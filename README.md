@@ -1,1 +1,2 @@
-# kernel-copyleft-dts
+This git include the device tree configuration code for the hardware from Code Aurora which is the reference for community projects.
+These files are copyrighted by Qualcomm and are not provided under an open source license.
