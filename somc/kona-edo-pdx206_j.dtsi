@@ -1,0 +1,179 @@
+/* Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "kona-edo-pdx206_common.dtsi"
+
+&somc_pinctrl {
+	/* If variant specific default setting is needed,
+	fill pinctrl-2 value in <variant>.dtsi */
+	pinctrl-2 = <&sm_gpio_100 &sm_gpio_130
+		     &sm_gpio_133 &sm_gpio_134 &sm_gpio_135>;
+};
+
+&soc {
+};
+
+&tlmm {
+	somc_tert_mi2s_sck_active: somc_tert_mi2s_sck_active {
+		mux {
+			pins = "gpio133";
+			function = "mi2s2_sck";
+		};
+
+		config {
+			pins = "gpio133";
+			drive-strength = <2>;
+			bias-disable;
+		};
+	};
+
+	somc_tert_mi2s_sck_sleep: somc_tert_mi2s_sck_sleep {
+		mux {
+			pins = "gpio133";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio133";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+
+	somc_tert_mi2s_ws_active: somc_tert_mi2s_ws_active {
+		mux {
+			pins = "gpio135";
+			function = "mi2s2_ws";
+		};
+
+		config {
+			pins = "gpio135";
+			drive-strength = <2>;
+			bias-disable;
+		};
+	};
+
+	somc_tert_mi2s_ws_sleep: somc_tert_mi2s_ws_sleep {
+		mux {
+			pins = "gpio135";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio135";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+};
+
+&q6core {
+	somc_cdc_tert_mi2s_gpios: msm_cdc_pinctrl_tert {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&somc_tert_mi2s_sck_active &somc_tert_mi2s_ws_active
+				&tert_mi2s_sd0_active>;
+		pinctrl-1 = <&somc_tert_mi2s_sck_sleep &somc_tert_mi2s_ws_sleep
+				&tert_mi2s_sd0_sleep>;
+	};
+};
+
+&dai_mi2s2 {
+	qcom,msm-mi2s-tx-lines = <1>;
+};
+
+&kona_snd {
+	qcom,tert-mi2s-gpios = <&somc_cdc_tert_mi2s_gpios>;
+};
+
+/* GPIO_100 : FM_INT */
+&sm_gpio_100 {
+	mux {
+		pins = "gpio100";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio100";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_130 : FM_RST_N_SM */
+&sm_gpio_130 {
+	mux {
+		pins = "gpio130";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio130";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+		output-low;
+	};
+};
+
+/* GPIO_133 : FM_I2S_DCLK_SM(Follow QC) */
+&sm_gpio_133 {
+	mux {
+		pins = "gpio133";
+		/delete-property/ function;
+	};
+
+	config {
+		pins = "gpio133";
+		/delete-property/ drive-strength;
+		/delete-property/ bias-pull-down;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_134 : FM_I2S_DOUT(Follow QC) */
+&sm_gpio_134 {
+	mux {
+		pins = "gpio134";
+		/delete-property/ function;
+	};
+
+	config {
+		pins = "gpio134";
+		/delete-property/ drive-strength;
+		/delete-property/ bias-pull-down;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_135 : FM_I2S_DFS_SM(Follow QC) */
+&sm_gpio_135 {
+	mux {
+		pins = "gpio135";
+		/delete-property/ function;
+	};
+
+	config {
+		pins = "gpio135";
+		/delete-property/ drive-strength;
+		/delete-property/ bias-pull-down;
+		/delete-property/ input-enable;
+	};
+};
+
+#include "somc-edo-display.dtsi"
+#include "somc-edo-display-pdx206.dtsi"
+#include "somc-edo-nfc_pn81f.dtsi"
