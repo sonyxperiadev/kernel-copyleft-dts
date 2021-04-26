@@ -1,0 +1,209 @@
+/* Copyright (c) 2019, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "kona-edo-pdx203_common.dtsi"
+
+&somc_pinctrl {
+	/* If variant specific default setting is needed,
+	fill pinctrl-2 value in <variant>.dtsi */
+	pinctrl-2 = <&sm_gpio_48 &sm_gpio_49 &sm_gpio_50 &sm_gpio_51 &sm_gpio_100
+		     &sm_gpio_130>;
+};
+
+&somc_pinctrl_pmic {
+	pinctrl-2 = <&pm8150l_gpio_11>;
+};
+
+&soc {
+	dtv_tuner: mn88553 {
+		compatible = "socionext,mn88553";
+		interrupt-parent = <&tlmm>;
+		interrupts = <26 0>;
+		gpios = <&pm8150l_gpios 11 0>,         /* DTV_PWR_EN */
+			<&tlmm 130 0>,                 /* DTV_RST_N  */
+			<&tlmm 100 0>;                 /* DTV_INT    */
+	};
+};
+
+&qupv3_se16_spi {
+	pinctrl-0 = <&sm_gpio_48 &sm_gpio_49 &sm_gpio_50 &sm_gpio_51>;
+	pinctrl-1 = <&sm_gpio_48_suspend &sm_gpio_49_suspend &sm_gpio_50_suspend &sm_gpio_51_suspend>;
+	status = "okay";
+
+	tmm3spi@0 {
+		compatible = "socionext,mn553-spi";
+		reg = <0>;
+		spi-max-frequency = <25000000>;
+		spi-mode = <0>;
+	};
+};
+
+/* GPIO_48 : DTV_SPI_MISO */
+&sm_gpio_48 {
+	mux {
+		pins = "gpio48";
+		function = "qup16";
+	};
+
+	config {
+		pins = "gpio48";
+		drive-strength = <2>;
+		bias-pull-down;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_49 : DTV_SPI_MOSI */
+&sm_gpio_49 {
+	mux {
+		pins = "gpio49";
+		function = "qup16";
+	};
+
+	config {
+		pins = "gpio49";
+		drive-strength = <6>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_50 : DTV_SPI_CLK */
+&sm_gpio_50 {
+	mux {
+		pins = "gpio50";
+		function = "qup16";
+	};
+
+	config {
+		pins = "gpio50";
+		drive-strength = <6>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_51 : DTV_SPI_CS_N */
+&sm_gpio_51 {
+	mux {
+		pins = "gpio51";
+		function = "qup16";
+	};
+
+	config {
+		pins = "gpio51";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+&tlmm {
+	/* GPIO_48 : DTV_SPI_MISO (Suspend) */
+	sm_gpio_48_suspend: sm_gpio_48_suspend {
+		mux {
+			pins = "gpio48";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio48";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+
+	/* GPIO_49 : DTV_SPI_MOSI (Suspend) */
+	sm_gpio_49_suspend: sm_gpio_49_suspend {
+		mux {
+			pins = "gpio49";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio49";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+
+	/* GPIO_50 : DTV_SPI_CLK (Suspend) */
+	sm_gpio_50_suspend: sm_gpio_50_suspend {
+		mux {
+			pins = "gpio50";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio50";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+
+	/* GPIO_51 : DTV_SPI_CS_N (Suspend) */
+	sm_gpio_51_suspend: sm_gpio_51_suspend {
+		mux {
+			pins = "gpio51";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio51";
+			drive-strength = <2>;
+			bias-pull-down;
+			input-enable;
+		};
+	};
+};
+
+/* GPIO_100 : DTV_INT */
+&sm_gpio_100 {
+	mux {
+		pins = "gpio100";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio100";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_130 : DTV_RST_N */
+&sm_gpio_130 {
+	mux {
+		pins = "gpio130";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio130";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+		output-low;
+	};
+};
+
+#include "somc-edo-display.dtsi"
+#include "somc-edo-display-pdx203.dtsi"
+#include "somc-edo-nfc_pn81f.dtsi"
