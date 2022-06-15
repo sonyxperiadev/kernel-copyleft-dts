@@ -1,0 +1,17 @@
+SOMC_PRODUCT_OPERATOR = $(SOMC_TARGET_PRODUCT)_$(SOMC_TARGET_OPERATOR)
+
+ifeq ($(SOMC_PLATFORM), nagara)
+
+ifeq ($(SOMC_PRODUCT_OPERATOR),pdx223_generic)
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx223.dtbo
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx223-crossflash.dtbo
+endif
+
+endif
+
+ always-y    := $(dtb-y) $(dtbo-y)
+ subdir-y    := $(dts-dirs)
+ clean-files    := *.dtb *.dtbo
