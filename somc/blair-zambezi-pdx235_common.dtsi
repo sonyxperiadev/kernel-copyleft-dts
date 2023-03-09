@@ -1,0 +1,4 @@
+#include "blair-zambezi-common.dtsi"
+
+&soc {
+};
