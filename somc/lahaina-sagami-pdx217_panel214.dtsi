@@ -1,0 +1,14 @@
+#include "lahaina-sagami-pdx217_generic.dtsi"
+
+&soc {
+};
+
+/delete-node/ &dsi_6;
+#include "somc-sagami-display-pdx214.dtsi"
+
+&qupv3_se4_i2c {
+	touchscreen@48 {
+		sec,max_coords = <1080 2520>;
+		sec,firmware_name = "touch_module_id_0x27.img";
+	};
+};
