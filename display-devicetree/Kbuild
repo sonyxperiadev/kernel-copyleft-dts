@@ -1,0 +1,34 @@
+ifneq ($(SOMC_PLATFORM), nagara)
+
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+		display/waipio-sde-display-mtp-overlay.dtbo \
+		display/waipio-sde-display-cphy-mtp-overlay.dtbo \
+		display/waipio-sde-display-mtp-68disp-overlay.dtbo \
+		display/waipio-sde-display-cdp-overlay.dtbo \
+		display/waipio-sde-display-qrd-overlay.dtbo \
+		display/waipio-sde-display-hdk-overlay.dtbo \
+		display/waipio-sde-display-waipio-lemur-cdp-overlay.dtbo \
+		display/waipio-sde-display-waipio-lemur-mtp-overlay.dtbo \
+		display/waipio-sde-display-rumi-overlay.dtbo
+
+SOMC_PRODUCT_OPERATOR = $(SOMC_TARGET_PRODUCT)_$(SOMC_TARGET_OPERATOR)
+
+ifneq ($(filter pdx223_generic ,$(SOMC_PRODUCT_OPERATOR)),)
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+	display/waipio-sde-display-pdx223-overlay.dtbo
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+	display/waipio-sde-display-pdx223-crossflash-overlay.dtbo
+endif
+
+ifneq ($(filter pdx224_generic ,$(SOMC_PRODUCT_OPERATOR)),)
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+	display/waipio-sde-display-pdx224-overlay.dtbo
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += display/waipio-sde.dtbo \
+	display/waipio-sde-display-pdx224-crossflash-overlay.dtbo
+endif
+
+always-y    := $(dtb-y) $(dtbo-y)
+subdir-y    := $(dts-dirs)
+clean-files    := *.dtb *.dtbo

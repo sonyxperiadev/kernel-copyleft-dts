@@ -1,0 +1,34 @@
+SOMC_PRODUCT_OPERATOR = $(SOMC_TARGET_PRODUCT)_$(SOMC_TARGET_OPERATOR)
+
+ifeq ($(SOMC_PLATFORM), nagara)
+ifeq ($(SOMC_PRODUCT_OPERATOR),pdx223_generic)
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx223.dtbo
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx223-crossflash.dtbo
+endif
+
+ifeq ($(SOMC_PRODUCT_OPERATOR),pdx224_generic)
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx224.dtbo
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+	          somc-nagara-audio-pdx224-crossflash.dtbo
+endif
+
+
+else
+dtbo-$(CONFIG_ARCH_WAIPIO) += waipio-audio.dtbo \
+                 waipio-audio-cdp.dtbo \
+                 waipio-audio-mtp.dtbo \
+                 waipio-audio-qrd.dtbo \
+                 waipio-audio-atp.dtbo \
+                 waipio-audio-rumi.dtbo \
+                 waipio-audio-hdk.dtbo
+
+endif
+
+ always-y    := $(dtb-y) $(dtbo-y)
+ subdir-y    := $(dts-dirs)
+ clean-files    := *.dtb *.dtbo
