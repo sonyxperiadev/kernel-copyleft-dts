@@ -1,0 +1,74 @@
+/*
+ * Each QUP device that's a parent to PMIC must be listed as a critical device
+ * to GCC
+ */
+
+/* for wl2868c pmic only */
+&gcc {
+	qcom,critical-devices = <&qupv3_se2_i2c>;
+};
+
+&qupv3_se2_i2c{
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	i2c_wl2868c@2F{
+		compatible = "will,wl2868c";
+		reg = <0x2F>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&wl2868c_pins_default>;
+
+		wl2868c_l1: ldo_1{
+			ldo-channel = <0>;
+			regulator-name = "ldo_1";
+			regulator-min-microvolt  = <496000>;
+			regulator-max-microvolt  = <1512000>;
+		};
+		wl2868c_l2: ldo_2{
+			ldo-channel = <1>;
+			regulator-name = "ldo_2";
+			regulator-min-microvolt = <496000>;
+			regulator-max-microvolt = <1512000>;
+		};
+		wl2868c_l3: ldo_3{
+			ldo-channel = <2>;
+			regulator-name = "ldo_3";
+			regulator-min-microvolt = <1504000>;
+			regulator-max-microvolt = <3544000>;
+		};
+		wl2868c_l4: ldo_4{
+			ldo-channel = <3>;
+			regulator-name = "ldo_4";
+			regulator-min-microvolt = <1504000>;
+			regulator-max-microvolt = <3544000>;
+		};
+		wl2868c_l5: ldo_5{
+			ldo-channel = <4>;
+			regulator-name = "ldo_5";
+			regulator-min-microvolt = <1504000>;
+			regulator-max-microvolt = <3544000>;
+		};
+		wl2868c_l6: ldo_6{
+			ldo-channel = <5>;
+			regulator-name = "ldo_6";
+			regulator-min-microvolt = <1504000>;
+			regulator-max-microvolt = <3544000>;
+		};
+		wl2868c_l7: ldo_7{
+			ldo-channel = <6>;
+			regulator-name = "ldo_7";
+			regulator-min-microvolt = <1504000>;
+			regulator-max-microvolt = <3544000>;
+		};
+	};
+};
+
+&pm6450_gpios{
+	wl2868c_pins_default: wl2868c_pins_default {
+		pins = "gpio3";
+		function = "normal";
+		output-high;
+		bias-disable;
+		power-source = <0>;
+	};
+};

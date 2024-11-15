@@ -1,0 +1,55 @@
+#include "parrot-audio-overlay.dtsi"
+
+&waipio_snd {
+	qcom,model = "parrot-qrd-snd-card";
+	qcom,sku-model = "parrot-qrd-sku1-snd-card";
+	nvmem-cells = <&adsp_variant>;
+	nvmem-cell-names = "adsp_variant";
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
+	qcom,wcn-btfm = <1>;
+        qcom,pri-mi2s-gpios = <&fm_i2s0_gpios>;
+	qcom,wsa881x-support = <0>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,quin-mi2s-gpios = <&cdc_quin_mi2s_gpios>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+	qcom,audio-routing =
+			"AMIC1", "Analog Mic1",
+			"AMIC1", "MIC BIAS1",
+			"AMIC2", "Analog Mic2",
+			"AMIC2", "MIC BIAS2",
+			"AMIC3", "Analog Mic3",
+			"AMIC3", "MIC BIAS3",
+			"TX DMIC0", "Digital Mic0",
+			"TX DMIC0", "MIC BIAS3",
+			"TX DMIC1", "Digital Mic1",
+			"TX DMIC1", "MIC BIAS3",
+			"TX DMIC2", "Digital Mic2",
+			"TX DMIC2", "MIC BIAS1",
+			"TX DMIC3", "Digital Mic3",
+			"TX DMIC3", "MIC BIAS1",
+			"IN1_HPHL", "HPHL_OUT",
+			"IN2_HPHR", "HPHR_OUT",
+			"IN3_AUX", "AUX_OUT",
+			"RX_TX DEC0_INP", "TX DEC0 MUX",
+			"RX_TX DEC1_INP", "TX DEC1 MUX",
+			"RX_TX DEC2_INP", "TX DEC2 MUX",
+			"RX_TX DEC3_INP", "TX DEC3 MUX",
+			"TX SWR_INPUT", "WCD_TX_OUTPUT",
+			"VA SWR_INPUT", "VA_SWR_CLK",
+			"VA SWR_INPUT", "WCD_TX_OUTPUT",
+			"VA_AIF1 CAP", "VA_SWR_CLK",
+			"VA_AIF2 CAP", "VA_SWR_CLK",
+			"VA_AIF3 CAP", "VA_SWR_CLK";
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <1>;
+	qcom,msm-mbhc-gnd-swh = <1>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+		      <&wcd937x_codec>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			   "wcd937x_codec";
+	qcom,wsa-max-devs = <0>;
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+			  <&lpass_cdc>;
+};
+
