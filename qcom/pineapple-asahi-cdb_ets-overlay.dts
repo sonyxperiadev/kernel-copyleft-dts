@@ -1,0 +1,12 @@
+/dts-v1/;
+/plugin/;
+
+#include "pineapple-qrd.dtsi"
+#include "pineapple-asahi-cdb_ets.dtsi"
+
+/ {
+	model = "Sony Corporation. Asahi-CDB ETS(Pineapple QRD)";
+	compatible = "somc,asahi-cdb-ets", "qcom,pineapple", "qcom,qrd";
+	qcom,msm-id = <557 0x10000>, <557 0x20000>, <577 0x10000>, <577 0x20000>;
+	qcom,board-id = <0x1000B 0>, <0xB 0>;
+};

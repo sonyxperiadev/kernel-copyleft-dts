@@ -1,0 +1,13 @@
+/dts-v1/;
+/plugin/;
+
+#include "pineapple-sde-display-qrd.dtsi"
+#include "somc-asahi-display.dtsi"
+#include "somc-asahi-display-cdb.dtsi"
+
+/ {
+	model = "Sony Corporation. ASAHI-CDB(Pineapple QRD)";
+	compatible = "somc,asahi-cdb", "qcom,pineapple", "qcom,pineapplep-qrd", "qcom,pineapplep", "qcom,qrd";
+	qcom,msm-id = <557 0x10000>, <557 0x20000>, <577 0x10000>, <577 0x20000>;
+	qcom,board-id = <0x1000B 0>, <0x5000B 0>, <0xB 0>;
+};

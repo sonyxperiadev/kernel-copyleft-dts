@@ -1,0 +1,304 @@
+/* arch/arm64/boot/dts/qcom/pineapple-asahi-cdb.dtsi */
+
+#include "pineapple-asahi-common.dtsi"
+
+&somc_pinctrl {
+	/* If variant specific default setting is needed,
+	fill pinctrl-2 value in <variant>.dtsi */
+	pinctrl-2 = <&sm_gpio_8 &sm_gpio_9 &sm_gpio_10 &sm_gpio_11
+		     &sm_gpio_50 &sm_gpio_51 &sm_gpio_52 &sm_gpio_54
+		     &sm_gpio_55 &sm_gpio_100 &sm_gpio_104
+		     &sm_gpio_105 &sm_gpio_108 &sm_gpio_110 &sm_gpio_111
+		     &sm_gpio_163 &sm_gpio_200 &sm_gpio_206>;
+
+};
+
+&soc {
+};
+
+/* GPIO_8 : UWB_SPI_MISO */
+&sm_gpio_8 {
+	mux {
+		pins = "gpio8";
+		function = "qup2_se2_l0";
+	};
+
+	config {
+		pins = "gpio8";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_9 : UWB_SPI_MOSI */
+&sm_gpio_9 {
+	mux {
+		pins = "gpio9";
+		function = "qup2_se2_l1";
+	};
+
+	config {
+		pins = "gpio9";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_10 : UWB_SPI_SCK */
+&sm_gpio_10 {
+	mux {
+		pins = "gpio10";
+		function = "qup2_se2_l2";
+	};
+
+	config {
+		pins = "gpio9";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_11 : UWB_SPI_NSS */
+&sm_gpio_11 {
+	mux {
+		pins = "gpio11";
+		function = "qup2_se2_l3";
+	};
+
+	config {
+		pins = "gpio11";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_50 : SBU_SW_OE */
+&sm_gpio_50 {
+	mux {
+		pins = "gpio50";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio50";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+		output-low;
+	};
+};
+
+/* GPIO_51 : SBU_SW_SEL */
+&sm_gpio_51 {
+	mux {
+		pins = "gpio51";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio51";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+		output-low;
+	};
+};
+
+/* GPIO_52 : TELE_SPI_MISO */
+&sm_gpio_52 {
+	mux {
+		pins = "gpio52";
+		function = "qup1_se5_l0";
+	};
+
+	config {
+		pins = "gpio52";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_54 : TELE_SPI_CLK */
+&sm_gpio_54 {
+	mux {
+		pins = "gpio54";
+		function = "qup1_se5_l2";
+	};
+
+	config {
+		pins = "gpio54";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_55 : TELE_SPI_CS_N */
+&sm_gpio_55 {
+	mux {
+		pins = "gpio55";
+		function = "qup1_se5_l3";
+	};
+
+	config {
+		pins = "gpio55";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_100 : CAM_MCLK0 */
+&sm_gpio_100 {
+	mux {
+		pins = "gpio100";
+		function = "cam_mclk";
+	};
+
+	config {
+		pins = "gpio100";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_104 : CAM_MCLK4 */
+&sm_gpio_104 {
+	mux {
+		pins = "gpio104";
+		function = "cam_aon_mclk4";
+
+	};
+
+	config {
+		pins = "gpio104";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_105 : CAM_MCLK5 */
+&sm_gpio_105 {
+	mux {
+		pins = "gpio105";
+		function = "cam_mclk";
+	};
+
+	config {
+		pins = "gpio105";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+	};
+};
+
+/* GPIO_108 : UWB_CHIPENABLE */
+&sm_gpio_108 {
+	mux {
+		pins = "gpio108";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio108";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_110 : UWB_GPIO03*/
+&sm_gpio_110 {
+	mux {
+		pins = "gpio110";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio110";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_111 : UWB_CLK_REQ_38MHz*/
+&sm_gpio_111 {
+	mux {
+		pins = "gpio111";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio111";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_163 : UWB_GPIO05_SENSORINT*/
+&sm_gpio_163 {
+	mux {
+		pins = "gpio163";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio163";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_200 : OIS_ENABLE_WIDE*/
+&sm_gpio_200 {
+	mux {
+		pins = "gpio200";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio200";
+		drive-strength = <2>;
+		bias-pull-down;
+		input-enable;
+	};
+};
+
+/* GPIO_206 : XVS*/
+&sm_gpio_206 {
+	mux {
+		pins = "gpio206";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio206";
+		drive-strength = <2>;
+		/delete-property/ bias-pull-down;
+		bias-disable;
+		/delete-property/ input-enable;
+		output-low;
+	};
+};
+
+
+#include "somc-charger-asahi-common.dtsi"
+#include "somc-charger-asahi-cdb.dtsi"
