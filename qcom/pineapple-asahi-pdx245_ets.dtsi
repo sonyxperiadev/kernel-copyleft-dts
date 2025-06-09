@@ -1,0 +1,8 @@
+#include "pineapple-asahi-pdx245_generic.dtsi"
+
+/*
+ * ETS common dtsi
+ */
+#include "pineapple-asahi-common_ets.dtsi"
+&soc {
+};
