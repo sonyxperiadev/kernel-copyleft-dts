@@ -1,0 +1,10 @@
+/* arch/arm64/boot/dts/qcom/pineapple-asahi-cdb_ets.dtsi */
+#include "pineapple-asahi-cdb.dtsi"
+
+/*
+ * ETS common dtsi
+ */
+#include "pineapple-asahi-common_ets.dtsi"
+
+&soc {
+};

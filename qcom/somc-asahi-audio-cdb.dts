@@ -1,0 +1,14 @@
+/dts-v1/;
+/plugin/;
+
+#include "pineapple-audio.dtsi"
+#include "pineapple-audio-qrd.dtsi"
+#include "somc-asahi-audio-common.dtsi"
+#include "somc-asahi-audio-cdb.dtsi"
+
+/ {
+	model = "Sony Corporation. Asahi-CDB(Pineapple QRD)";
+	compatible = "somc,asahi-cdb", "qcom,pineapple", "qcom,qrd";
+	qcom,msm-id = <557 0x10000>, <557 0x20000>, <577 0x10000>, <577 0x20000>;
+	qcom,board-id = <0x1000B 0>, <0xB 0>;
+};

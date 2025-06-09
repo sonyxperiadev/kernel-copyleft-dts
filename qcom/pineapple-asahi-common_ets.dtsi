@@ -1,0 +1,4 @@
+/* arch/arm64/boot/dts/qcom/pineapple-asahi-common_ets.dtsi */
+
+&soc {
+};
