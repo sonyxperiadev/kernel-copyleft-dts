@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "tuna.dtsi"
+/ {
+	model = "Qualcomm Technologies, Inc. Tuna 7";
+	compatible = "qcom,tuna";
+	qcom,msm-id = <681 0x10000>;
+
+};
+
+&adsp_pas {
+	firmware-name = "adsp2.mdt", "adsp2_dtb.mdt";
+};
+
+&llcc {
+	compatible = "qcom,tuna7-llcc";
+};

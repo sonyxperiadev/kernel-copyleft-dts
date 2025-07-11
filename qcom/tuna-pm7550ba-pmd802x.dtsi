@@ -1,0 +1,91 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "tuna-pm7550ba.dtsi"
+#include "pmd802x.dtsi"
+
+/ {
+	qcom,pmic-id-size = <8>;
+	qcom,pmic-id = <0x0 0x0 0x0 0x0 0x57 0x0 0x0 0x4C>;
+};
+
+&pm7550ba_amoled {
+	status = "disabled";
+};
+
+&pm7550ba_amoled_ecm {
+	status = "disabled";
+};
+
+&spmi0_debug_bus {
+	pmd802x@4 {
+		compatible = "qcom,spmi-pmic";
+		reg = <4 SPMI_USID>;
+		#address-cells = <2>;
+		#size-cells = <0>;
+		qcom,can-sleep;
+	};
+};
+
+&pmic_glink_debug {
+	/delete-node/ i2c@104;
+	/delete-node/ spmi@200;
+
+		i2c@104 {
+		reg = <0x104>;  /* I2C instance 4 in ADSP for SE5 */
+		#address-cells = <1>;
+		#size-cells = <0>;
+		qcom,bus-type = "i2c";
+
+		qcom,smb1500@69 {
+			compatible = "qcom,i2c-pmic";
+			reg = <0x69>;
+			qcom,can-sleep;
+		};
+
+		qcom,smb1500@68 {
+			compatible = "qcom,i2c-pmic";
+			reg = <0x68>;
+			qcom,can-sleep;
+		};
+	};
+};
+
+&pmic_glink_adc {
+	status = "ok";
+	/delete-node/ smb1398_1_iin;
+	/delete-node/ smb1398_1_ichg;
+	/delete-node/ smb1398_1_die_temp;
+
+	smb1500_1_iin {
+		reg = <0x1046901>;
+		label = "smb1393_1_iin";
+	};
+
+	smb1500_1_ichg {
+		reg = <0x1046902>;
+		label = "smb1393_1_ichg";
+	};
+
+	smb1500_1_die_temp {
+		reg = <0x1046903>;
+		label = "smb1393_1_die_temp";
+	};
+
+	smb1500_2_iin {
+		reg = <0x1046801>;
+		label = "smb1393_2_iin";
+	};
+
+	smb1500_2_ichg {
+		reg = <0x1046802>;
+		label = "smb1393_2_ichg";
+	};
+
+	smb1500_2_die_temp {
+		reg = <0x1046803>;
+		label = "smb1393_2_die_temp";
+	};
+};
