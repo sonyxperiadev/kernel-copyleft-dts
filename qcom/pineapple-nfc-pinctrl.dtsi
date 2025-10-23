@@ -32,7 +32,7 @@
 
 		nfc_enable_active: nfc_enable_active {
 			mux {
-				/* Enable and Clock request gpios */
+				/* Enable, and Clock request gpios */
 				pins = "gpio34", "gpio35";
 				function = "gpio";
 			};
