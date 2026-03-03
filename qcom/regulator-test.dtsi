@@ -1,0 +1,17 @@
+&soc{
+	regulator_consumer{
+		compatible = "huaqin,ldo_test";
+
+		l1-supply  = <&wl2868c_l1>;
+		l2-supply  = <&wl2868c_l2>;
+		l3-supply  = <&wl2868c_l3>;
+		l4-supply  = <&wl2868c_l4>;
+		l5-supply  = <&wl2868c_l5>;
+		l6-supply  = <&wl2868c_l6>;
+		l7-supply  = <&wl2868c_l7>;
+
+		regulator-names = "l1", "l2", "l3", "l4", "l5","l6","l7";
+		min-voltage = <1000000 1000000 2200000 2200000 2200000 2200000 2200000 >;
+		max-voltage = <1000000 1000000 2200000 2200000 2200000 2200000 2200000 >;
+	};
+};
