@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+&rx_macro {
+	reg = <0x6AC0000 0x0>;
+};
+
+&swr1 {
+	swrm-io-base = <0x6AD0000 0x0>;
+	interrupts = <GIC_SPI 155 IRQ_TYPE_LEVEL_HIGH>;
+};
+
+&tx_macro {
+	reg = <0x6AE0000 0x0>;
+};
+
+&wsa_macro {
+	reg = <0x6B00000 0x0>;
+};
+
+&swr0 {
+	swrm-io-base = <0x6B10000 0x0>;
+	interrupts = <GIC_SPI 170 IRQ_TYPE_LEVEL_HIGH>;
+};
+
+&swr2 {
+	reg = <0x7630000 0x0>;
+};
+
+&va_macro {
+	reg = <0x7660000 0x0>;
+};
+
+&tlmm {
+	reg = <0x7760000 0x0>;
+};

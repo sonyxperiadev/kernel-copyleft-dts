@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+# Copyright (c) Qualcomm Technologies, Inc. All rights reserved.
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/qbt_handler.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: QbtHandler Bindings
+
+maintainers:
+  - Revar Rajeev <rrajeev@qti.qualcomm.com>
+  - Sri Krishna Chaitanya Valluri <svalluri@qti.qualcomm.com>
+
+description: |
+  QBT is a fingerprint sensor ASIC capable of performing fingerprint image scans
+  and detecting finger presence on the sensor using programmable firmware.
+
+properties:
+  compatible:
+    properties:
+        qcom,ipc-gpio:
+            description: phandle for GPIO to be used for IPC.
+            $ref: /schemas/types.yaml#/definitions/string
+        qcom,finger-detect-gpio:
+            description: phandle for GPIO to be used for finger detect.
+            $ref: /schemas/types.yaml#/definitions/string
+        qcom,intr2-gpio:
+            description: phandle for GPIO to be used for INTR2 finger interrupt.
+            $ref: /schemas/types.yaml#/definitions/string
+
+required:
+    - compatible
+    - qcom,ipc-gpio
+    - qcom,finger-detect-gpio
+    - qcom,intr2-gpio
+
+examples:
+  - |
+    qcom,qbt_handler {
+                compatible = "qcom,qbt-handler";
+                qcom,ipc-gpio = <&tlmm 92 0>;
+                qcom,finger-detect-gpio = <&tlmm 90 0>;
+                qcom,intr2-gpio = <&tlmm 89 0>;
+    };

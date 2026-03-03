@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/qcom,aop-qmp.h>
+#include <dt-bindings/clock/qcom,gcc-tuna.h>
+#include <dt-bindings/clock/qcom,gpucc-tuna.h>
+#include <dt-bindings/clock/qcom,rpmh.h>
+#include <dt-bindings/interconnect/qcom,tuna.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "tuna-gpu.dtsi"
+#include "tuna-gpu-pwrlevels.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. tuna";
+	compatible = "qcom,tuna", "qcom,tunap";
+	qcom,msm-id = <0x28f 0x10000>, <0x2b6 0x10000>;
+	qcom,board-id = <0 0>;
+};

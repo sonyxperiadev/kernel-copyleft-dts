@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "tuna-audio-overlay.dtsi"
+
+&wsa_macro {
+	qcom,wsa-bat-cfgs= <1>, <1>;
+};
+
+&tuna_snd {
+	qcom,model = "tuna-mtp-snd-card";
+	swr-haptics-unsupported;
+	qcom,sec-mi2s-gpios = <&fm_i2s1_gpios>;
+};

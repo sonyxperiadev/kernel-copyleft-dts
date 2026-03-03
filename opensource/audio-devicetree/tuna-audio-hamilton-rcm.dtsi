@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "tuna-audio-cdp.dtsi"
+
+&lpass_bt_swr {
+	status = "disabled";
+};
+
+&tuna_snd {
+	qcom,model = "tuna-cdp-snd-card";
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+				<&lpass_cdc>;
+};

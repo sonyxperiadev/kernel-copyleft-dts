@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "tuna-audio-cdp.dtsi"
+
+&tuna_snd {
+	qcom,wcn-btfm = <0>;
+	qcom,ext-disp-audio-rx = <0>;
+	qcom,wcd-disabled =<1>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3";
+	qcom,wsa-max-devs = <0>;
+};
+
+&swr0 {
+	qcom,swr-num-dev = <0>;
+	wsa884x_0220: wsa884x@02170220 {
+		status = "disabled";
+	};
+
+	wsa884x_0221: wsa884x@02170221 {
+		status = "disabled";
+	};
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+
+&wsa_macro {
+	qcom,wsa-bat-cfgs= <4>, <4>;
+};
+
