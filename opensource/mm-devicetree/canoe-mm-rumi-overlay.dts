@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "hw_fence/canoe-hw-fence.dtsi"
+#include "hfi_core/canoe-hfi-core.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Canoe RUMI";
+	compatible = "qcom,canoe-rumi", "qcom,canoe", "qcom,rumi";
+	qcom,msm-id = <0x10294 0x10000>, <0x10294 0x20000>, <0x10295 0x10000>, <0x10295 0x20000>,
+		      <0x30294 0x10000>, <0x30294 0x20000>, <0x30295 0x10000>, <0x30295 0x20000>,
+		      <0x1010294 0x10000>, <0x1010294 0x20000>, <0x1010295 0x10000>,
+		      <0x1010295 0x20000>, <0x1030294 0x10000>, <0x1030294 0x20000>,
+		      <0x1030295 0x10000>, <0x1030295 0x20000>;
+	qcom,board-id = <15 0>;
+};

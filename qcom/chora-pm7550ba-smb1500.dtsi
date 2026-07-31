@@ -7,7 +7,7 @@
 
 &pmic_glink_debug {
 	i2c_pmic: i2c@105 {
-		reg = <0x108>;  /* I2C instance 8 in ADSP for SE0 QUP 1 */
+		reg = <0x105>;  /* I2C instance 5 in ADSP for SE4 */
 		#address-cells = <1>;
 		#size-cells = <0>;
 		qcom,bus-type = "i2c";
@@ -24,17 +24,17 @@
 	status = "ok";
 
 	smb1500_1_iin {
-		reg = <0x1086801>;
+		reg = <0x1056801>;
 		label = "smb1500_1_iin";
 	};
 
 	smb1500_1_ichg {
-		reg = <0x1086802>;
+		reg = <0x1056802>;
 		label = "smb1500_1_ichg";
 	};
 
 	smb1500_1_die_temp {
-		reg = <0x1086803>;
+		reg = <0x1056803>;
 		label = "smb1500_1_die_temp";
 	};
 };

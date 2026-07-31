@@ -271,6 +271,8 @@
 
 &thermal_zones {
 	mapss {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 0>;
 		trips {
 			thermal-engine-config {
@@ -289,6 +291,7 @@
 
 	cdsp-hvx {
 		polling-delay-passive = <10>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 1>;
 		trips {
 			thermal-engine-config {
@@ -357,6 +360,8 @@
 	};
 
 	wlan {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 2>;
 		trips {
 			thermal-engine-config {
@@ -374,6 +379,8 @@
 	};
 
 	camera {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 3>;
 		trips {
 			thermal-engine-config {
@@ -391,6 +398,8 @@
 	};
 
 	video {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 4>;
 		trips {
 			thermal-engine-config {
@@ -408,6 +417,8 @@
 	};
 
 	mdm-1 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 5>;
 		trips {
 			thermal-engine-config {
@@ -453,6 +464,8 @@
 	};
 
 	cpu-1-0 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 6>;
 		trips {
 			thermal-engine-config {
@@ -489,6 +502,8 @@
 	};
 
 	cpu-1-1 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 7>;
 		trips {
 			thermal-engine-config {
@@ -525,6 +540,8 @@
 	};
 
 	cpu-1-2 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 8>;
 		trips {
 			thermal-engine-config {
@@ -561,6 +578,8 @@
 	};
 
 	cpu-1-3 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 9>;
 		trips {
 			thermal-engine-config {
@@ -597,6 +616,8 @@
 	};
 
 	cpuss-0 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 10>;
 		trips {
 			thermal-engine-config {
@@ -638,6 +659,8 @@
 	};
 
 	cpuss-1 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 11>;
 		trips {
 			thermal-engine-config {
@@ -679,6 +702,8 @@
 	};
 
 	cpuss-2 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 12>;
 		trips {
 			thermal-engine-config {
@@ -725,6 +750,8 @@
 	};
 
 	mdm-0 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 13>;
 		trips {
 			thermal-engine-config {
@@ -770,6 +797,8 @@
 	};
 
 	display {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 14>;
 		trips {
 			thermal-engine-config {
@@ -788,6 +817,7 @@
 
 	gpu {
 		polling-delay-passive = <10>;
+		polling-delay = <0>;
 		thermal-sensors = <&tsens0 15>;
 		trips {
 			thermal-engine-config {
@@ -851,6 +881,8 @@
 	};
 
 	xo-therm {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&pm6125_adc_tm 2>;
 		trips {
 			active-config0 {
@@ -874,6 +906,8 @@
 	};
 
 	pa-therm0 {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&pm6125_adc_tm 0>;
 		trips {
 			active-config0 {
@@ -885,6 +919,8 @@
 	};
 
 	quiet-therm {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&pm6125_adc_tm 1>;
 		trips {
 			active-config0 {
@@ -896,6 +932,8 @@
 	};
 
 	camera-therm {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&pm6125_adc_tm_iio 0>;
 		trips {
 			active-config0 {
@@ -907,6 +945,8 @@
 	};
 
 	emmc-ufs-therm {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
 		thermal-sensors = <&pm6125_adc_tm_iio 1>;
 		trips {
 			active-config0 {

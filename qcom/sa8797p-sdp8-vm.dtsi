@@ -349,86 +349,6 @@
 				<GIC_ESPI 0x13f IRQ_TYPE_LEVEL_HIGH>;
 	};
 
-	kgsl_smmu_0: iommu@3da0000 {
-		compatible = "qcom,qsmmu-v500";
-		reg = <0x3da0000 0x40000>;
-		reg-names = "base";
-		#iommu-cells = <2>;
-		#global-interrupts = <2>;
-		dma-coherent;
-		qcom,skip-init;
-		qcom,reset-stream-mapping-groups;
-		qcom,handoff-smrs = <0x0 0xffff>;
-		qcom,multi-match-handoff-smr;
-		interrupts = <GIC_SPI 422 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 476 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 574 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 575 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 576 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 577 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 660 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 662 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 665 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 666 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 667 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 669 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 670 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 673 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 674 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 678 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 679 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 680 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 681 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 682 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 683 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 684 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 685 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 686 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 687 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 688 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 700 IRQ_TYPE_LEVEL_HIGH>;
-	};
-
-	kgsl_smmu_1: iommu@98a0000 {
-		compatible = "qcom,qsmmu-v500";
-		reg = <0x98a0000 0x40000>;
-		reg-names = "base";
-		#iommu-cells = <2>;
-		#global-interrupts = <2>;
-		dma-coherent;
-		qcom,skip-init;
-		qcom,reset-stream-mapping-groups;
-		qcom,handoff-smrs = <0x0 0xffff>;
-		qcom,multi-match-handoff-smr;
-		interrupts = <GIC_SPI 851 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 852 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 853 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 854 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 855 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 856 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 857 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 858 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 859 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 920 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 921 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 922 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 924 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 925 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 926 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 927 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 928 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 929 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 931 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 932 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 936 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 937 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 938 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 939 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 940 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 941 IRQ_TYPE_LEVEL_HIGH>,
-				<GIC_SPI 942 IRQ_TYPE_LEVEL_HIGH>;
-	};
-
 	dma_dev@0x0 {
 		compatible = "qcom,iommu-dma";
 		memory-region = <&system_cma>;
@@ -438,8 +358,6 @@
 		compatible = "qcom,xpcs";
 		reg = <0x1a94000 0x5100>;
 		reg-names = "qxpcs";
-		resets = <&scmi_reset 1>;
-		reset-names = "serdes_reset";
 	};
 
 	ethernet1: ethernet@1a80000 {
@@ -458,12 +376,8 @@
 			 <&apps_smmu_2 0x11c4 0x3>,
 			 <&apps_smmu_2 0x11c5 0x3>,
 			 <&apps_smmu_2 0x11c6 0x3>,
-			 <&apps_smmu_2 0x11c7 0x3>,
-			 <&apps_smmu_2 0x11c8 0x2>,
-			 <&apps_smmu_2 0x11c9 0x8>,
-			 <&apps_smmu_2 0x11ca 0x2>;
-
-		qcom,iommu-dma = "fastmap";
+			 <&apps_smmu_2 0x11c7 0x3>;
+		qcom,iommu-dma = "atomic";
 		power-domains = <&scmi_power 8>, <&scmi_power 9>, <&scmi_perf 1>, <&scmi_perf 2>;
 		power-domain-names = "power_core", "power_mdio", "perf_serdes", "perf_5g_serdes";
 
@@ -483,15 +397,10 @@
 		snps,mtl-rx-config = <&mtl_rx_setup1>;
 		snps,mtl-tx-config = <&mtl_tx_setup1>;
 
-		qcom,tx-vdma-map = <0 0 0 0 1 2 3 4 5 6 7 7>;
-		qcom,rx-vdma-map = <0 1 2 3 4 5 6 6 6 6 7 7>;
-		qcom,tx-pdma-map = <0 1 2 3 4 5 6 6 6 6 7 7>;
-		qcom,rx-pdma-map = <0 1 2 3 4 5 6 6 6 6 7 7>;
-
 		qcom-xpcs-handle = <&xpcs1>;
 
 		mtl_rx_setup1: rx-queues-config {
-			snps,rx-queues-to-use = <10>;
+			snps,rx-queues-to-use = <7>;
 			snps,rx-sched-sp;
 
 			queue0 {
@@ -532,25 +441,10 @@
 				snps,dcb-algorithm;
 				snps,map-to-dma-channel = <0x6>;
 			};
-
-			queue7 {
-				snps,dcb-algorithm;
-				snps,map-to-dma-channel = <0x7>;
-			};
-
-			queue8 {
-				snps,dcb-algorithm;
-				snps,map-to-dma-channel = <0x8>;
-			};
-
-			queue9 {
-				snps,dcb-algorithm;
-				snps,map-to-dma-channel = <0x9>;
-			};
 		};
 
 		mtl_tx_setup1: tx-queues-config {
-			snps,tx-queues-to-use = <10>;
+			snps,tx-queues-to-use = <7>;
 			snps,tx-sched-sp;
 
 			queue0 {
@@ -578,18 +472,6 @@
 			};
 
 			queue6 {
-				snps,dcb-algorithm;
-			};
-
-			queue7 {
-				snps,dcb-algorithm;
-			};
-
-			queue8 {
-				snps,dcb-algorithm;
-			};
-
-			queue9 {
 				snps,dcb-algorithm;
 			};
 		};
@@ -641,63 +523,11 @@
 		qcom,wdt-bite-offset = <0x10>;
 		qcom,wdt-hz = <19198242>;
 	};
-
-	qcom,secure-buffer {
-		compatible = "qcom,secure-buffer";
-	};
-
-	qcom,mem-buf {
-		compatible = "qcom,mem-buf";
-		qcom,mem-buf-capabilities = "consumer";
-		qcom,vmid = <52>;
-		qcom,vm-uses-hyp-assign;
-	};
-
-	qcom,mem-buf-msgq {
-		compatible = "qcom,mem-buf-msgq";
-		qcom,msgq-names = "trusted_vm";
-	};
-};
-
-&hab {
-	mmidgrp200: mmidgrp200 {
-	    dma-coherent;
-	};
-
-	mmidgrp300: mmidgrp300 {
-	    dma-coherent;
-	};
-
-	mmidgrp400: mmidgrp400 {
-	    dma-coherent;
-	};
-
-	mmidgrp500: mmidgrp500 {
-	    dma-coherent;
-	};
-
-	mmidgrp1700: mmidgrp1700 {
-	    grp-start-id = <1700>;
-	    role = "fe";
-	    remote-vmids = <0>;
-	};
-
-	mmidgrp1800: mmidgrp1800 {
-	    grp-start-id = <1800>;
-	    role = "fe";
-	    remote-vmids = <0>;
-	};
-
-	mmidgrp1900: mmidgrp1900 {
-	    grp-start-id = <1900>;
-	    role = "fe";
-	    remote-vmids = <0>;
-	};
 };
 
 &firmware {
 	scm {
-		compatible = "qcom,scm", "qcom,scm-v1.1";
+		compatible = "qcom,scm";
 		qcom,scm-hab;
 	};
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -12,7 +12,7 @@
 	interrupt-controller;
 	#interrupt-cells = <4>;
 
-	pmr735a_1: qcom,pmr735a@4 {
+	qcom,pmr735a@4 {
 		compatible = "qcom,spmi-pmic";
 		reg = <4 SPMI_USID>;
 		#address-cells = <1>;

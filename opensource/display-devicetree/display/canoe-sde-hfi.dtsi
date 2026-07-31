@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/arm/msm/qti-smmu-proxy-dt-ids.h>
+#include "canoe-sde-common-hfi.dtsi"
+
+&soc {
+	smmu_sde_iommu_region_partition1: smmu_sde_iommu_region_partition@1 {
+		iommu-addresses = <&smmu_sde_unsec1 0x0 0x0 0x0 0x00020000>,
+				  <&smmu_sde_unsec1 0x0 0xfc800000  0x0 0x02b00000>,
+				  <&smmu_sde_sec1 0x0 0x0 0x0 0x00020000>;
+	};
+
+	smmu_sde_unsec1: qcom,smmu_sde_unsec_cb@1 {
+		qcom,op-label = "hfi";
+		status = "disabled";
+		compatible = "qcom,smmu_sde_unsec";
+		iommus = <&apps_smmu 0x800 0x2>;
+		memory-region = <&smmu_sde_iommu_region_partition1>;
+		qcom,iommu-faults = "non-fatal";
+		qcom,iommu-earlymap; /* for cont-splash */
+		dma-coherent;
+	};
+
+	smmu_sde_sec1: qcom,smmu_sde_sec_cb@1 {
+		qcom,op-label = "hfi";
+		status = "disabled";
+		compatible = "qcom,smmu_sde_sec";
+		iommus = <&apps_smmu 0x801 0x0>;
+		memory-region = <&smmu_sde_iommu_region_partition1>;
+		qcom,iommu-faults = "non-fatal";
+		qcom,iommu-vmid = <0xa>;
+	};
+};
+
+&mdss_mdp1 {
+	qti,smmu-proxy-cb-id = <QTI_SMMU_PROXY_DISPLAY_CB>;
+
+	mmcx-supply = <&VDD_MMCX_LEVEL>;
+	cx-supply = <&VDD_CX_LEVEL>;
+	mxc-supply = <&VDD_MXC_LEVEL>;
+	mx-supply = <&VDD_MXA_LEVEL>;
+
+	qcom,sde-dspp-ltm-version = <0x00010004>;
+	/* offsets are based off dspp 0, 1, 2, and 3 */
+	qcom,sde-dspp-ltm-off = <0x3300 0x3300 0x3300 0x3300>;
+
+	nvmem-cells = <&ssip_config>;
+	nvmem-cell-names = "ssip_config";
+
+	/* Pre mdss_core vregs */
+	qcom,platform-supply-entries {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		qcom,platform-supply-entry@0 {
+			reg = <0>;
+			qcom,supply-name = "mmcx";
+			qcom,supply-min-voltage = <416>;
+			qcom,supply-max-voltage = <416>;
+			qcom,supply-enable-load = <0>;
+			qcom,supply-disable-load = <0>;
+		};
+
+		qcom,platform-supply-entry@1 {
+			reg = <1>;
+			qcom,supply-name = "cx";
+			qcom,supply-min-voltage = <480>;
+			qcom,supply-max-voltage = <480>;
+			qcom,supply-enable-load = <0>;
+			qcom,supply-disable-load = <0>;
+		};
+
+		qcom,platform-supply-entry@2 {
+			reg = <2>;
+			qcom,supply-name = "mxc";
+			qcom,supply-min-voltage = <456>;
+			qcom,supply-max-voltage = <456>;
+			qcom,supply-enable-load = <0>;
+			qcom,supply-disable-load = <0>;
+		};
+
+		qcom,platform-supply-entry@3 {
+			reg = <3>;
+			qcom,supply-name = "mx";
+			qcom,supply-min-voltage = <456>;
+			qcom,supply-max-voltage = <456>;
+			qcom,supply-enable-load = <0>;
+			qcom,supply-disable-load = <0>;
+		};
+	};
+};

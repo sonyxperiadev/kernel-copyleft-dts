@@ -1,0 +1,65 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/mailbox/qcom-ipcc-canoe.h>
+#include <dt-bindings/mailbox/qcom-ipcc.h>
+
+&soc {
+	msm_hfi_core: qcom,hfi-core {
+		compatible = "qcom,msm-hfi-core";
+		status = "ok";
+
+		depends-on-supply = <&qcom_smp2p_dcp>;
+
+		/* MBOX properties */
+		mboxes = <&ipcc_mproc IPCC_MPROC_DCP 5>,
+				<&ipcc_mproc IPCC_MPROC_DCP 6>,
+				<&ipcc_mproc IPCC_MPROC_APSS 5>,
+				<&ipcc_mproc IPCC_MPROC_APSS 6>;
+		interrupts-extended = <&ipcc_mproc IPCC_MPROC_DCP 5 IRQ_TYPE_EDGE_RISING>,
+				<&ipcc_mproc IPCC_MPROC_DCP 6 IRQ_TYPE_EDGE_RISING>,
+				<&ipcc_mproc IPCC_MPROC_APSS 5 IRQ_TYPE_EDGE_RISING>,
+				<&ipcc_mproc IPCC_MPROC_APSS 6 IRQ_TYPE_EDGE_RISING>,
+				<&intc GIC_SPI 295 IRQ_TYPE_LEVEL_HIGH>,
+				<&dcp_smp2p_in 0 IRQ_TYPE_NONE>,
+				<&dcp_smp2p_in 1 IRQ_TYPE_NONE>,
+				<&dcp_smp2p_in 2 IRQ_TYPE_NONE>,
+				<&dcp_smp2p_in 9 IRQ_TYPE_NONE>,
+				<&dcp_smp2p_in 3 IRQ_TYPE_NONE>;
+
+		interrupt-names = "dcp_power_notify_irq",
+					"dcp_event_notify_irq",
+					"apss_power_notify_irq",
+					"apss_event_notify_irq",
+					"dcp_wdog_bus_error_irq",
+					"smp2p_fatal_irq",
+					"smp2p_err_service_ready_irq",
+					"smp2p_dcp_clock_ready_irq",
+					"smp2p_dcp_pong_irq",
+					"smp2p_dcp_stop_ack_irq";
+
+		/* smp2p communication from apss to dcp */
+		qcom,smem-states = <&dcp_smp2p_out 0>, <&dcp_smp2p_out 8>, <&dcp_smp2p_out 11>,
+				   <&dcp_smp2p_out 12>;
+		qcom,smem-state-names = "stop", "ping", "wdog", "fatal";
+
+		/* DCP properties */
+		iommus = <&apps_smmu 0x19A3 0x0>;
+		dma-coherent;
+
+		/* page 1 */
+		reg = <0x0 0x9cb1000 0x0 0x1000>;
+		reg-names = "swi_dev0";
+
+		/* firmware map start addr and max size */
+		qcom,device-map-addr-reg = <0x88000000 0x8000000>;
+
+		/* firmware image specific information */
+		qcom,pas-id = <63>;
+		memory-region = <&dcp_mem>;
+		qcom,fw_image_name = "dcp.mbn";
+	};
+};

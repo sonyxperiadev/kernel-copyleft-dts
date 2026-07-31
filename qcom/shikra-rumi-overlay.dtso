@@ -5,12 +5,14 @@
 
 /dts-v1/;
 /plugin/;
+/memreserve/ 0x90000000 0x100;
 
+#include "shikra.dtsi"
 #include "shikra-rumi.dtsi"
 
 / {
   model = "Qualcomm Technologies, Inc. Shikra RUMI";
   compatible = "qcom,shikra-rumi", "qcom,shikra", "qcom,rumi";
-  qcom,msm-id = <756 0x10000>;
+  qcom,msm-id = <725 0x10000>; //TODO - correct soc id for colibri
   qcom,board-id = <15 0 >;
 };

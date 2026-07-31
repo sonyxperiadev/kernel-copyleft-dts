@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 &soc {
@@ -24,7 +24,7 @@
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";
 		dma-coherent;
-		status = "disabled";
+		status = "ok";
 		/* HS UART Instance */
 		qupv3_se2_4uart: qcom,qup_uart@988000 {
 			compatible = "qcom,msm-geni-serial-hs";
@@ -46,20 +46,6 @@
 			qcom,wakeup-byte = <0xFD>;
 			status = "disabled";
 		};
-
-		qupv3_se3_2uart: qcom,qup_uart@98c000 {
-			compatible = "qcom,msm-geni-serial-hs";
-			reg = <0x98c000 0x4000>;
-			reg-names = "se_phys";
-			interrupts = <GIC_SPI 530 IRQ_TYPE_LEVEL_HIGH>;
-			clock-names = "se";
-			clocks = <&gcc GCC_QUPV3_WRAP0_S3_CLK>;
-			pinctrl-names = "default", "sleep";
-			pinctrl-0 = <&qupv3_se3_2uart_tx_active>, <&qupv3_se3_2uart_rx_active>;
-			pinctrl-1 = <&qupv3_se3_2uart_sleep>;
-			status = "disabled";
-		};
-
 		/* Debug UART Instance */
 		qupv3_se7_2uart: qcom,qup_uart@99c000 {
 			compatible = "qcom,geni-debug-uart";
@@ -90,7 +76,7 @@
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
 		qcom,iommu-dma = "fastmap";
 		dma-coherent;
-		status = "disabled";
+		status = "ok";
 
 		qupv3_se9_i2c: i2c@a84000 {
 			compatible = "qcom,i2c-geni";

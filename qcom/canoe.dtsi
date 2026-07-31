@@ -3,6 +3,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/arm/msm/qti-smmu-proxy-dt-ids.h>
 #include <dt-bindings/clock/qcom,rpmh.h>
@@ -39,7 +44,7 @@
 
 	chosen: chosen {
 		/* All new command line changes must go into canoe-v2.dtsi */
-		bootargs = "android_arch_task_struct_size=512 loglevel=6 arm64.nosme log_buf_len=512K cpufreq.default_governor=performance sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc kpti=0 swiotlb=0 loop.max_part=7 irqaffinity=0-1 fw_devlink.strict=1 pcie_ports=compat pci-msm-drv.pcie_sm_regs=0x1D07000,0x1040,0x1048,0x3000,0x1 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup_disable=pressure printk.console_no_auto_verbose=1 sysctl.kernel.panic_on_rcu_stall=1 ftrace_dump_on_oops restrict_cma_redirect=false slub_debug=- can.stats_timer=0";
+		bootargs = "android_arch_task_struct_size=512 loglevel=6 arm64.nosme log_buf_len=512K cpufreq.default_governor=powersave sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc kpti=0 swiotlb=0 loop.max_part=7 irqaffinity=0-1 fw_devlink.strict=1 pcie_ports=compat pci-msm-drv.pcie_sm_regs=0x1D07000,0x1040,0x1048,0x3000,0x1 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup_disable=pressure printk.console_no_auto_verbose=1 sysctl.kernel.panic_on_rcu_stall=1 ftrace_dump_on_oops restrict_cma_redirect=false slub_debug=-";
 		stdout-path = "/soc/qcom,qupv3_1_geni_se@ac0000/qcom,qup_uart@a9c000:115200n8";
 	};
 
@@ -321,15 +326,20 @@
 
 	reserved_memory: reserved-memory { };
 
-	mem-offline {
-		compatible = "qcom,mem-offline";
-		status="disabled";
-		offline-sizes = <0x2 0xc0000000 0x1 0x0>;
-		granule = <512>;
-		qcom,qmp = <&aoss_qmp>;
-	};
 
 	soc: soc { };
+
+	hwinfo:HardwareInfo {
+		compatible = "huaqin,HardwareInfo";
+		pcb_type_gpios0 = <&tlmm 117 0 >;
+		pcb_type_gpios1 = <&tlmm 118 0 >;
+		pcb_type_gpios2 = <&tlmm 107 0 >;
+		sd_ufs_card_det_gpio = <&tlmm 55 0 >;
+		mmw_gpio = <&tlmm 87 0>;
+		pinctrl-names = "default";
+		pinctrl-0=<&pcb_type_default>;
+		status = "okay";
+        };
 };
 
 &firmware {
@@ -831,7 +841,7 @@
 		interrupt-controller;
 		#interrupt-cells = <2>;
 		wakeup-parent = <&pdc>;
-		qcom,gpios-reserved = <36 37 38 39 74 119 120 144 145 146 147>;
+		qcom,gpios-reserved = <36 37 38 39 74 144 145 146 147>;
 	};
 
 	tlmm-vm-mem-access {
@@ -1355,7 +1365,6 @@
 		reg-names = "base", "crm_b", "crm_b_pt", "crm_c", "crm_v", "common";
 		interrupts = <GIC_SPI 121 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "cam_crm_drv0";
-		clocks = <&camcc CAM_CC_DRV_AHB_CLK>;
 		qcom,hw-drv-ids = <0 1 2>;
 		qcom,sw-drv-ids = <0>;
 	};
@@ -2356,10 +2365,6 @@
 		clocks = <&rpmhcc RPMH_CXO_CLK>;
 		clock-names = "xo";
 
-		interconnects = <&aggre_noc MASTER_SOCCP_AGGR_NOC &mc_virt SLAVE_EBI1>,
-				<&gem_noc MASTER_APPSS_PROC &cnoc_main SLAVE_SOCCP>;
-		interconnect-names = "rproc_ddr", "rproc_cnoc";
-
 		firmware-name = "soccp.mbn", "soccp_dtb.mbn";
 
 		memory-region = <&soccp_mem &soccp_dtb_mem>;
@@ -2845,14 +2850,14 @@
 		};
 	};
 
-	pmic-glink {
+	pmic_glink:pmic-glink {
 		compatible = "qcom,qti-pmic-glink";
 		qcom,pmic-glink-channel = "PMIC_RTR_SOCCP_APPS";
 		depends-on-supply = <&ipcc_mproc>;
 		qcom,subsys-name = "soccp";
 
 		battery_charger: battery-charger {
-			compatible = "qcom,canoe-battery-charger";
+			compatible = "qcom,battery-charger";
 		};
 
 		ucsi: ucsi-glink {
@@ -2865,7 +2870,7 @@
 		};
 	};
 
-	pmic-glink-log {
+	pmic_glink_log:pmic-glink-log {
 		compatible = "qcom,qti-pmic-glink";
 		qcom,pmic-glink-channel = "PMIC_LOGS_SOCCP_APPS";
 
@@ -3795,11 +3800,6 @@
 			reg = <0x144 0x4>;
 		};
 
-		debugbus_en: debugbus_en@783 {
-			reg = <0x783 0x1>;
-			bits = <1 1>;
-		};
-
 		gpu_debug_bus_bin: gpu_debug_bus_bin@73 {
 			reg = <0x73 0x1>;
 			bits = <1 1>;
@@ -3808,11 +3808,6 @@
 		gpu_speed_bin: gpu_speed_bin@142 {
 			reg = <0x142 0x2>;
 			bits = <3 9>;
-		};
-
-		gpu_niden_en: gpu_niden_en@783 {
-			reg = <0x783 0x1>;
-			bits = <6 1>;
 		};
 
 		cpr_gfx_rc: cpr_gfx_rc@999 {
@@ -3929,6 +3924,12 @@
 		reg-names = "mon-base";
 		qcom,cluster-num = <2>;
 		qcom,devfreq = <&msm_gpu>;
+	};
+
+	last_logs@ff6c0000 {
+		compatible = "rd_last_logs";
+		label = "last_logs";
+		memory-region = "log";
 	};
 };
 
@@ -4296,10 +4297,35 @@
 		size = <0 0x1000000>;
 	};
 
-	ramoops_mem: ramoops-region {
-		alloc-ranges = <0x1 0x00000000 0xfffffffe 0xffffffff>;
-		size = <0x0 0x200000>;
+	debug_region: debug_region@ff600000 {
+		compatible = "removed-dma-pool", "qcom,debug_memory";
 		no-map;
+		reg = <0 0xff600000 0 0xc0000>;
+		label = "debug_mem";
+	};
+
+	last_log_region: last_log_region@ff6c0000 {
+		compatible = "removed-dma-pool", "qcom,last_log_memory";
+		no-map;
+		reg = <0 0xff6c0000 0 0x40000>;
+		label = "last_log";
+		phandle = "log";
+	};
+
+	ramoops_mem: ramoops_region@ff700000 {
+		compatible = "removed-dma-pool", "ramoops";
+		reg = <0 0xff700000 0 0xc0000>;
+		record-size = <0x1000>;
+		console-size = <0x40000>;
+		pmsg-size = <0x40000>;
+		ftrace-size = <0x0>;
+	};
+
+	rdtag_store_region: rdtag_store_region@ff7c0000 {
+		compatible = "removed-dma-pool", "rdtag_store_region";
+		no-map;
+		reg = <0 0xff7c0000 0 0x40000>;
+		label = "rdtag_store_region";
 	};
 };
 
@@ -4330,6 +4356,33 @@
 
 #include "ipcc-test-canoe.dtsi"
 #include "msm-rdbg.dtsi"
+
+&tlmm {
+	pcb_type_pins: pcb_type_pins {
+		pcb_type_default: pcb_type_default {
+			mux {
+				pins = "gpio117", "gpio118", "gpio107", "gpio87", "gpio100";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio117", "gpio118", "gpio107", "gpio87", "gpio100";
+				drive-strength = <2>;
+				bias-pull-down;         /* PULL DOWN */
+				input-enable;
+			};
+		};
+	};
+};
+
+&usb0 {
+	dwc3@a600000 {
+		/* disable USB2 LPM */
+		snps,usb2-lpm-disable;
+		snps,usb2-gadget-lpm-disable;
+		qcom,disable-host-ssphy-powerdown = <1>;
+	};
+};
 /delete-node/ &ipcc_self_ping_adsp;
 /delete-node/ &ipcc_self_ping_cdsp;
 /delete-node/ &ipcc_self_ping_slpi;
+#include "canoe-charger-chikugo.dtsi"

@@ -63,8 +63,6 @@
 	/* secdata region can be reused by apps */
 
 	smem_mem: smem_region@81d00000 {
-		compatible = "qcom,smem";
-		hwlocks = <&tcsr_mutex 3>;
 		no-map;
 		reg = <0x0 0x81d00000 0x0 0x200000>;
 	};
@@ -248,11 +246,6 @@
 		reg = <0x0 0xd4e23000 0x0 0x2dd000>;
 	};
 
-	hypervisor_extended_heap_mem: hypervisor_extended_heap_region@d74e0000 {
-		no-map;
-		reg = <0x0 0xd74e0000 0x0 0x520000>;
-	};
-
 	global_sync_mem: global_sync_region@d7a00000 {
 		no-map;
 		reg = <0x0 0xd7a00000 0x0 0x200000>;
@@ -305,14 +298,9 @@
 
 	trust_ui_vm_mem: trust_ui_vm_region@f3800000 {
 		compatible = "shared-dma-pool";
-		reg = <0x0 0xf3800000 0x0 0x4000000>;
+		reg = <0x0 0xf3800000 0x0 0x4400000>;
 		reusable;
 		alignment = <0x0 0x400000>;
-	};
-
-	sc_tcm_mem: sc_tcm_region@38000000 {
-		no-map;
-		reg = <0x0 0x38000000 0x0 0xa00000>;
 	};
 
 	llcc_lpi_mem: llcc_lpi_region@fc000000 {

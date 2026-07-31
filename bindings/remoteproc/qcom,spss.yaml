@@ -21,7 +21,6 @@ properties:
       - qcom,pineapple-spss-pas
       - qcom,sun-spss-pas
       - qcom,canoe-spss-pas
-      - qcom,lahaina-spss-pas
 
   reg:
     minItems: 1

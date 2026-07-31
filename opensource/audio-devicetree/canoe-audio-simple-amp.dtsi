@@ -1,0 +1,434 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+#include <dt-bindings/gpio/gpio.h>
+
+&swr0 {
+	qcom,swr-num-dev = <1>;
+
+	wsa8855_0230: wsa8855@02170230 {
+		reg = <0x0105 0x02170230>;
+		compatible = "qcom,simple-sdca-amp";
+		sound-name-prefix = "SA1"; /* simple amp - 1 */
+		powerdown-gpios = <&tlmm 76 GPIO_ACTIVE_LOW>;
+		vdd-1p8-supply = <&L15B>;
+		vdd-io-supply = <&L1G>;
+		qcom,lpass-cdc-handle = <&lpass_cdc>;
+
+		/* Function Numbers , Define function dt entries in the same order as func numbers */
+		qcom,simple-amp-function-array = <1>;
+		qcom,codec-name = "sdca-simple-amp.01";
+
+		function_1_stereo: stereo_amp {
+
+			 mipi-sdca-function-initialization-table =
+								<0x40580606 0x24 /* CDC_RX0_RX_PATH_CTL - CLK_EN(1) */
+								0x40580626 0x24  /* CDC_RX1_RX_PATH_CTL - CLK_EN(1) */
+								0x40580613 0x1   /* RX0_RX_PATH_DSMDEM_CTL - DSMDEM_CLK_EN(1) */
+								0x40580633 0x1   /* RX1_RX_PATH_DSMDEM_CTL - DSMDEM_CLK_EN(1) */
+								0x40580640 0x1   /* CDC_COMPANDER0_CTL0 - CLK_EN(1) */
+								0x40580660 0x1   /* CDC_COMPANDER1_CTL0 - CLK_EN(1) */
+								0x405806A1 0x14  /* CDC_VSENSE0_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+								0x405806B1 0x14  /* CDC_VSENSE1_SPKR_PROT_PATH_CTL - CLK_EN(1)*/
+								0x405806A9 0x14  /* CDC_ISENSE0_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+								0x405806B9 0x14  /* CDC_ISENSE1_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+								0x4058041C 0xF   /* DIG_CTRL0_CDC_CLK_CTL  - SYS_CLOCK_EN(1) */
+								0x4058041C 0xCF  /* DIG_CTRL0_CDC_CLK_CTL - FSM_INTP_CG_DISABLE and FSM_IVS_CG_DISABLE */
+								0x40580470 0x2   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(1) */
+								0x40580470 0x0   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(0) */
+								0x40580470 0x1   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_EN(1) */
+								0x40400008 0x2   /* SMP_AMP_CTRL_STEREO_CMT_GRP_MASK - CMT_GRP_MASK(2) */
+								0x40580602 0x60  /* CDC_RX0_RX_PATH_CFG1 - HPF_EN(0) */
+								0x40580622 0x60  /* CDC_RX1_RX_PATH_CFG1 - HPF_EN(0) */
+								0x40580108 0xA5  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH1_CTRL3 */
+								0x4058010E 0xA5  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH2_CTRL3 */
+								0x405800CA 0x85  /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL2 - SPARE_BITS_0(Sets LDO to 1.6V) */
+								0x405800CB 0xC   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL3 - ADC_VREF_VCTL_I(Sets VREF_I to 1.35V) */
+								0x405800CB 0xE   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL3 - ADC_VREF_VCTL_I(Sets VREF_I to 1.35V) */
+								0x405800CC 0xC   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_REF_CTL - ADC_VREF_VCTL_V(Sets VREF_V to 1.35V) */
+								0x405804B4 0x1   /* PANDEIRO_DIG_CTRL0_GAIN_RAMP0_CTL1 - ANA_BYPASS(1) */
+								0x405804B7 0x1   /* PANDEIRO_DIG_CTRL0_GAIN_RAMP1_CTL1 - ANA_BYPASS(1) */
+								0x40580601 0x88  /* CDC_RX0_RX_PATH_CFG0 - DLY_ZN_EN(1) */
+								0x40580601 0x89  /* CDC_RX0_RX_PATH_CFG0 - PH_EQ_EN */
+								0x40580621 0x88  /* CDC_RX1_RX_PATH_CFG0 - DLY_ZN_EN(1) */
+								0x40580621 0x89  /* CDC_RX1_RX_PATH_CFG0 - PH_EQ_EN */
+								0x4058005B 0x82  /* PANDEIRO_ANA_TOP_BOOST_STB_CTRL2 */
+								0x4058005C 0x34  /* PANDEIRO_ANA_TOP_BOOST_STB_CTRL3 */
+								0x40580065 0x41  /* PANDEIRO_ANA_TOP_BOOST_PWRSTAGE_CTRL2 */
+								0x40580067 0x7F  /* PANDEIRO_ANA_TOP_BOOST_PWRSTAGE_CTRL4 */
+								0x405806CD 0x50  /* CDC_CLSH_V1P8_BP_CTL1 */
+								0x405806CC 0x6C  /* CDC_CLSH_V1P8_BP_CTL0 */
+								0x405806C7 0xD   /* CDC_CLSH_CLSH_SIG_DP_CTL0 */
+								0x405806C3 0x3   /* CDC_CLSH_CLSH_V_HD_PA */
+								0x40580423 0x5   /* PANDEIRO_DIG_CTRL0_POWER_FSM_CTL0 */
+								0x4058010B 0x45  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH1_TUNE3 */
+								0x40580111 0x45  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH2_TUNE3 */
+								0x405806CE 0x5   /* CDC_CLSH_V1P8_BP_CTL2 - BP_CNT  */
+								0x40580024 0x35  /* PANDEIRO_ANA_TOP_BG_TVP_UVLO1_PROG - VTH 2.1v */
+								0x40580025 0x21  /* PANDEIRO_ANA_TOP_BG_TVP_UVLO2_PROG - VTH 2.0v */
+								0x4058005E 0xC7  /* PANDEIRO_ANA_TOP_BOOST_BYP_CTRL2 */
+								0x4058005F 0x11  /* PANDEIRO_ANA_TOP_BOOST_BYP_CTRL3 */
+								0x405800D0 0x80 /* PANDEIRO_ANA_TOP_IVSENSE_ADC_CDAC_CAL_CTL2 */
+								0x4058013C 0x08 /* PANDEIRO_ANA_TOP_SPK_TOP_SPARE3 */
+								0x40580103 0x03 /* PANDEIRO_ANA_TOP_SPK_TOP_COMMON_TUNE1 - 0x3 : G_0DB */
+								0x4058000D 0x20 /* PANDEIRO_ANA_TOP_PON_CKSK_CTL_0 - BST_CLK_Flip Enable */
+								0x4058042B 0x47 /* PANDEIRO_DIG_CTRL0_PA0_FSM_CTL1 - SILENT_STATE_IVS_EN */
+								0x40580435 0x47 /* PANDEIRO_DIG_CTRL0_PA1_FSM_CTL1 - SILENT_STATE_IVS_EN */
+								0x40580647 0x34 /* CDC_COMPANDER0_CTL7 - AGAIN_DELAY */
+								0x40580667 0x34 /* CDC_COMPANDER0_CTL7 - AGAIN_DELAY */
+								0x40580458 0x79>; /* PANDEIRO_DIG_CTRL0_VBAT_THRM_FLT_CTL - VBAT_COEF_SEL */
+
+			 mipi-sdca-function-initialization-table-v2 =
+								<0x40580470 0x2   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(1) */
+								0x40580470 0x0   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(0) */
+								0x40580470 0x1   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_EN(1) */
+								0x40400008 0x2   /* SMP_AMP_CTRL_STEREO_CMT_GRP_MASK - CMT_GRP_MASK(2) */
+								0x40580602 0x60  /* CDC_RX0_RX_PATH_CFG1 - HPF_EN(0) */
+								0x40580622 0x60  /* CDC_RX1_RX_PATH_CFG1 - HPF_EN(0) */
+								0x40580458 0x79 /* PANDEIRO_DIG_CTRL0_VBAT_THRM_FLT_CTL - VBAT_COEF_SEL */
+								0x4058010B 0xD9  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH1_TUNE3 */
+								0x40580111 0xD9  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH2_TUNE3 */
+								0x4058013C 0x8   /* SPK_TOP_COMMON_CTRL4 - override_ctl*/
+								0x4058011D 0x40  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH1_TUNE1  - HIZ_DELAY_PROG*/
+								0x40580129 0x40  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH2_TUNE1  - HIZ_DELAY_PROG*/
+								0x4058011A 0x80  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH1_CTRL9 - OCP_CLIP_T_CTRL_EXT */
+								0x4058011A 0x81  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH1_CTRL9 - OCP_BRIDGE_TRANSITION_BLIND */
+								0x40580126 0x80  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH2_CTRL9 -  OCP_CLIP_T_CTRL_EXT */
+								0x40580126 0x81  /* PANDEIRO_ANA_TOP_SPK_TOP_LF_CH2_CTRL9 -  OCP_BRIDGE_TRANSITION_BLIND */
+								0x40580103 0x6   /* PANDEIRO_ANA_TOP_SPK_TOP_COMMON_TUNE1 - GAIN_TUNE */
+								0x405800CA 0x85  /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL2 - SPARE_BITS_0(Sets LDO to 1.6V) */
+								0x405800CB 0xE   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL3 - ADC_VREF_VCTL_I(Sets VREF_I to 1.35V) */
+								0x405800CC 0xC   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_REF_CTL - ADC_VREF_VCTL_V(Sets VREF_I to 1.35V) */
+								0x405800D0 0x80 /* PANDEIRO_ANA_TOP_IVSENSE_ADC_CDAC_CAL_CTL2 */
+								0x4058041C 0x4E /* PANDEIRO_DIG_CTRL0_CDC_CLK_CTL - FSM_INTP_CG_DISABLE */
+								0x40580647 0x34 /* CDC_COMPANDER0_CTL7 - SET AGAIN DELAY 10 */
+								0x40580667 0x34>; /* CDC_COMPANDER1_CTL7 - SET AGAIN DELAY 10 */
+
+			/* Entity0 - Entity0 - Function Level Controls _DSD  */
+			entity_id_0x0: mipi-sdca-entity-id-0x0-subproperties@entity0 {
+				mipi-sdca-entity-label = "ENTITY0";
+				mipi-sdca-entity-number = <0x0>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x1>, <0x4>, <0x5>, <0x6>, <0x7>, <0x8>, <0x9>,
+								<0xA>, <0x10>, <0x11>, <0x2C>, <0x2D>, <0x2E>, <0x2F>;
+
+				control-selectors {
+					mipi-sdca-control-0x1-subproperties = <&control_subproperty_E0_C01>;   //Commit_Group_Mask
+					mipi-sdca-control-0x4-subproperties = <&control_subproperty_E0_C04>;   //Function_SDCA_Version
+					mipi-sdca-control-0x5-subproperties = <&control_subproperty_E0_C05>;   //Function_Type
+					mipi-sdca-control-0x6-subproperties = <&control_subproperty_E0_C06>;   //Function_Manufacturer_ID
+					mipi-sdca-control-0x7-subproperties = <&control_subproperty_E0_C07>;   //Function_ID
+					mipi-sdca-control-0x8-subproperties = <&control_subproperty_E0_C08>;   //Function_Version
+					mipi-sdca-control-0x9-subproperties = <&control_subproperty_E0_C09>;   //Function_Extension_ID_0
+					mipi-sdca-control-0xA-subproperties = <&control_subproperty_E0_C0A>;   //Function_Extension_Version
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E0_C010>; //Function_Status
+					mipi-sdca-control-0x11-subproperties = <&control_subproperty_E0_C011>; //Function_Action
+					mipi-sdca-control-0x2C-subproperties = <&control_subproperty_E0_C02C>; //Device_Manufacturer_ID_0
+					mipi-sdca-control-0x2D-subproperties = <&control_subproperty_E0_C02D>; //Device _Part_ID_0
+					mipi-sdca-control-0x2E-subproperties = <&control_subproperty_E0_C02E>; //Device_Version
+					mipi-sdca-control-0x2F-subproperties = <&control_subproperty_E0_C02F>; //Device_SDCA_Version
+
+					control_subproperty_E0_C01: mipi-sdca-control-0x1-subproperties@C01 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+
+					control_subproperty_E0_C04: mipi-sdca-control-0x4-subproperties@C04 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C05: mipi-sdca-control-0x5-subproperties@C05 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C06: mipi-sdca-control-0x6-subproperties@C06 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C07: mipi-sdca-control-0x7-subproperties@C07 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C08: mipi-sdca-control-0x8-subproperties@C08 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C09: mipi-sdca-control-0x9-subproperties@C09 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C0A: mipi-sdca-control-0xA-subproperties@C0A {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C010: mipi-sdca-control-0x10-subproperties@C010 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW1C
+					};
+
+					control_subproperty_E0_C011: mipi-sdca-control-0x11-subproperties@C011 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW1S
+					};
+
+					control_subproperty_E0_C02C: mipi-sdca-control-0x2C-subproperties@C02C {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C02D: mipi-sdca-control-0x2D-subproperties@C02D {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+					control_subproperty_E0_C02E: mipi-sdca-control-0x2E-subproperties@C02E {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0_C02F: mipi-sdca-control-0x2F-subproperties@C02F {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity0 */
+
+			/* Entity1 - IT21 */
+			entity_id_0x1: mipi-sdca-entity-id-0x1-subproperties@IT21 {
+				mipi-sdca-entity-label = "IT21";
+				mipi-sdca-entity-number = <0x1>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x10>, <0x11>;
+
+				control-selectors {
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E1_C10>; //ClusterIndex
+					mipi-sdca-control-0x11-subproperties = <&control_subproperty_E1_C11>; //DataPort_Selector
+
+					control_subproperty_E1_C10: mipi-sdca-control-0x10-subproperties@C110 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+
+					control_subproperty_E1_C11: mipi-sdca-control-0x11-subproperties@C111 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity1 */
+
+			/* Start Entity2 - CS21 */
+			entity_id_0x2: mipi-sdca-entity-id-0x2-subproperties@CS21 {
+				mipi-sdca-entity-label = "CS21";
+				mipi-sdca-entity-number = <0x2>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x2>, <0x10>;
+
+				control-selectors {
+					mipi-sdca-control-0x2-subproperties = <&control_subproperty_E2_C01>; //Clock_valid
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E2_C10>; //Sample rate
+
+					control_subproperty_E2_C01: mipi-sdca-control-0x2-subproperties@C201 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E2_C10: mipi-sdca-control-0x10-subproperties@C210 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity2 */
+
+			/* Start Entity3 - PPU21 */
+			entity_id_0x3: mipi-sdca-entity-id-0x3-subproperties@CS21 {
+				mipi-sdca-entity-label = "PPU21";
+				mipi-sdca-entity-number = <0x3>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x10>;
+
+				control-selectors {
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E3_C10>; //PostureNumber
+
+					control_subproperty_E3_C10: mipi-sdca-control-0x10-subproperties@C310 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity3 */
+
+			/* Start Entity4 - FU21 */
+			entity_id_0x4: mipi-sdca-entity-id-0x4-subproperties@FU21 {
+				mipi-sdca-entity-label = "FU21";
+				mipi-sdca-entity-number = <0x4>;
+				mipi-sdca-control-numbers = <0x0>, <0x1>, <0x2>;
+				mipi-sdca-control-selectors = <0x1>, <0x2>;
+
+				control-selectors {
+					mipi-sdca-control-0x1-subproperties = <&control_subproperty_E4_C01>; //Mute_rx0
+					mipi-sdca-control-0x2-subproperties = <&control_subproperty_E4_C02>; //Volume_rx0
+
+					control_subproperty_E4_C01: mipi-sdca-control-0x1-subproperties@C401 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+
+					control_subproperty_E4_C02: mipi-sdca-control-0x2-subproperties@C402 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity4 */
+
+			/* Start Entity7 - SAPU29 */
+			entity_id_0x7: mipi-sdca-entity-id-0x7-subproperties@SAPU29 {
+				mipi-sdca-entity-label = "SAPU29";
+				mipi-sdca-entity-number = <0x7>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x10>, <0x11>;
+
+				control-selectors {
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E7_C10>; //Protection_Mode
+					mipi-sdca-control-0x11-subproperties = <&control_subproperty_E7_C11>; //Protection_Status
+
+					control_subproperty_E7_C10: mipi-sdca-control-0x10-subproperties@C710 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E7_C11: mipi-sdca-control-0x11-subproperties@C711 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity7 */
+
+			/* Start Entity 0x0A - PDE23 */
+			entity_id_0xA: mipi-sdca-entity-id-0xA-subproperties@PDE23 {
+				mipi-sdca-entity-label = "PDE23";
+				mipi-sdca-entity-number = <0xA>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x1>, <0x10>;
+
+				control-selectors {
+					mipi-sdca-control-0x1-subproperties = <&control_subproperty_E0A_C01>; //Requested PS
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E0A_C10>; //Actual PS
+
+					control_subproperty_E0A_C01: mipi-sdca-control-0x1-subproperties@C0A02 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+
+					control_subproperty_E0A_C10: mipi-sdca-control-0x10-subproperties@C0A10 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity 0x0A */
+
+			/* Start Entity 0x0B - OT23 */
+			entity_id_0xB: mipi-sdca-entity-id-0xB-subproperties@OT23 {
+				mipi-sdca-entity-label = "OT23";
+				mipi-sdca-entity-number = <0xB>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x4>;
+
+				control-selectors {
+					mipi-sdca-control-0x4-subproperties = <&control_subproperty_E0B_C04>; //Usage
+
+					control_subproperty_E0B_C04: mipi-sdca-control-0x4-subproperties@C0B04 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity 0x0B */
+
+			/* Start Entity 0x0C - IT29 */
+			entity_id_0xC: mipi-sdca-entity-id-0xC-subproperties@IT29 {
+				mipi-sdca-entity-label = "IT29";
+				mipi-sdca-entity-number = <0xC>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x10>;
+
+				control-selectors {
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E0C_C04>; //Cluster_Index
+
+					control_subproperty_E0C_C04: mipi-sdca-control-0x04-subproperties@C0C04 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity 0x0C */
+
+			/* Start Entity 0xE - CS24 */
+			entity_id_0xE: mipi-sdca-entity-id-0xE-subproperties@CS24 {
+				mipi-sdca-entity-label = "CS24";
+				mipi-sdca-entity-number = <0xE>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x2>, <0x10>;
+
+				control-selectors {
+					mipi-sdca-control-0x2-subproperties = <&control_subproperty_E0E_C02>; //Clock_valid
+					mipi-sdca-control-0x10-subproperties = <&control_subproperty_E0E_C10>; //Sample rate
+
+					control_subproperty_E0E_C02: mipi-sdca-control-0x2-subproperties@C0E02 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0E_C10: mipi-sdca-control-0x10-subproperties@C210 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity - 0xE */
+
+			/* Start Entity 0x0F - OT24 */
+			entity_id_0xF: mipi-sdca-entity-id-0xF-subproperties@OT24 {
+				mipi-sdca-entity-label = "OT24";
+				mipi-sdca-entity-number = <0xF>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x4>, <0x11>;
+
+				control-selectors {
+					mipi-sdca-control-0x4-subproperties = <&control_subproperty_E0F_C04>; //Usage
+					mipi-sdca-control-0x11-subproperties = <&control_subproperty_E0F_C11>; //DataPort_Selector
+
+					control_subproperty_E0F_C04: mipi-sdca-control-0x4-subproperties@C0F04 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+
+					control_subproperty_E0F_C11: mipi-sdca-control-0x11-subproperties@C0F11 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x0>; //R
+					};
+				};
+			}; /* End of Entity 0x0F */
+
+			/* Start Entity 0x11 - TG 23 */
+			entity_id_0x11: mipi-sdca-entity-id-0x10-subproperties@TG23 {
+				mipi-sdca-entity-label = "TG23";
+				mipi-sdca-entity-number = <0x10>;
+				mipi-sdca-control-numbers = <0x0>;
+				mipi-sdca-control-selectors = <0x11>;
+
+				control-selectors {
+					mipi-sdca-control-0x11-subproperties = <&control_subproperty_E011_C011>; //Tone_divider
+
+					control_subproperty_E011_C011: mipi-sdca-control-0x11-subproperties@C1111 {
+						mipi-sdca-control-access-layer = <0x4>;
+						mipi-sdca-control-access-mode = <0x2>; //RW
+					};
+				};
+			}; /* End of Entity 0x11 */
+		};
+
+	};
+};

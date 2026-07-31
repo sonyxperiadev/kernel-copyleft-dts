@@ -44,8 +44,6 @@ properties:
           - qcom,x1p42100-pdc
           - qcom,seraph-pdc
           - qcom,chora-pdc
-          - qcom,pikachu-pdc
-          - qcom,bourtzi-pdc
       - const: qcom,pdc
 
   reg:

@@ -1,7 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "kernel_dtstree")
 
-exports_files(glob(["qcom/*.config"]))
-
 kernel_dtstree(
     name = "msm_dt",
     srcs = glob(
@@ -10,7 +8,7 @@ kernel_dtstree(
             "qcom/Makefile",
             "qcom/**/*.dtsi",
             "qcom/**/*.dts",
-            "qcom/**/*.dtso",
+	    "qcom/**/*.dtso",
             "bindings/**/*",
         ],
         exclude = [

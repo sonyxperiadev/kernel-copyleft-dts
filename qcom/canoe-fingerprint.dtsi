@@ -1,0 +1,101 @@
+&soc {
+        fp_egistec {
+                status = "ok";
+                compatible = "fp-egistec";
+                egistec,gpio_vcc_en = <&tlmm 125 0x00>;
+                egistec,gpio_reset = <&tlmm 79 0x00>;
+                egistec,gpio_irq = <&tlmm 99 0x00>;
+                fp-gpio-vcc-enable;
+                fp-ctrl-power;         // enable power control
+//		fp-gpio-ext-ldo;       // yodo use regulator pm_humu_bob1
+		pinctrl-names = "egis_rst_high", "egis_rst_low", "egis_vcc_high", "egis_vcc_low", "egis_irq_active", "egis_irq_low";
+		pinctrl-0 = <&fingerfp_rst_high>;
+		pinctrl-1 = <&fingerfp_rst_low>;
+		pinctrl-2 = <&fingerfp_vcc_high>;
+		pinctrl-3 = <&fingerfp_vcc_low>;
+		pinctrl-4 = <&fingerfp_irq_active>;
+		pinctrl-5 = <&fingerfp_irq_sleep>;
+//		vcc_fp-supply = <&pm_humu_bob3>;
+		egis-fp,vcc-voltage = <3300000 3300000>;
+		egis-fp,vcc-current = <1000000>;
+		egis-fp,vcc-max-voltage = <3300000>;
+        };
+};
+&tlmm {
+        fingerfp_rst_pin: fingerfp_rst_pin {
+                fingerfp_rst_high: fingerfp_rst_high {
+                        mux {
+                                pins = "gpio79";
+                                function = "gpio";
+                        };
+                        config {
+                                pins = "gpio79";
+                                drive-strength = <2>;
+                                output-high;
+                                bias-pull-up;
+                        };
+                };
+                fingerfp_rst_low: fingerfp_rst_low {
+                        mux {
+                                pins = "gpio79";
+                                function = "gpio";
+                        };
+                        config {
+                                pins = "gpio79";
+                                drive-strength = <2>;
+                                output-low;
+                                bias-pull-down;
+                        };
+                };
+        };
+        fingerfp_irq_active: fingerfp_irq_active {
+                mux {
+                        pins = "gpio99";
+                        function = "gpio";
+                };
+                config {
+                        pins = "gpio99";
+                        drive-strength = <2>;
+                        bias-pull-up;
+                        input-enable;
+                };
+        };
+        fingerfp_irq_sleep: fingerfp_irq_sleep {
+                mux {
+                        pins = "gpio99";
+                        function = "gpio";
+                };
+                config {
+                        pins = "gpio99";
+                        drive-strength = <2>;
+                        bias-disable;
+                        output-low;
+                };
+        };
+        fingerfp_vcc_pin: fingerfp_vcc_pin {
+                fingerfp_vcc_high: fingerfp_vcc_high {
+                        mux {
+                                pins = "gpio125";
+                                function = "gpio";
+                        };
+                        config {
+                                pins = "gpio125";
+                                drive-strength = <2>;
+                                output-high;
+                                bias-pull-up;
+                        };
+                };
+                fingerfp_vcc_low: fingerfp_vcc_low {
+                        mux {
+                                pins = "gpio125";
+                                function = "gpio";
+                        };
+                        config {
+                                pins = "gpio125";
+                                drive-strength = <2>;
+                                output-low;
+                                bias-pull-down;
+                        };
+                };
+        };
+};

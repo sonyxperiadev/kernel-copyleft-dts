@@ -22,7 +22,6 @@ properties:
   compatible:
     items:
       - enum:
-          - qcom,pm2250-flash-led
           - qcom,pm6150l-flash-led
           - qcom,pm8150c-flash-led
           - qcom,pm8150l-flash-led
@@ -31,18 +30,10 @@ properties:
           - qcom,pmh0101-flash-led
           - qcom,pmxr2230-flash-led
           - qcom,pmi8998-flash-led
-          - qcom,pmi632-flash-led
       - const: qcom,spmi-flash-led
 
   reg:
     maxItems: 1
-
-  qcom,use-smb-battery-interface:
-    description: |
-      Indicates the SMB charger driver is used for reading battery properties
-      needed for max current calculations. This property is only required for
-      Linux charger designs and should not be added otherwise.
-    type: boolean
 
 patternProperties:
   "^led-[0-3]$":

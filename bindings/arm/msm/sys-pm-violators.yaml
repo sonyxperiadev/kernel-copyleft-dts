@@ -30,9 +30,6 @@ properties:
       - qcom,sys-pm-vienna
       - qcom,sys-pm-alor
       - qcom,sys-pm-x1e80100
-      - qcom,sys-pm-chora
-      - qcom,sys-pm-pikachu
-      - qcom,sys-pm-seraph
 
   reg:
     maxItems: 1
@@ -60,9 +57,6 @@ allOf:
               - qcom,sys-pm-pineapple
               - qcom,sys-pm-parrot
               - qcom,sys-pm-ravelin
-              - qcom,sys-pm-chora
-              - qcom,sys-pm-pikachu
-              - qcom,sys-pm-seraph
     then:
       properties:
         reg:

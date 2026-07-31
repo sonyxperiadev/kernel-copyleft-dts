@@ -6,7 +6,7 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/spmi/spmi.h>
 
-qcom,pmr735b@5 {
+pmr735b: pmr735b@5 {
 	compatible = "qcom,spmi-pmic";
 	reg = <5 SPMI_USID>;
 	#address-cells = <1>;

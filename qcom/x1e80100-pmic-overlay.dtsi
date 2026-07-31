@@ -46,10 +46,6 @@
 	status = "ok";
 };
 
-&pm8010_n {
-	status = "disabled";
-};
-
 &pm8550_gpios {
 	key_vol_up {
 		key_vol_up_default: key_vol_up_default {
@@ -60,29 +56,6 @@
 			power-source = <1>;
 		};
 	};
-
-	sys_therm_0_gpio3 {
-		sys_therm_0_gpio3_default: sys_therm_0_gpio3_default {
-			pins = "gpio3";
-			bias-high-impedance;
-		};
-	};
-
-	sys_therm_1_gpio4 {
-		sys_therm_1_gpio4_default: sys_therm_1_gpio4_default {
-			pins = "gpio4";
-			bias-high-impedance;
-		};
-	};
-};
-
-&battery_charger {
-	qcom,wireless-charging-not-supported;
-	qcom,multiport-usb = <2>;
-};
-
-&pmk8550_rtc {
-	qcom,no-alarm; /* alarm owned by ADSP */
 };
 
 &soc {
@@ -112,7 +85,6 @@
 		compatible = "qcom,pmic-pon-log";
 		nvmem = <&pmk8550_sdam_5>, <&pmk8550_sdam_6>;
 		nvmem-names = "pon_log0", "pon_log1";
-		depends-on-supply = <&wdog>;
 	};
 };
 
@@ -159,9 +131,6 @@
 };
 
 &pmk8550_vadc {
-	pinctrl-0 = <&sys_therm_0_gpio3_default>, <&sys_therm_1_gpio4_default>;
-	pinctrl-names = "default";
-
 	pm8550_sys_therm_0 {
 		reg = <PM8550_ADC5_GEN3_AMUX1_GPIO3_100K_PU>;
 		label = "pm8550_sys_therm_0";
@@ -234,7 +203,7 @@
 	pm8550ve_i_die_temp {
 		reg = <PM8550VX_ADC5_GEN3_DIE_TEMP(8)>;
 		label = "pm8550ve_i_die_temp";
-		qcom,pre-scaling = <1 1>;
+		qom,pre-scaling = <1 1>;
 	};
 
 	pm8550ve_j_die_temp {
@@ -282,7 +251,7 @@
 		};
 
 		smb2360_0_bcl: bcl@4700 {
-			compatible = "qcom,smb2360-bcl-v5";
+			compatible = "qcom,bcl-v5";
 			reg = <0x4700 0x100>;
 			interrupts = <0x7 0x47 0x0 IRQ_TYPE_NONE>,
 					<0x7 0x47 0x1 IRQ_TYPE_NONE>,
@@ -291,7 +260,6 @@
 					"bcl-lvl1",
 					"bcl-lvl2";
 			qcom,pmic7-threshold;
-			qcom,disable-vbat-level0-in-suspend;
 			#thermal-sensor-cells = <1>;
 		};
 
@@ -332,7 +300,6 @@
 		reg = <12 SPMI_USID>;
 		#address-cells = <1>;
 		#size-cells = <0>;
-		status = "disabled";
 
 		smb2360_3_eusb2_repeater: phy@fd00 {
 			compatible = "qcom,smb2360-eusb2-repeater";

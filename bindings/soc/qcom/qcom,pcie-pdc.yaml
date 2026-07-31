@@ -22,8 +22,6 @@ properties:
       - qcom,cliffs-pcie-pdc
       - qcom,canoe-pcie-pdc
       - qcom,alor-pcie-pdc
-      - qcom,seraph-pcie-pdc
-      - qcom,pikachu-pcie-pdc
       - qcom,pcie-pdc
 
   reg:

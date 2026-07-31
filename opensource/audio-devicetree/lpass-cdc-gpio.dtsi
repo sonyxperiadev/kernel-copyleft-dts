@@ -1,0 +1,178 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+&spf_core_platform  {
+
+	cdc_pri_mi2s_gpios: pri_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s0_sck_active &i2s0_ws_active
+				&i2s0_sd0_active &i2s0_sd1_active>;
+		pinctrl-1 = <&i2s0_sck_sleep &i2s0_ws_sleep
+				&i2s0_sd0_sleep &i2s0_sd1_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	fm_i2s1_gpios: fm_i2s1_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&i2s1_sck_active &i2s1_ws_active
+				&i2s1_sd0_active>;
+		pinctrl-1 = <&i2s1_sck_sleep &i2s1_ws_sleep
+				&i2s1_sd0_sleep>;
+		#gpio-cells = <0>;
+	};
+
+	cdc_tert_mi2s_gpios: tert_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s4_clk_active &lpi_i2s4_ws_active
+				&lpi_i2s4_data0_active &lpi_i2s4_data1_active>;
+		pinctrl-1 = <&lpi_i2s4_clk_sleep &lpi_i2s4_ws_sleep
+				&lpi_i2s4_data0_sleep &lpi_i2s4_data1_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_quat_mi2s_gpios: quat_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s0_sck_active &lpi_i2s0_ws_active
+				&lpi_i2s0_data0_active &lpi_i2s0_data1_active
+				&lpi_i2s0_data2_active &lpi_i2s0_data3_active>;
+		pinctrl-1 = <&lpi_i2s0_sck_sleep &lpi_i2s0_ws_sleep
+				&lpi_i2s0_data0_sleep &lpi_i2s0_data1_sleep
+				&lpi_i2s0_data2_sleep &lpi_i2s0_data3_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_quin_mi2s_gpios: quin_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s1_clk_active &lpi_i2s1_ws_active
+				&lpi_i2s1_data0_active &lpi_i2s1_data1_active>;
+		pinctrl-1 = <&lpi_i2s1_clk_sleep &lpi_i2s1_ws_sleep
+				&lpi_i2s1_data0_sleep &lpi_i2s1_data1_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_sen_mi2s_gpios: sen_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s2_clk_active &lpi_i2s2_ws_active
+				&lpi_i2s2_data0_active &lpi_i2s2_data1_active>;
+		pinctrl-1 = <&lpi_i2s2_clk_sleep &lpi_i2s2_ws_sleep
+				&lpi_i2s2_data0_sleep &lpi_i2s2_data1_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_sep_mi2s_gpios: sep_mi2s_pinctrl {
+		status = "disabled";
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_i2s3_clk_active &lpi_i2s3_ws_active
+				&lpi_i2s3_data0_active &lpi_i2s3_data1_active>;
+		pinctrl-1 = <&lpi_i2s3_clk_sleep &lpi_i2s3_ws_sleep
+				&lpi_i2s3_data0_sleep &lpi_i2s3_data1_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	wsa_swr_gpios: wsa_swr_clk_data_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&wsa_swr_clk_active &wsa_swr_data_active>;
+		pinctrl-1 = <&wsa_swr_clk_sleep &wsa_swr_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	wsa2_swr_gpios: wsa2_swr_clk_data_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&wsa2_swr_clk_active &wsa2_swr_data_active>;
+		pinctrl-1 = <&wsa2_swr_clk_sleep &wsa2_swr_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	rx_swr_gpios: rx_swr_clk_data_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&swr_rx_clk_active &swr_rx_data0_active
+				&swr_rx_data1_active>;
+		pinctrl-1 = <&swr_rx_clk_sleep &swr_rx_data0_sleep
+				&swr_rx_data1_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	va_swr_gpios: tx_swr_clk_data_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&swr_tx_clk_active &swr_tx_data0_active
+			    &swr_tx_data1_active &swr_tx_data2_active>;
+		pinctrl-1 = <&swr_tx_clk_sleep &swr_tx_data0_sleep
+			    &swr_tx_data1_sleep &swr_tx_data2_sleep>;
+		qcom,chip-wakeup-reg = <0xf1a4008>;
+		qcom,chip-wakeup-maskbit = <7>;
+		qcom,chip-wakeup-default-val = <0x1>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	wcd939x_rst_gpio: msm_cdc_pinctrl@32 {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&wcd939x_reset_active>;
+		pinctrl-1 = <&wcd939x_reset_sleep>;
+	};
+
+	cdc_dmic01_gpios: cdc_dmic01_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_dmic0_clk_active &lpi_dmic0_data_active>;
+		pinctrl-1 = <&lpi_dmic0_clk_sleep &lpi_dmic0_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_dmic23_gpios: cdc_dmic23_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_dmic1_clk_active &lpi_dmic1_data_active>;
+		pinctrl-1 = <&lpi_dmic1_clk_sleep &lpi_dmic1_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_dmic45_gpios: cdc_dmic45_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_dmic2_clk_active &lpi_dmic2_data_active>;
+		pinctrl-1 = <&lpi_dmic2_clk_sleep &lpi_dmic2_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+	cdc_dmic67_gpios: cdc_dmic67_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_dmic3_clk_active &lpi_dmic3_data_active>;
+		pinctrl-1 = <&lpi_dmic3_clk_sleep &lpi_dmic3_data_sleep>;
+		qcom,lpi-gpios;
+		#gpio-cells = <0>;
+	};
+
+
+};

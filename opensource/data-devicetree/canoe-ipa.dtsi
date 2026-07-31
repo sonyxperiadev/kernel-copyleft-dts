@@ -1,0 +1,77 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "ipa.dtsi"
+
+&ipa_hw {
+	reg = <0x0 0x3e00000 0x0 0x84000>,
+		<0x0 0x3e04000 0x0 0xfc000>;
+
+	qcom,interconnect,num-cases = <5>;
+	qcom,interconnect,num-paths = <3>;
+	qcom,ipa-wdi-opt-dpath;
+	interconnects = <&aggre2_noc MASTER_IPA &gem_noc SLAVE_LLCC>,
+		<&mc_virt MASTER_LLCC &mc_virt SLAVE_EBI1>,
+		<&gem_noc MASTER_APPSS_PROC &cnoc_main SLAVE_IPA_CFG>;
+	interconnect-names = "ipa_to_llcc", "llcc_to_ebi1", "appss_to_ipa";
+
+	/* ipa and gsi interrupts */
+	interrupts =
+		<0 655 IRQ_TYPE_LEVEL_HIGH>,
+		<0 432 IRQ_TYPE_LEVEL_HIGH>;
+
+	/* No vote */
+	qcom,no-vote =
+		<0 0 0 0 0 0>;
+
+	/* SVS2 */
+	qcom,svs2 =
+		<0 0 0 1300000 0 76800>;
+
+	/* SVS */
+	qcom,svs =
+		<1200000 0 1200000 2800000 0 150000>;
+
+	/* NOMINAL */
+	qcom,nominal =
+		<2400000 0 2400000 5500000 0 400000>;
+
+	/* TURBO */
+	qcom,turbo =
+		<3600000 0 3600000 5500000 0 400000>;
+
+	qcom,bus-vector-names = "MIN", "SVS2", "SVS", "NOMINAL",
+		"TURBO";
+
+	/* Low Latency pipe alloc factor */
+	qcom,ipa-gen-rx-ll-pool-sz-factor = <1>;
+	#address-cells=<2>;
+	#size-cells=<2>;
+	ipa_smmu_ap_partition: ipa_smmu_ap_partition {
+		iommu-addresses = <&ipa_smmu_ap 0x0 0x0 0x0 0x20000000>,
+			<&ipa_smmu_ap 0x0 0x40000000 0xFFFFFFFF 0xC0000000>;
+	};
+
+	ipa_smmu_uc_partition: ipa_smmu_uc_partition {
+		iommu-addresses = <&ipa_smmu_uc 0x0 0x0 0x0 0x20000000>,
+			<&ipa_smmu_uc 0x0 0x40000000 0xFFFFFFFF 0xC0000000>;
+	};
+
+	ipa_smmu_ap: ipa_smmu_ap {
+		/delete-property/ qcom,iommu-dma-addr-pool;
+		qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
+		memory-region = <&ipa_smmu_ap_partition>;
+		qcom,additional-mapping =
+			/* modem tables in IMEM */
+			<0x14683000 0x14683000 0x2000>;
+		qcom,ipa-q6-smem-size = <102400>;
+	};
+
+	ipa_smmu_uc: ipa_smmu_uc {
+		/delete-property/ qcom,iommu-dma-addr-pool;
+		qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
+		memory-region = <&ipa_smmu_uc_partition>;
+	};
+};

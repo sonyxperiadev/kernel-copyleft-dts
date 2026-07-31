@@ -2,15 +2,23 @@
 /*
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/clock/qcom,gcc-canoe.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/clock/qcom,gcc-canoe.h>
 
+#include "canoe-fingerprint.dtsi"
 #include "canoe-pmic-overlay.dtsi"
 #include "canoe-qpt-overlay.dtsi"
 #include "canoe-thermal-overlay.dtsi"
+#include "lxs_touchscreen.dtsi"
+#include "haptic.dtsi"
 
 &soc {
 	gpio_keys {
@@ -18,13 +26,33 @@
 		label = "gpio-keys";
 
 		pinctrl-names = "default";
-		pinctrl-0 = <&key_vol_up_default>;
+		pinctrl-0 = <&key_vol_up_default>, <&pmih010x_gpio_7>, <&pmih010x_gpio_8>;
 
 		vol_up {
 			label = "volume_up";
 			gpios = <&tlmm 101 GPIO_ACTIVE_LOW>;
 			linux,input-type = <EV_KEY>;
-			linux,code = <KEY_VOLUMEUP>;
+			linux,code = <KEY_VOLUMEDOWN>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+			linux,can-disable;
+		};
+
+		cam_snapshot {
+			label = "cam_snapshot";
+			gpios = <&pmih010x_gpios 7 GPIO_ACTIVE_LOW>;
+			linux,input-type = <1>;
+			linux,code = <766>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+			linux,can-disable;
+		};
+
+		cam_focus {
+			label = "cam_focus";
+			gpios = <&pmih010x_gpios 8 GPIO_ACTIVE_LOW>;
+			linux,input-type = <1>;
+			linux,code = <KEY_CAMERA_FOCUS>;
 			gpio-key,wakeup;
 			debounce-interval = <15>;
 			linux,can-disable;
@@ -46,8 +74,26 @@
 	qcom,thermal-mitigation-step = <500000>;
 	#cooling-cells = <2>;
 	qcom,ship-mode-immediate;
-	qcom,wireless-fw-name = "cps4061.bin";
+	qcom,wireless-fw-name = "cps4059.bin";
+	pinctrl-names = "default";
+	pinctrl-0 = <&wls_gpio_ping_det_default>;
 };
+
+&tlmm {
+	wls_gpio_ping_det_default: wls_gpio_ping_det_default {
+		mux {
+			pins = "gpio97";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio97";
+			drive-strength = <2>;
+			bias-pull-up;
+			input-enable;
+		};
+	};
+};
+
 
 &pcie {
 	power-domains = <&gcc GCC_PCIE_0_PHY_GDSC>;
@@ -122,7 +168,10 @@
 	pinctrl-0 = <&sdc2_on>;
 	pinctrl-1 = <&sdc2_off>;
 
-	cd-gpios = <&tlmm 55 GPIO_ACTIVE_LOW>;
+	/* forbid DDR50/SDR104 */
+	sdhci-caps-mask = <0x6 0x0>;
+
+	cd-gpios = <&tlmm 55 GPIO_ACTIVE_HIGH>;
 
 	resets = <&gcc GCC_SDCC2_BCR>;
 	reset-names = "core_reset";
@@ -224,7 +273,7 @@
 &qupv3_se19_spi {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	status = "ok";
+	status = "disabled";
 	qcom,touch-active = "st,fts";
 	qcom,la-vm;
 

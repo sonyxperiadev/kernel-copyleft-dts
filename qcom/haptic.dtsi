@@ -1,0 +1,91 @@
+/* arch/arm64/boot/dts/qcom/haptic.dtsi
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
+
+&tlmm {
+	cirrus_reset_default: cirrus_reset_default {
+		mux {
+			pins = "gpio59";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio59";
+			drive-strength = <8>;
+			bias-disable;
+			output-enable;
+			output-low;
+		};
+	};
+	cirrus_irq_default: cirrus_irq_default {
+		mux {
+			pins = "gpio67";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio67";
+			drive-strength = <8>;
+			bias-pull-up;
+			input-enable;
+		};
+	};
+};
+
+&qupv3_se15_i2c {
+        status = "ok";
+        qcom,clk-freq-out = <1000000>;
+        /* CS Haptic */
+        cs40l26_0: cs40l26@40 {
+                status = "ok";
+                compatible = "cirrus,cs40l26a";
+                reg = <0x40>;
+                interrupt-parent = <&tlmm>;
+                interrupts = <67 IRQ_TYPE_LEVEL_LOW>;
+                reset-gpios = <&tlmm 59 1>;
+                pinctrl-names = "default";
+                pinctrl-0 = <&cirrus_reset_default &cirrus_irq_default>;
+
+                cirrus,dbc-enable;
+                cirrus,dbc-env-rel-coef = <8000000>;
+                cirrus,dbc-fall-headroom = <7000000>;
+                cirrus,dbc-rise-headroom = <6000000>;
+                cirrus,dbc-tx-lvl-hold-off-ms = <50>;
+                cirrus,dbc-tx-lvl-thresh-fs = <900>;
+                cirrus,pm-active-timeout-ms = <200>;
+                cirrus,pm-stdby-timeout-ms = <500>;
+                cirrus,bst-ipk-microamp = <4000000>;
+
+                cirrus,vbbr-enable;
+                cirrus,vbbr-thld-uv = <656260>;
+                cirrus,vbbr-max-att-db = <6>;
+                cirrus,vbbr-atk-step = <1>;
+                cirrus,vbbr-atk-rate = <1>;
+                cirrus,vbbr-wait = <1>;
+                cirrus,vbbr-rel-rate = <2>;
+                crrrus,bst-sft-ramp = <4>;
+
+                cirrus,vpbr-enable;
+                cirrus,vpbr-thld-uv = <2781500>;
+                cirrus,vpbr-max-att-db = <6>;
+                cirrus,vpbr-atk-step = <1>;
+                cirrus,vpbr-atk-rate = <1>;
+                cirrus,vpbr-wait = <1>;
+                cirrus,vpbr-rel-rate = <2>;
+
+                cirrus,f0-default = <(166 << 14)>;
+                cirrus,redc-default = <418447>;
+        };
+        /* CS Haptic */
+};

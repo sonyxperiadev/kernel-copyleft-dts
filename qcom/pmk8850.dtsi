@@ -2,6 +2,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
@@ -135,7 +140,7 @@ pmk8850: pmk8850@0 {
 		resin {
 			compatible = "qcom,pmk8350-resin";
 			interrupts = <0x0 0x13 0x6 IRQ_TYPE_EDGE_BOTH>;
-			linux,code = <KEY_VOLUMEDOWN>;
+			linux,code = <KEY_VOLUMEUP>;
 		};
 	};
 

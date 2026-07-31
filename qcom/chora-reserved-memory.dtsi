@@ -112,19 +112,17 @@
 	};
 
 	qdss_apps_mem: qdss_apps_region@82800000 {
-		compatible = "shared-dma-pool";
 		reg = <0x0 0x82800000 0x0 0x2000000>;
-		reusable;
-		alignment = <0x0 0x400000>;
-	};
-
-	mpss_mem: mpss_region@8ac00000 {
-		reg = <0x0 0x8ac00000 0x0 0xd200000>;
 		no-map;
 	};
 
-	q6_mpss_dtb_mem: q6_mpss_dtb_region@97e00000 {
-		reg = <0x0 0x97e00000 0x0 0x80000>;
+	mpss_mem: mpss_region@8ac00000 {
+		reg = <0x0 0x8ac00000 0x0 0xe600000>;
+		no-map;
+	};
+
+	q6_mpss_dtb_mem: q6_mpss_dtb_region@99200000 {
+		reg = <0x0 0x99200000 0x0 0x80000>;
 		no-map;
 	};
 
@@ -164,7 +162,7 @@
 	};
 
 	adspslpi_mem: adspslpi_region@9bc00000 {
-		reg = <0x0 0x9bc00000 0x0 0x3200000>;
+		reg = <0x0 0x9bc00000 0x0 0x320c800>;
 		no-map;
 	};
 

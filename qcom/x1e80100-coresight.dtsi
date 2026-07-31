@@ -92,7 +92,6 @@
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
-		status = "disabled";
 
 		out-ports {
 			port {
@@ -113,7 +112,6 @@
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
-		status = "disabled";
 
 		in-ports {
 			port {
@@ -144,7 +142,6 @@
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
-		status = "disabled";
 
 		in-ports {
 			#address-cells = <1>;
@@ -211,8 +208,8 @@
 
 		device-name = "turing_etm0";
 
-		qcom,atid-num = <2>;
-		atid = <38 39>;
+		qcom,atid-num = <4>;
+		atid = <38 39 40 41>;
 		trace-name = "turing-etm0";
 
 		out-ports {
@@ -1904,7 +1901,7 @@
 		reg = <0x0 0x13e0a000 0x0 0x1000>;
 		reg-names = "replicator-base";
 
-		device-name = "replicator_uc2";
+		device-name = "coresight_replicator_uc2";
 
 		qcom,replicator-loses-context;
 
@@ -4597,6 +4594,14 @@
 				};
 			};
 
+			port@3 {
+				reg = <3>;
+				funnel_dl_center_in_funnel_lpass_cx: endpoint {
+					remote-endpoint =
+					<&funnel_lpass_cx_out_funnel_dl_center>;
+				};
+			};
+
 			port@4 {
 				reg = <4>;
 				funnel_dl_center_in_funnel_dlct2: endpoint {
@@ -5239,8 +5244,6 @@
 		atid = <40 41>;
 
 		out-ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
 			port@0 {
 				reg = <0>;
 				audio_etm0_out_funnel_lpass_lpi: endpoint {
@@ -5266,8 +5269,6 @@
 		atid = <25>;
 
 		out-ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
 			port@0 {
 				reg = <0>;
 				lpass_stm_out_funnel_lpass_lpi_1: endpoint {
@@ -5290,12 +5291,10 @@
 	audio-qmi {
 		compatible = "qcom,coresight-qmi";
 
-		device-name = "qmi_auido";
+		device-name = "coresight-qmi-auido";
 		qcom,inst-id = <5>;
 
 		in-ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
 			port@0 {
 				reg = <0>;
 				qmi_in_audio_etm0: endpoint {
@@ -5320,7 +5319,8 @@
 		trace-name = "tpda_lpass_lpi";
 
 		out-ports {
-			port {
+			port@0 {
+				reg = <0>;
 				tpdm_lpass_lpi_out_funnel_lpass_lpi_1: endpoint {
 					remote-endpoint =
 					<&funnel_lpass_lpi_1_in_tpdm_lpass_lpi>;
@@ -5336,23 +5336,20 @@
 		qcom,dsb-element-bits = <32>;
 		device-name = "tpdm_lpass";
 
-		clocks = <&aoss_qmp>;
-		clock-names = "apb_pclk";
-
 		out-ports {
-			port {
-
-				tpdm_lpass_cx_out_funnel_lpass_cx: endpoint {
+			port@0 {
+				reg = <0>;
+				tpdm_lpass_cx_out_tpda_dl_center: endpoint {
 					remote-endpoint =
-					<&funnel_lpass_cx_in_tpdm_lpass_cx>;
+					<&tpda_dl_center_in_tpdm_lpass_cx>;
 				};
 			};
 		};
 	};
 
-	funnel_lpass_cx: funnel@10846000 {
+	funnel_lpass_cx: funnel@10b50000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
-		reg = <0x0 0x10846000 0x0 0x1000>;
+		reg = <0x0 0x10b50000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
 		device-name = "funnel_lpass";
@@ -5360,48 +5357,11 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 
-		in-ports {
-			port {
-				funnel_lpass_cx_in_tpdm_lpass_cx: endpoint {
-					remote-endpoint =
-					<&tpdm_lpass_cx_out_funnel_lpass_cx>;
-				};
-			};
-		};
-
 		out-ports {
 			port {
-				funnel_lpass_cx_out_replicator_lpass_cx: endpoint {
+				funnel_lpass_cx_out_funnel_dl_center: endpoint {
 					remote-endpoint =
-					<&replicator_lpass_cx_in_funnel_lpass_cx>;
-				};
-			};
-		};
-
-	};
-
-	lpass_cx_replicator {
-		compatible = "arm,coresight-static-replicator";
-		device-name = "replicator_lpass";
-
-		in-ports {
-			port {
-				replicator_lpass_cx_in_funnel_lpass_cx: endpoint {
-					remote-endpoint =
-					<&funnel_lpass_cx_out_replicator_lpass_cx>;
-				};
-			};
-		};
-
-		out-ports {
-			#size-cells = <0>;
-
-			port@0 {
-				reg = <0>;
-				tpdm_lpass_cx_out_tpda_dl_center: endpoint {
-					remote-endpoint =
-					<&tpda_dl_center_in_tpdm_lpass_cx>;
-					filter-source= <&tpdm_lpass_cx>;
+					<&funnel_dl_center_in_funnel_lpass_cx>;
 				};
 			};
 		};
@@ -5727,7 +5687,7 @@
 		reg-names = "tmc-base";
 
 		device-name = "tmc_etr0";
-		qcom,iommu-dma = "bypass";
+
 		iommus = <&apps_smmu 0x04e0 0x0>;
 		dma-coherent;
 		arm,scatter-gather;
@@ -6280,7 +6240,6 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
-		status = "disabled";
 	};
 
 	cti@10d31000 {

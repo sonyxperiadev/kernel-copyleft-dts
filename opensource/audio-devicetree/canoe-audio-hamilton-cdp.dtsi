@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+/*This is CDP with Hamilton wlan*/
+#include "canoe-audio-cdp-wsa885x.dtsi"
+
+&lpass_bt_swr {
+	status = "disabled";
+};
+
+&canoe_snd {
+	qcom,wcn-bt = <1>;
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+				<&lpass_cdc>;
+	qcom,wcn-bt-ext = <0>;
+};

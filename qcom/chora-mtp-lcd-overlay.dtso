@@ -6,7 +6,7 @@
 /dts-v1/;
 /plugin/;
 
-#include "chora-mtp-lcd.dtsi"
+#include "chora-mtp.dtsi"
 #include "chora-pmiv010x.dtsi"
 
 / {
@@ -17,16 +17,5 @@
 };
 
 &pmiv010x_lcdb {
-	status = "ok";
-};
-
-&pmiv010x_wled {
-	interrupts = <0x7 0xf5 0x1 IRQ_TYPE_EDGE_RISING>,
-		     <0x7 0xf5 0x4 IRQ_TYPE_EDGE_BOTH>,
-		     <0x7 0xf5 0x5 IRQ_TYPE_EDGE_BOTH>;
-	interrupt-names = "ovp-irq", "pre-flash-irq", "flash-irq";
-	qcom,string-cfg = <2>;
-	qcom,leds-per-string = <8>;
-	qcom,fs-current-limit = <22500>;
 	status = "ok";
 };

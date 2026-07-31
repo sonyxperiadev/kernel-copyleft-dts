@@ -15,13 +15,11 @@ description: |
 
   See also:
     dt-bindings/clock/qcom,dispcc-monaco.h
-    dt-bindings/clock/qcom,shikra-dispcc.h
 
 properties:
   compatible:
     enum:
       - qcom,monaco-dispcc
-      - qcom,shikra-dispcc
 
   clocks:
     items:

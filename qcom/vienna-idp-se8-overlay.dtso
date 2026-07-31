@@ -7,11 +7,9 @@
 /plugin/;
 
 #include "vienna-idp-se8.dtsi"
-#include "vienna-pmw6100-v1.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. Vienna IDP SE8 PMW6100 V1";
+	model = "Qualcomm Technologies, Inc. Vienna IDP SE8";
 	compatible = "qcom,vienna-idp", "qcom,vienna", "qcom,idp";
 	qcom,board-id = <0x10022 0x02>;
-	qcom,pmic-id = <0x10064 0x0 0x0 0x0>;
 };

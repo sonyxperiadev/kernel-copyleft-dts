@@ -1,0 +1,93 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+&soc {
+	clock_audio_va_1: va_core_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x307>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_wsa_1: wsa_core_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_2>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x309>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_wsa_2: wsa2_core_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_9>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x310>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_rx_1: rx_core_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_4>;
+		qcom,codec-lpass-ext-clk-freq = <22579200>;
+		qcom,codec-lpass-clk-id = <0x30E>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_rx_tx: rx_core_tx_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_10>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x312>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_tx_1: tx_core_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_6>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x30C>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_wsa_tx: wsa_core_tx_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_11>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x314>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_wsa2_tx: wsa2_core_tx_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_12>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x316>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_rx_mclk2_2x_clk: rx_mclk2_2x_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_13>;
+		qcom,codec-lpass-ext-clk-freq = <19200000>;
+		qcom,codec-lpass-clk-id = <0x318>;
+		#clock-cells = <1>;
+	};
+	clock_audio_bt_swr_mclk_clk: bt_swr_mclk_clk {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_15>;
+		qcom,codec-lpass-ext-clk-freq = <24576000>;
+		qcom,codec-lpass-clk-id = <0x31A>;
+		#clock-cells = <1>;
+	};
+
+	clock_audio_bt_swr_mclk_clk_2x: bt_swr_mclk_clk_2x {
+		compatible = "qcom,audio-ref-clk";
+		qcom,codec-ext-clk-src = <AUDIO_LPASS_MCLK_16>;
+		qcom,codec-lpass-ext-clk-freq = <24576000>;
+		qcom,codec-lpass-clk-id = <0x31B>;
+		#clock-cells = <1>;
+	};
+
+};

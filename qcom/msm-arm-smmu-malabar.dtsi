@@ -8,18 +8,17 @@
 &soc {
 	kgsl_smmu: kgsl-smmu@0x59a0000 {
 		compatible = "qcom,qsmmu-v500", "qcom,adreno-smmu";
-		reg = <0x0 0x59a0000 0x0 0x10000>,
-			<0x0 0x59C2000 0x0 0x20>;
+		reg = <0x59a0000 0x10000>,
+			<0x59C2000 0x20>;
 		reg-names = "base", "tcu-base";
 		#iommu-cells = <2>;
 		qcom,use-3-lvl-tables;
 		#global-interrupts = <1>;
-		#size-cells = <2>;
-		#address-cells = <2>;
+		#size-cells = <1>;
+		#address-cells = <1>;
 		ranges;
 
-		qcom,regulator-names = "vdd";
-		vdd-supply = <&gpu_cc_cx_gdsc>;
+		power-domains = <&gpucc GPU_CC_CX_SMMU_GDSC>;
 
 		clocks = <&gcc GCC_GPU_MEMNOC_GFX_CLK>,
 			 <&gpucc GPU_CC_AHB_CLK>,
@@ -46,8 +45,8 @@
 
 		gfx_0_tbu: gfx_0_tbu@0x59c5000 {
 			compatible = "qcom,qsmmuv500-tbu";
-			reg = <0x0 0x59c5000 0x0 0x1000>,
-				<0x0 0x59c2200 0x0 0x8>;
+			reg = <0x59c5000 0x1000>,
+				<0x59c2200 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x0 0x400>;
 			qcom,iova-width = <49>;
@@ -55,8 +54,8 @@
 
 		gfx_1_tbu: gfx_1_tbu@0x59c9000 {
 			compatible = "qcom,qsmmuv500-tbu";
-			reg = <0x0 0x59c9000 0x0 0x1000>,
-				<0x0 0x59c2208 0x0 0x8>;
+			reg = <0x59c9000 0x1000>,
+				<0x59c2208 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x400 0x400>;
 			qcom,iova-width = <49>;
@@ -66,15 +65,15 @@
 
 	apps_smmu: apps-smmu@0xc600000 {
 		compatible = "qcom,qsmmu-v500";
-		reg = <0x0 0xc600000 0x0 0x80000>,
-			<0x0 0xc782000 0x0 0x20>;
+		reg = <0xc600000 0x80000>,
+			<0xc782000 0x20>;
 		reg-names = "base", "tcu-base";
 		#iommu-cells = <2>;
 		qcom,use-3-lvl-tables;
 		qcom,handoff-smrs = <0x420 0x2>;
 		#global-interrupts = <1>;
-		#size-cells = <2>;
-		#address-cells = <2>;
+		#size-cells = <1>;
+		#address-cells = <1>;
 		ranges;
 
 		interrupts =	<GIC_SPI 81 IRQ_TYPE_LEVEL_HIGH>,
@@ -154,10 +153,6 @@
 			<0x0420 0x0002 0x00000103>,
 			<0x0421 0x0000 0x00000103>,
 
-			/* Rotator(Display) */
-			<0x043c 0x0000 0x00000103>,
-			<0x043d 0x0000 0x00000103>,
-
 			/* Video */
 			<0x0980 0x0020 0x00000103>,
 			<0x0981 0x0004 0x00000103>,
@@ -166,8 +161,8 @@
 
 		anoc_1_tbu: anoc_1_tbu@0xc785000 {
 			compatible = "qcom,qsmmuv500-tbu";
-			reg = <0x0 0xc785000 0x0 0x1000>,
-				<0x0 0xc782200 0x0 0x8>;
+			reg = <0xc785000 0x1000>,
+				<0xc782200 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x0 0x400>;
 			qcom,iova-width = <36>;
@@ -175,8 +170,8 @@
 
 		mm_rt_tbu: mm_rt_tbu@0xc789000 {
 			compatible = "qcom,qsmmuv500-tbu";
-			reg = <0x0 0xc789000 0x0 0x1000>,
-				<0x0 0xc782208 0x0 0x8>;
+			reg = <0xc789000 0x1000>,
+				<0xc782208 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x400 0x400>;
 			qcom,iova-width = <36>;
@@ -184,8 +179,8 @@
 
 		mm_nrt_tbu: mm_nrt_tbu@0xc78d000 {
 			compatible = "qcom,qsmmuv500-tbu";
-			reg = <0x0 0xc78d000 0x0 0x1000>,
-				<0x0 0xc782210 0x0 0x8>;
+			reg = <0xc78d000 0x1000>,
+				<0xc782210 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x800 0x400>;
 			qcom,iova-width = <32>;
@@ -203,30 +198,42 @@
 
 		usecase0_apps {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x1e0 0x0>;
+			iommus = <&apps_smmu 0x1e0 0x1>;
 		};
 
 		usecase1_apps_fastmap {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x1e0 0x0>;
+			iommus = <&apps_smmu 0x1e0 0x1>;
 			qcom,iommu-dma = "fastmap";
 		};
 
 		usecase2_apps_atomic {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x1e0 0x0>;
+			iommus = <&apps_smmu 0x1e0 0x1>;
 			qcom,iommu-dma = "atomic";
 		};
 
-		usecase3_apps_secure {
+		usecase3_apps_dma {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x1e0 0x0>;
+			iommus = <&apps_smmu 0x1e0 0x1>;
+			dma-coherent;
+		};
+
+		usecase4_apps_secure {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&apps_smmu 0x1e0 0x1>;
 			qcom,iommu-vmid = <0xa>; /* VMID_CP_PIXEL */
 		};
 
-		usecase4_kgsl {
+		usecase5_kgsl {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&kgsl_smmu 0x7 0x400>;
+			iommus = <&kgsl_smmu 0x7 0x0>, <&kgsl_smmu 0x407 0x0>;
+		};
+
+		usecase6_kgsl_dma {
+			compatible = "qcom,iommu-debug-usecase";
+			iommus = <&kgsl_smmu 0x7 0x0>, <&kgsl_smmu 0x407 0x0>;
+			dma-coherent;
 		};
 	};
 };

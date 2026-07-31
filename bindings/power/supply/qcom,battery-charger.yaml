@@ -21,7 +21,6 @@ properties:
       - enum:
           - qcom,battery-charger
           - qcom,pmw6100-battery-charger
-          - qcom,canoe-battery-charger
 
   qcom,thermal-mitigation:
     description: |
@@ -64,21 +63,6 @@ properties:
       after shut down is initiated.
     $ref: /schemas/types.yaml#/definitions/flag
 
-  qcom,micro-usb:
-    description: |
-      Flag used for the enabling the micro-usb.
-      When present, PMIC GLINK USB properties such as USB_CONNECTOR_TYPE and
-      USB_SCOPE are queried. When absent, drivers should skip connector-related
-      queries.
-    $ref: /schemas/types.yaml#/definitions/flag
-
-  qcom,multiport-usb:
-    description: |
-       Indicates number of USB ports present.
-    $ref: /schemas/types.yaml#/definitions/uint32
-    minimum: 2
-    maximum: 2
-
 required:
   - compatible
 
@@ -96,20 +80,6 @@ allOf:
     then:
       properties:
         qcom,thermal-mitigation: false
-
-  - if:
-      required:
-        - qcom,micro-usb
-    then:
-      properties:
-        qcom,multiport-usb: false
-
-  - if:
-      required:
-        - qcom,multiport-usb
-    then:
-      properties:
-        qcom,micro-usb: false
 
 additionalProperties: false
 

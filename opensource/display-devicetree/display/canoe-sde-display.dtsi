@@ -1,0 +1,376 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
+
+#include "canoe-sde-display-pinctrl.dtsi"
+#include "canoe-sde-display-common.dtsi"
+#include <dt-bindings/clock/qcom,dispcc-canoe.h>
+
+&soc {
+	sde_wb0: qcom,wb-display@0 {
+		compatible = "qcom,wb-display";
+		cell-index = <0>;
+		label = "wb_display0";
+		qcom,op-label = "hwio";
+		status = "ok";
+		clocks = <&dispcc DISP_CC_MDSS_MDP_CLK>;
+		clock-names = "mdp_core_clk";
+	};
+
+	sde_wb1: qcom,wb-display@1 {
+		compatible = "qcom,wb-display";
+		cell-index = <1>;
+		label = "wb_display1";
+		qcom,op-label = "hwio";
+		status = "ok";
+		clocks = <&dispcc DISP_CC_MDSS_MDP_CLK>;
+		clock-names = "mdp_core_clk";
+	};
+
+	display_panel_avdd: display_gpio_regulator@1 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_avdd";
+		regulator-min-microvolt = <5500000>;
+		regulator-max-microvolt = <5500000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&pmh0104_gpios 7 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_avdd>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+	};
+
+	display_panel_vdd: display_gpio_regulator@2 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "display_panel_vdd";
+		regulator-min-microvolt = <1100000>;
+		regulator-max-microvolt = <1100000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&pmd802x_gpios 2 0>;
+		enable-active-high;
+		regulator-boot-on;
+		proxy-supply = <&display_panel_vdd>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sde_disp0_vdd_active>;
+	};
+
+	disp_rdump_memory: disp_rdump_region@0xfc800000 {
+		reg = <0x0 0xfc800000 0x0 0x00800000>;
+		label = "disp_rdump_region";
+	};
+};
+
+&reserved_memory {
+	splash_memory: splash_region {
+		reg = <0x0 0xfc800000 0x0 0x02b00000>;
+		label = "cont_splash_region";
+	};
+	/*
+	 * Demura memory regions are to be commented out if
+	 * feature not in use.
+	 */
+	demura_memory_0: demura_region_0 {
+		reg = <0x0 0x0 0x0 0x0>;
+		label = "demura hfc region 0";
+	};
+
+	demura_memory_1: demura_region_1 {
+		reg = <0x0 0x0 0x0 0x0>;
+		label = "demura hfc region 1";
+	};
+};
+
+&sde_dsi {
+	clocks = <&mdss_dsi_phy0 0>,
+		<&mdss_dsi_phy0 1>,
+		<&mdss_dsi_phy1 0>,
+		<&mdss_dsi_phy1 1>,
+		/*
+		 * Currently the dsi clock handles are under the dsi
+		 * controller DT node. As soon as the controller probe
+		 * finishes, the dispcc sync state can get called before
+		 * the dsi_display probe potentially disturbing the clock
+		 * votes for cont_splash use case. Hence we are no longer
+		 * protected by the component model in this case against the
+		 * disp cc sync state getting triggered after the dsi_ctrl
+		 * probe. To protect against this incorrect sync state trigger
+		 * add this dummy MDP clk vote handle to the dsi_display
+		 * DT node. Since the dsi_display driver does not parse
+		 * MDP clock nodes, no actual vote shall be added and this
+		 * change is done just to satisfy sync state requirements.
+		 */
+		<&dispcc DISP_CC_MDSS_MDP_CLK>,
+		 /*
+		  * The esync clk RCG is only necessary here to set its parent
+		  * to the pll dsi clk, which also needs to be available at the
+		  * point that its known whether the clock will be used. After
+		  * updating the parent, this clock handle is no longer needed.
+		  */
+		 <&dispcc DISP_CC_ESYNC0_CLK_SRC>;
+	clock-names = "pll_byte_clk0", "pll_dsi_clk0",
+			"pll_byte_clk1", "pll_dsi_clk1",
+			"mdp_core_clk", "esync_clk_rcg";
+	vddio-supply = <&L12B>;
+	vci-supply = <&L13B>;
+	vddr-supply = <&L10B>;
+
+	pinctrl-names = "panel_active", "panel_active_with_esync", "panel_suspend";
+	pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+	pinctrl-1 = <&sde_dsi_active &sde_te_active>;
+	pinctrl-2 = <&sde_dsi_suspend &sde_te_suspend>;
+};
+
+&sde_dsi1 {
+	clocks = <&mdss_dsi_phy0 0>,
+		<&mdss_dsi_phy0 1>,
+		<&mdss_dsi_phy1 0>,
+		<&mdss_dsi_phy1 1>,
+		/*
+		 * Currently the dsi clock handles are under the dsi
+		 * controller DT node. As soon as the controller probe
+		 * finishes, the dispcc sync state can get called before
+		 * the dsi_display probe potentially disturbing the clock
+		 * votes for cont_splash use case. Hence we are no longer
+		 * protected by the component model in this case against the
+		 * disp cc sync state getting triggered after the dsi_ctrl
+		 * probe. To protect against this incorrect sync state trigger
+		 * add this dummy MDP clk vote handle to the dsi_display
+		 * DT node. Since the dsi_display driver does not parse
+		 * MDP clock nodes, no actual vote shall be added and this
+		 * change is done just to satisfy sync state requirements.
+		 */
+		<&dispcc DISP_CC_MDSS_MDP_CLK>,
+		 /*
+		  * The esync clk RCG is only necessary here to set its parent
+		  * to the pll dsi clk, which also needs to be available at the
+		  * point that its known whether the clock will be used. After
+		  * updating the parent, this clock handle is no longer needed.
+		  */
+		 <&dispcc DISP_CC_ESYNC1_CLK_SRC>;
+	clock-names = "pll_byte_clk0", "pll_dsi_clk0",
+			"pll_byte_clk1", "pll_dsi_clk1",
+			"mdp_core_clk", "esync_clk_rcg";
+	vddio-supply = <&L12B>;
+	vci-supply = <&L13B>;
+	vdd-supply = <&L11B>;
+	tvdd-supply = <&L4B>;
+
+	pinctrl-names = "panel_active", "panel_active_with_esync", "panel_active_with_esync_without_te", "panel_suspend";
+	pinctrl-0 = <&sde_dsi1_active &sde_te1_active &sde_esync1_suspend>;
+	pinctrl-1 = <&sde_dsi1_active &sde_te1_active &sde_esync1_active>;
+	pinctrl-2 = <&sde_dsi1_active &sde_te1_function0 &sde_esync1_active>;
+	pinctrl-3 = <&sde_dsi1_suspend &sde_te1_suspend &sde_esync1_suspend>;
+};
+
+&mdss_mdp {
+	connectors = <&sde_dsi &sde_dsi1 &smmu_sde_unsec &smmu_sde_sec
+			&sde_wb0 &sde_wb1 &sde_dp &sde_cesta>;
+};
+
+&dsi_vtdr6130_amoled_cmd {
+	qcom,ulps-enabled;
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 40 40 1080 40>;
+		};
+
+		timing@1 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 40 40 1080 40>;
+		};
+
+		timing@2 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 40 40 1080 40>;
+		};
+
+		timing@3 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 40 40 1080 40>;
+		};
+	};
+};
+
+&dsi_nt37801_amoled_cmd {
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@1 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@2 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@3 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@4 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+	};
+};
+
+&dsi_nt37801_amoled_cmd_cphy {
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@1 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@2 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+	};
+};
+
+&dsi_nt37801_amoled_fhd_plus_cmd {
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 540 40 1080 40>;
+		};
+
+		timing@1 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 540 40 1080 40>;
+		};
+
+		timing@2 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 540 40 1080 40>;
+		};
+
+		timing@3 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 540 40 1080 40>;
+		};
+
+		timing@4 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <540 40 540 40 1080 40>;
+		};
+	};
+};
+
+&dsi_nt37801_amoled_cmd_spr {
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+	};
+};
+
+&dsi_nt37801_amoled_cmd_cphy_spr {
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@1 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+
+		timing@2 {
+			qcom,partial-update-enabled = "single_roi";
+			qcom,panel-roi-alignment = <720 40 720 40 1440 40>;
+		};
+	};
+};
+
+&dsi_sim_cmd {
+	qcom,ulps-enabled;
+	qcom,mdss-dsi-display-timings {
+		timing@0 { /* WQHD 60FPS cmd vid mode*/
+			qcom,panel-roi-alignment = <720 40 720 40 720 40>;
+			qcom,partial-update-enabled = "single_roi";
+		};
+
+		timing@2 { /* FHD 60FPS cmd mode*/
+			qcom,panel-roi-alignment = <540 20 540 20 540 20>;
+			qcom,partial-update-enabled = "single_roi";
+		};
+
+		timing@3 { /* HD 60FPS cmd mode*/
+			qcom,panel-roi-alignment = <360 40 360 40 360 40>;
+			qcom,partial-update-enabled = "single_roi";
+		};
+	};
+};
+
+&dsi_sim_dsc_375_cmd {
+	qcom,ulps-enabled;
+};
+
+&dsi_sim_dsc_10b_cmd {
+	qcom,ulps-enabled;
+};
+
+&dsi_dual_sim_cmd {
+	qcom,ulps-enabled;
+};
+
+&dsi_dual_sim_dsc_375_cmd {
+	qcom,ulps-enabled;
+};
+
+&dsi_sim_sec_hd_cmd {
+	qcom,ulps-enabled;
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,panel-roi-alignment = <720 40 720 40 720 40>;
+			qcom,partial-update-enabled = "single_roi";
+		};
+	};
+};
+
+&dsi_ss_video_psr_vid_vhm {
+	qcom,mdss-esync;
+	qcom,mdss-esync-hsync-milli-pulse-width = <450>;
+	qcom,mdss-esync-emsync-fps = <240>;
+	qcom,mdss-esync-emsync-milli-pulse-width = <200>;
+
+	qcom,qsync-enable;
+	qcom,vrr-enable;
+	qcom,video-psr-enable;
+	qcom,dsi-qsync-avr-step-fps = <240>;
+	qcom,mdss-dsi-qsync-min-refresh-rate = <60>;
+};
+
+&dsi_nt37802_amoled_video_psr_vhm {
+	qcom,mdss-esync;
+	qcom,mdss-dsi-panel-esync-emsync-switch-enabled;
+
+	qcom,qsync-enable;
+	qcom,vrr-enable;
+	qcom,video-psr-enable;
+	qcom,dsi-qsync-avr-step-fps = <120>;
+	qcom,mdss-dsi-qsync-min-refresh-rate = <1>;
+};

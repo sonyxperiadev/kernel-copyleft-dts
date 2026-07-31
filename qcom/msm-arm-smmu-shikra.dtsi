@@ -18,18 +18,6 @@
 		#address-cells = <1>;
 		ranges;
 
-		power-domains = <&gpucc GPU_CC_CX_SMMU_GDSC>;
-
-		clocks = <&gcc GCC_GPU_MEMNOC_GFX_CLK>,
-				<&gcc GCC_GPU_SNOC_DVM_GFX_CLK>,
-				<&gpucc GPU_CC_AHB_CLK>,
-				<&gpucc GPU_CC_GPU_SMMU_VOTE_CLK>;
-
-		clock-names = "gcc_gpu_memnoc_gfx",
-				"gcc_gpu_snoc_dvm_gfx",
-				"gpu_cc_ahb",
-				"gpu_cc_gpu_smmu_vote";
-
 		interrupts =	<GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>,
 				<GIC_SPI 167 IRQ_TYPE_LEVEL_HIGH>,
 				<GIC_SPI 168 IRQ_TYPE_LEVEL_HIGH>,
@@ -135,10 +123,6 @@
 				<GIC_SPI 149 IRQ_TYPE_LEVEL_HIGH>,
 				<GIC_SPI 150 IRQ_TYPE_LEVEL_HIGH>;
 
-		interconnects = <&mem_noc MASTER_AMPSS_M0
-						&system_noc SLAVE_TCU>;
-		qcom,active-only;
-
 		qcom,actlr =
 			/* Camera */
 			<0x0400 0x0000 0x103>,
@@ -162,11 +146,6 @@
 				<0xc782200 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x0 0x400>;
-			interconnects = <&mem_noc MASTER_AMPSS_M0
-							&config_noc SLAVE_IMEM_CFG>,
-							<&mem_noc MASTER_AMPSS_M0
-							&system_noc SLAVE_TCU>;
-			qcom,active-only;
 			qcom,iova-width = <36>;
 		};
 
@@ -176,11 +155,6 @@
 				<0xc782208 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x400 0x400>;
-			interconnects = <&mmrt_virt MASTER_MDP_PORT0
-							&mmrt_virt SLAVE_MM_MEMNOC>,
-							<&mem_noc MASTER_AMPSS_M0
-							&system_noc SLAVE_TCU>;
-			qcom,active-only;
 			qcom,iova-width = <36>;
 		};
 
@@ -190,17 +164,8 @@
 				<0xc782210 0x8>;
 			reg-names = "base", "status-reg";
 			qcom,stream-id-range = <0x800 0x400>;
-			interconnects = <&system_noc MASTER_PCIE2_0
-							&mc_virt SLAVE_EBI_CH0>;
-			qcom,active-only;
 			qcom,iova-width = <36>;
-			qcom,opt-out-tbu-halting;
 		};
-	};
-
-	dma_dev {
-		compatible = "qcom,iommu-dma";
-		memory-region = <&system_cma>;
 	};
 
 	iommu_test_device {

@@ -228,12 +228,6 @@ properties:
       Some hardware may not have full support for atos debugging in tandem
       with other features like power collapse.
 
-  qcom,irgn0-errata:
-    type: boolean
-    description: |
-      When present, the platform requires enabling the Qualcomm SMMU IRGN0
-      errata workaround. The driver will apply the IRGN0 quirk.
-
   qcom,regulator-names:
     description: |
       List of strings to use with the (.*)-supply property.

@@ -102,21 +102,3 @@
 &CLUSTER_PWR_DN {
 	status = "disabled";
 };
-
-&gcc {
-	#power-domain-cells = <1>;
-};
-
-&tsens0 {
-	status = "disabled";
-};
-
-&tsens1 {
-	status = "disabled";
-};
-
-&rpmcc {
-	compatible = "fixed-clock";
-	clock-output-names = "rpm_clocks";
-	clock-frequency = <19200000>;
-};

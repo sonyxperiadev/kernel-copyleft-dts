@@ -9,7 +9,6 @@
 	model = "Qualcomm Technologies, Inc. Monaco Guest Virtual Machine";
 	qcom,msm-name  = "SA_QX_VM";
 	qcom,msm-id = <606 0x10000>;
-	qcom,sdp = <0x2c6>;
 
 	aliases {
 		hsuart0 = &qupv3_se2_4uart;

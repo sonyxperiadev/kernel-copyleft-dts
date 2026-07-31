@@ -15,14 +15,3 @@
 	qcom,msm-id = <724 0x10000>, <744 0x10000>;
 	qcom,board-id = <0x10008 0x0>;
 };
-
-&pmiv010x_eusb2_repeater {
-	status = "ok";
-	vdd18-supply = <&L7B_E0>;
-	vdd3-supply = <&L17B_E0>;
-};
-
-&eusb2_phy0 {
-	dummy-supply = <&pmiv010x_eusb2_repeater>;
-	usb-repeater = <&pmiv010x_eusb2_repeater>;
-};

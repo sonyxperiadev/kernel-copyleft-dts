@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "canoe-hfi-core.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Sun SoC";
+	compatible = "qcom,canoe";
+	qcom,msm-id = <660 0x10000>, <660 0x20000>, <661 0x10000>, <661 0x20000>,
+			<0x1000294 0x10000>, <0x1000294 0x20000>,
+			<0x1000295 0x10000>, <0x1000295 0x20000>;
+	qcom,board-id = <0 0>;
+};

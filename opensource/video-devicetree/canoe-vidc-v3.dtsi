@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "canoe-vidc.dtsi"
+
+/* canoe V3-specific changes */
+&msm_vidc {
+	compatible = "qcom,canoe-vidc-v3";
+};
+

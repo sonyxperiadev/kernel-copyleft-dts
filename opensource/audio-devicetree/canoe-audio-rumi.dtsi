@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "canoe-lpi.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "canoe-audio-lpass-reg.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
+
+&canoe_snd {
+	qcom,model = "canoe-rumi-snd-card";
+	compatible = "qcom,canoe-asoc-snd-stub";
+	asoc-codec = <&stub_codec>;
+	asoc-codec-names = "msm-stub-codec.1";
+};
+
+&lpi_tlmm {
+	status = "disabled";
+};
+
+&lpass_cdc {
+	status = "disabled";
+};
+
+&lpass_bt_swr {
+	status = "disabled";
+};

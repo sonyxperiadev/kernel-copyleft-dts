@@ -193,7 +193,7 @@
 	soc: soc { };
 
 	chosen {
-		bootargs = "loglevel=6 log_buf_len=256K kpti=off kernel.panic_on_rcu_stall=1 msm_rtb.filter=0x237 rcupdate.rcu_expedited=1 rcu_nocbs=0-3 ftrace_dump_on_oops fw_devlink.strict=1 printk.console_no_auto_verbose=1 irqaffinity=0-2 cpufreq.default_governor=performance slub_debug=- randomize_kstack_offset=on restrict_cma_redirect=false android_arch_task_struct_size=512";
+		bootargs = "console=ttyMSM0,115200n8 kasan.stacktrace=off stack_depot_disable=off page_owner=on no_hash_pointers panic_on_taint=0x20 memory_dump_v2.enable_dynamic_memdump=1 slub_debug=FZP,zs_handle,zspage;FZPU android_arch_task_struct_size=512 loop.max_part=7 cpufreq.default_governor=performance rcupdate.rcu_expedited=1 ftrace_dump_on_oops fw_devlink.strict=1 printk.devkmsg=on androidboot.console=ttyMSM0 earlycon=qcom_geni,0x4a98000 qcom_geni_serial.con_enabled=1 androidboot.serialconsole=1 lpm_levels.sleep_disabled=1 cpuidle.off=1 service_locator.enable=1 export_pmu_events movable_node ssbd=force-off cgroup.memory=nokmem,nosocket panic=5 androidboot.hardware=qcom loglevel=6 arm64.nosme log_buf_len=512K sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc pcie_ports=compat pci-msm-drv.pcie_sm_regs=0x1D07000,0x1040,0x1048,0x3000,0x1 kasan=off cgroup_disable=pressure printk.console_no_auto_verbose=1 sysctl.kernel.panic_on_rcu_stall=1 restrict_cma_redirect=false swiotlb=2048 kpti=off rcu_nocbs=0-3 bootconfig msm_drm.dsi_display0=qcom,mdss_dsi_rm69090_amoled_178_cmd: rootwait ro init=/init resume=/dev/mmcblk0p76 silent_boot.mode=nonsilent";
 	};
 
 	reserved_memory: reserved-memory {
@@ -728,7 +728,7 @@
 	};
 
 	qcom,sps {
-		compatible = "qcom,msm-sps-v1_7-4k";
+		compatible = "qcom,msm-sps-4k";
 		qcom,pipe-attr-ee;
 	};
 
@@ -742,11 +742,6 @@
 		adsp_variant: adsp_variant@6011 {
 			reg = <0x6011 0x1>;
 			bits = <3 1>;
-		};
-
-		gpu_speed_bin: gpu_speed_bin@6006 {
-			reg = <0x6006 0x2>;
-			bits = <5 8>;
 		};
 	};
 
@@ -964,22 +959,17 @@
 		compatible = "qcom,monaco-adsp-pas";
 		reg = <0xab00000 0x00100>;
 
-		cx-supply = <&VDD_LPI_CX_LEVEL>;
-		reg-names = "cx", "mx";
-		cx-uV-uA = <RPMH_REGULATOR_LEVEL_TURBO 0>;
-		mx-supply = <&VDD_LPI_MX_LEVEL>;
-		mx-uV-uA = <RPMH_REGULATOR_LEVEL_TURBO 0>;
+		vdd_lpi_cx-supply = <&VDD_LPI_CX_LEVEL>;
+		reg-names = "vdd_lpi_cx", "vdd_lpi_mx";
+		vdd_lpi_cx-uV-uA = <RPMH_REGULATOR_LEVEL_TURBO 0>;
+		vdd_lpi_mx-supply = <&VDD_LPI_MX_LEVEL>;
+		vdd_lpi_mx-uV-uA = <RPMH_REGULATOR_LEVEL_TURBO 0>;
 
 		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>;
 		clock-names = "xo";
 
-		interconnects = <&bimc MASTER_AMPSS_M0 &bimc SLAVE_EBI_CH0>,
-			<&system_noc MASTER_CRYPTO_CORE0 &bimc SLAVE_EBI_CH0>;
-		interconnect-names = "rproc_ddr","crypto_ddr";
-
 		memory-region = <&pil_adsp_mem>;
 
-		firmware-name = "adsp.mdt";
 		/* Inputs from lpass */
 		interrupts-extended = <&intc 0 282 IRQ_TYPE_EDGE_RISING>,
 				      <&adsp_smp2p_in 0 0>,
@@ -1000,7 +990,7 @@
 		/* Outputs to lpass */
 		qcom,smem-states = <&adsp_smp2p_out 0>;
 		qcom,smem-state-names = "stop";
-		remoteproc_adsp_glink: glink-edge {
+		glink_edge: glink-edge {
 			qcom,remote-pid = <2>;
 			transport = "smem";
 			mboxes = <&apcs_glb 8>;
@@ -1035,7 +1025,6 @@
 
 		memory-region = <&pil_modem_mem>;
 
-		firmware-name = "modem.mdt";
 		/* Inputs from mss */
 		interrupts-extended = <&intc 0 307 1>,
 				<&modem_smp2p_in 0 0>,

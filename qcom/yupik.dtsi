@@ -38,16 +38,14 @@
 
 	reserved_memory: reserved-memory { };
 
-	ddr-regions { };
-
 	mem-offline {
 		compatible = "qcom,mem-offline";
 		offline-sizes = <0x1 0x40000000 0x0 0x40000000>,
 			<0x1 0xc0000000 0x0 0x80000000>,
 			<0x2 0xc0000000 0x1 0x40000000>;
 		granule = <512>;
-		qcom,qmp = <&qmp_aop>;
-		ddr-old-version;
+		mboxes = <&qmp_aop 0>;
+		status = "disabled";
 	};
 
 	aliases: aliases {
@@ -1357,7 +1355,6 @@
 
 		reset-gpios = <&tlmm 175 GPIO_ACTIVE_LOW>;
 		resets = <&gcc GCC_UFS_PHY_BCR>;
-		non-removable;
 		reset-names = "rst";
 
 		depends-on-supply = <&apps_smmu>;
@@ -2844,14 +2841,6 @@
 						0x190>;
 
 			};
-			qcom,apr_tal_rpmsg {
-				qcom,glink-channels = "apr_audio_svc";
-				qcom,intents = <0x200 20>;
-			};
-
-			qcom,adsp_glink_ssr {
-				qcom,glink-channels = "glink_ssr";
-			};
 
 			qcom,pmic_glink_rpmsg {
 				qcom,glink-channels = "PMIC_RTR_ADSP_APPS";
@@ -3024,7 +3013,7 @@
 	};
 
 	qcom,sps {
-		compatible = "qcom,msm-sps-v1_7-4k";
+		compatible = "qcom,msm-sps-4k";
 		qcom,pipe-attr-ee;
 	};
 

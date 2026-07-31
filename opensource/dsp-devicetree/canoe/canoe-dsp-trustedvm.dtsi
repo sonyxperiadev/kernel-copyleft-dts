@@ -1,0 +1,59 @@
+#include <dt-bindings/soc/qcom,ipcc.h>
+#include <dt-bindings/mailbox/qcom-ipcc-canoe.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+&soc {
+
+	/* IOMMU Config */
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	fastrpc_gen_pool_region: fastrpc_gen_pool_region {
+		iommu-addresses = <&fastrpc_compute_cb1 0x0 0x8000 0x0 0x10FFF>;
+	};
+
+	fastrpc_compute_cb1: compute-cb@12 {
+		compatible = "qcom,fastrpc-compute-cb";
+		reg = <11>;
+		iommus = <&apps_smmu 0xC0B 0x0>;
+		memory-region = <&fastrpc_gen_pool_region>;
+		qcom,iommu-faults = "stall-disable", "HUPCF";
+		dma-coherent;
+		qcom,iova-best-fit;
+		qcom,iova-max-align-shift = <9>; /* Set MAX alignment to 2 MB*/
+		qrtr-gen-pool = <&fastrpc_compute_cb1>;
+		frpc-gen-addr-pool = <0x8000 0x9000>;
+		pd-type = <9>;	/* USER_UNSIGNEDPD_POOL */
+		alloc-size-range = /bits/ 64 <0x4000000 0x3FFFFFFFF>;
+		qcom,dsp-iova-format = <1>;
+		ubs = <34>;
+	};
+
+	fastrpc_compute_cb2: compute-cb@13 {
+		compatible = "qcom,fastrpc-compute-cb";
+		reg = <14>;
+		iommus = <&apps_smmu 0xC0E 0x0>;
+		qcom,iommu-faults = "stall-disable", "HUPCF";
+		dma-coherent;
+		qcom,iova-best-fit;
+		qcom,iova-max-align-shift = <9>; /* Set MAX alignment to 2 MB*/
+		pd-type = <9>;	/* USER_UNSIGNEDPD_POOL */
+		alloc-size-range = /bits/ 64 <0x0 0x3FFFFFFFF>;
+		qcom,dsp-iova-format = <1>;
+		ubs = <34>;
+	};
+
+	qrtr_genpool: qrtr-genpool {
+		compatible = "qcom,qrtr-genpool";
+		gen-pool = <&fastrpc_compute_cb1>;
+		interrupt-parent = <&ipcc_mproc_ns1>;
+		interrupts = <IPCC_MPROC_CDSP 0 IRQ_TYPE_EDGE_RISING>,
+				<IPCC_MPROC_CDSP 1 IRQ_TYPE_EDGE_RISING>;
+		mboxes = <&ipcc_mproc_ns1 IPCC_MPROC_CDSP 0>,
+				<&ipcc_mproc_ns1 IPCC_MPROC_CDSP 1>;
+	};
+};
+
+&non_devices_common {
+	required-subnodes-dsp = <&qrtr_genpool &fastrpc_compute_cb2>;
+};

@@ -2,6 +2,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 &soc {
 	/* QUPv3 SE Instances
 	 * Qup1 0: SE 0
@@ -561,8 +566,8 @@
 			pinctrl-names = "default", "sleep";
 			pinctrl-0 = <&qupv3_se8_i2c_sda_active>, <&qupv3_se8_i2c_scl_active>;
 			pinctrl-1 = <&qupv3_se8_i2c_sleep>;
-			dmas = <&gpi_dma2 0 0 3 64 0>,
-				<&gpi_dma2 1 0 3 64 0>;
+			dmas = <&gpi_dma2 0 0 3 1024 0>,
+				<&gpi_dma2 1 0 3 1024 0>;
 			dma-names = "tx", "rx";
 			status = "disabled";
 		};
@@ -941,13 +946,9 @@
 		i3c3: i3c-master@1984000 {
 			compatible = "qcom,geni-i3c";
 			reg = <0x1984000 0x4000>,
-			      <0xb00000 0x10000>;
-			clock-names = "se-clk",
-				      "ibic-core-clk", "ibic-ahb-clk", "ibic-src-clk";
-			clocks = <&gcc GCC_QUPV3_WRAP3_S1_CLK>,
-				 <&gcc GCC_QUPV3_WRAP3_IBI_CTRL_1_CLK>,
-				 <&gcc GCC_QUPV3_WRAP_3_IBI_1_AHB_CLK>,
-				 <&gcc GCC_QUPV3_WRAP3_IBI_CTRL_0_CLK_SRC>;
+				<0xb00000 0x10000>;
+			clock-names = "se-clk";
+			clocks = <&gcc GCC_QUPV3_WRAP3_S1_CLK>;
 			qcom,ibic-naon;
 			interconnect-names = "qup-core", "qup-config", "qup-memory";
 			interconnects =
@@ -958,14 +959,12 @@
 			pinctrl-0 = <&qupv3_se14_i3c_sda_active>, <&qupv3_se14_i3c_scl_active>;
 			pinctrl-1 = <&qupv3_se14_i3c_sda_sleep>, <&qupv3_se14_i3c_scl_sleep>;
 			pinctrl-2 = <&qupv3_se14_i3c_disable>;
-			interrupts = <GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 238 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts-extended = <&intc GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>;
 			#address-cells = <3>;
 			#size-cells = <0>;
 			qcom,ibi-ctrl-id = <5>;
-			dmas = <&gpi_dma3 0 1 4 64 2>,
-			       <&gpi_dma3 1 1 4 64 2>;
+			dmas = <&gpi_dma3 0 1 4 64 0>,
+				<&gpi_dma3 1 1 4 64 0>;
 			dma-names = "tx", "rx";
 			status = "disabled";
 		};
@@ -1300,7 +1299,7 @@
 		i3c5: i3c-master@1a80000 {
 			compatible = "qcom,geni-i3c";
 			reg = <0x1a80000 0x4000>,
-			      <0xecf0000 0x10000>;
+				<0xecf0000 0x10000>;
 			clock-names = "se-clk";
 			clocks = <&gcc GCC_QUPV3_WRAP4_S0_CLK>;
 			interconnect-names = "qup-core", "qup-config", "qup-memory";
@@ -1318,8 +1317,8 @@
 			#address-cells = <3>;
 			#size-cells = <0>;
 			qcom,ibi-ctrl-id = <8>;
-			dmas = <&gpi_dma4 0 0 4 64 2>,
-			       <&gpi_dma4 1 0 4 64 2>;
+			dmas = <&gpi_dma4 0 0 4 64 0>,
+				<&gpi_dma4 1 0 4 64 0>;
 			dma-names = "tx", "rx";
 			status = "disabled";
 		};

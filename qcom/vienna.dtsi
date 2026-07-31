@@ -26,7 +26,7 @@
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
 
 	chosen: chosen {
-		bootargs = "android_arch_task_struct_size=512 kasan=off kpti=0 log_buf_len=512K swiotlb=0 loop.max_part=7 hibernate=nocompress irqaffinity=0-1 cpufreq.default_governor=performance fw_devlink.strict=1 printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 sysctl.kernel.panic_on_rcu_stall=1";
+		bootargs = "android_arch_task_struct_size=512 kasan=off kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 hibernate=nocompress irqaffinity=0-1 cpufreq.default_governor=performance fw_devlink.strict=1 printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 sysctl.kernel.panic_on_rcu_stall=1";
 	};
 
 	aliases {
@@ -757,10 +757,6 @@
 		cap-based-alloc-and-pwr-collapse;
 	};
 
-	logbuf: qcom,logbuf-vendor-hooks {
-		compatible = "qcom,logbuf-vendor-hooks";
-	};
-
 	gic-interrupt-router {
 		compatible = "qcom,gic-intr-routing";
 		/* keep a few m cores in class0 only to avoid wakeup of l cores */
@@ -866,7 +862,7 @@
 		sd-uhs-sdr25;
 		sd-uhs-sdr50;
 		sd-uhs-ddr50;
-		max-frequency = <100000000>;
+		max-frequency = <86000000>;
 
 		iommus = <&apps_smmu 0x140 0x0>;
 		qcom,iommu-dma = "fastmap";
@@ -939,13 +935,6 @@
 		#mbox-cells = <1>;
 	};
 
-	qmp_aop: qcom,qmp-aop {
-		compatible = "qcom,qmp-mbox";
-		qcom,qmp = <&aoss_qmp>;
-		label = "aop";
-		#mbox-cells = <1>;
-	};
-
 	qcom,tmecom-qmp-client {
 		compatible = "qcom,tmecom-qmp-client";
 		mboxes = <&qmp_tme 0>;
@@ -955,7 +944,7 @@
 	};
 
 	qcom,sps {
-		compatible = "qcom,msm-sps-v1_7-4k";
+		compatible = "qcom,msm-sps-4k";
 		qcom,pipe-attr-ee;
 	};
 
@@ -1219,17 +1208,6 @@
 			interrupt-controller;
 			#interrupt-cells = <2>;
 		};
-
-		am_sleepstate_smp2p_out: sleepstate-out {
-			qcom,entry-name = "sleepstate";
-			#qcom,smem-state-cells = <1>;
-		};
-
-		am_sleepstate_smp2p_in: qcom,sleepstate-in {
-			qcom,entry-name = "sleepstate_see";
-			interrupt-controller;
-			#interrupt-cells = <2>;
-		};
 	};
 
 	qcom,smp2p_sleepstate_adsp {
@@ -1247,15 +1225,6 @@
 		interrupt-parent = <&wm_sleepstate_smp2p_in>;
 		interrupts = <0 0>;
 		label = "wm";
-		interrupt-names = "smp2p-sleepstate-in";
-	};
-
-	qcom,smp2p_sleepstate_am {
-		compatible = "qcom,smp2p-sleepstate";
-		qcom,smem-states = <&am_sleepstate_smp2p_out 0>;
-		interrupt-parent = <&am_sleepstate_smp2p_in>;
-		interrupts = <0 0>;
-		label = "am";
 		interrupt-names = "smp2p-sleepstate-in";
 	};
 
@@ -1379,8 +1348,6 @@
 	gcc_camss_top_gdsc: qcom,gdsc@12a004 {
 		compatible = "qcom,gdsc";
 		reg = <0x12a004 0x4>;
-		interconnects = <&mmss_noc MASTER_CAMNOC_HF &mmss_noc SLAVE_MNOC_HF_MEM_NOC>;
-		interconnect-names = "mmnoc";
 		regulator-name = "gcc_camss_top_gdsc";
 		parent-supply = <&VDD_MXC_LEVEL>;
 		qcom,retain-regs;
@@ -1414,8 +1381,6 @@
 		reg = <0x159004 0x4>;
 		regulator-name = "gcc_usb30_prim_gdsc";
 		parent-supply = <&VDD_CX_LEVEL>;
-		qcom,proxy-consumer-enable;
-		proxy-supply = <&gcc_usb30_prim_gdsc>;
 		qcom,retain-regs;
 		qcom,support-cfg-gdscr;
 	};
@@ -1994,6 +1959,12 @@
 				qcom,glinkpkt-dev-name = "glink_pkt_ctrl_am";
 		};
 
+		qcom,glinkpkt-disp-ctrl-am {
+				qcom,glinkpkt-edge = "am";
+				qcom,glinkpkt-ch-name = "disp-ctrl";
+				qcom,glinkpkt-dev-name = "glink_pkt_am_display_ctrl";
+		};
+
 		qcom,glinkpkt-data-am {
 				qcom,glinkpkt-edge = "am";
 				qcom,glinkpkt-ch-name = "LOOPBACK_DATA_AM";
@@ -2399,7 +2370,7 @@
 			compatible = "qcom,memlat-grp";
 			qcom,target-dev = <&qcom_ddr_dcvs_hw>;
 			qcom,sampling-path = <&ddr_dcvs_sp>;
-			qcom,miss-ev = <0x2A>;
+			qcom,miss-ev = <0x1000>;
 
 			silver {
 				compatible = "qcom,memlat-mon";
@@ -2512,7 +2483,7 @@
 			compatible = "qcom,memlat-grp";
 			qcom,target-dev = <&qcom_ddrqos_dcvs_hw>;
 			qcom,sampling-path = <&ddrqos_dcvs_sp>;
-			qcom,miss-ev = <0x2A>;
+			qcom,miss-ev = <0x1000>;
 
 			ddrqos_gold_lat: gold {
 				compatible = "qcom,memlat-mon";

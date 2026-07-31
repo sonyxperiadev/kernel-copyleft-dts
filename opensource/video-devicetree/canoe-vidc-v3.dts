@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/clock/qcom,gcc-canoe.h>
+#include <dt-bindings/interconnect/qcom,canoe.h>
+#include <dt-bindings/clock/qcom,videocc-canoe.h>
+#include "canoe-vidc-v3.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. canoe v3";
+	compatible = "qcom,canoe";
+
+	qcom,msm-id = <0x10002D2 0x30000>, <0x10002D3 0x30000>,
+		<722 0x30000>, <723 0x30000>;
+	qcom,board-id = <0 0>;
+};

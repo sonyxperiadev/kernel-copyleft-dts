@@ -11,5 +11,4 @@
 	compatible = "qcom,lemans", "qcom,quinvm";
 	qcom,msm-id = <532 0x20000>;
 	qcom,board-id = <0x0 0x2000001>;
-	qcom,sdp = <0x2c6>;
 };

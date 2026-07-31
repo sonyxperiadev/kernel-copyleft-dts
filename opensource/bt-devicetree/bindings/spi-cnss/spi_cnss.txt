@@ -1,0 +1,11 @@
+SPI CNSS driver for UWB
+
+-UWB protocol driver
+
+Required Properties:
+- compatible: "qcom,spi-cnss"
+
+Example:
+	spi-cnss {
+		compatible = "qcom,spi-cnss";
+	};

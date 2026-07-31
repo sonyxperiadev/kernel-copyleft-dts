@@ -540,5 +540,12 @@
 				type = "passive";
 			};
 		};
+
+		soc_trip:soc-trip {
+			temperature = <90>;
+			hysteresis = <0>;
+			type = "passive";
+		};
+
 	};
 };

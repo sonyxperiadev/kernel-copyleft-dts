@@ -3,7 +3,7 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
-#include <dt-bindings/regulator/qcom,rpm-smd-regulator.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
 &soc {
 		S1A:
@@ -11,7 +11,7 @@
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_s1";
 			qcom,hpm-min-load = <10000>;
-			regulator-min-microvolt = <1950000>;
+			regulator-min-microvolt = <856000>;
 			regulator-max-microvolt = <1396000>;
 		};
 
@@ -22,8 +22,8 @@
 			regulator-name = "pm4125_s2_level";
 			qcom,hpm-min-load = <10000>;
 			regulator-min-microvolt =
-				<RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			regulator-max-microvolt = <RPM_SMD_REGULATOR_LEVEL_BINNING>;
+				<RPMH_REGULATOR_LEVEL_RETENTION>;
+			regulator-max-microvolt = <RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		VDD_MX_LEVEL:
@@ -33,8 +33,8 @@
 			regulator-name = "pm4125_s3_level";
 			qcom,hpm-min-load = <10000>;
 			regulator-min-microvolt =
-				<RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			regulator-max-microvolt = <RPM_SMD_REGULATOR_LEVEL_BINNING>;
+				<RPMH_REGULATOR_LEVEL_RETENTION>;
+			regulator-max-microvolt = <RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		VDD_MX_LEVEL_AO:
@@ -44,8 +44,8 @@
 			regulator-name = "pm4125_s3_level_ao";
 			qcom,hpm-min-load = <10000>;
 			regulator-min-microvolt =
-				<RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			regulator-max-microvolt = <RPM_SMD_REGULATOR_LEVEL_BINNING>;
+				<RPMH_REGULATOR_LEVEL_RETENTION>;
+			regulator-max-microvolt = <RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		S4A:
@@ -71,8 +71,8 @@
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_l2";
 			qcom,hpm-min-load = <10000>;
-			regulator-min-microvolt = <312000>;
-			regulator-max-microvolt = <1304000>;
+			regulator-min-microvolt = <1000000>;
+			regulator-max-microvolt = <1200000>;
 		};
 
 		VDD_IO_EBI_LEVEL:
@@ -82,8 +82,8 @@
 			regulator-name = "pm4125_l3_level";
 			qcom,hpm-min-load = <10000>;
 			regulator-min-microvolt =
-				<RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			regulator-max-microvolt = <RPM_SMD_REGULATOR_LEVEL_BINNING>;
+				<RPMH_REGULATOR_LEVEL_RETENTION>;
+			regulator-max-microvolt = <RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
 		L4A:
@@ -105,18 +105,16 @@
 		};
 
 		VDD_A_EBI_LEVEL:
-		VDD_EBI_LEVEL:
 		L6A_LEVEL:
 		pm4125_l6_level: regulator-pm4125-l6-level {
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_l6_level";
 			qcom,hpm-min-load = <10000>;
 			regulator-min-microvolt =
-				<RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			regulator-max-microvolt = <RPM_SMD_REGULATOR_LEVEL_BINNING>;
+				<RPMH_REGULATOR_LEVEL_RETENTION>;
+			regulator-max-microvolt = <RPMH_REGULATOR_LEVEL_MAX>;
 		};
 
-		WCSS_CX:
 		L7A:
 		pm4125_l7: regulator-pm4125-l7 {
 			compatible = "qcom,stub-regulator";
@@ -158,8 +156,8 @@
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_l11";
 			qcom,hpm-min-load = <10000>;
-			regulator-min-microvolt = <970000>;
-			regulator-max-microvolt = <1150000>;
+			regulator-min-microvolt = <312000>;
+			regulator-max-microvolt = <1304000>;
 		};
 
 		L12A:
@@ -203,8 +201,8 @@
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_l16";
 			qcom,hpm-min-load = <10000>;
-			regulator-min-microvolt = <1504000>;
-			regulator-max-microvolt = <2000000>;
+			regulator-min-microvolt = <1700000>;
+			regulator-max-microvolt = <1910000>;
 		};
 
 		L17A:
@@ -239,7 +237,7 @@
 			compatible = "qcom,stub-regulator";
 			regulator-name = "pm4125_l20";
 			qcom,hpm-min-load = <10000>;
-			regulator-min-microvolt = <1504000>;
+			regulator-min-microvolt = <2300000>;
 			regulator-max-microvolt = <3544000>;
 		};
 

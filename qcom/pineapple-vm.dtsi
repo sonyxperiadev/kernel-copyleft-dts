@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/soc/qcom,ipcc.h>
@@ -270,7 +270,10 @@
 
 	tlmm-vm-mem-access {
 		compatible = "qcom,tlmm-vm-mem-access";
-		depends-on-supply = <&tlmm>;
+		tlmm-vm-gpio-list = <&tlmm 86 0 &tlmm 87 0 &tlmm 133 0 &tlmm 137 0 &tlmm 48 0
+					&tlmm 49 0 &tlmm 50 0 &tlmm 51 0 &tlmm 161 0 &tlmm 162 0
+					 &tlmm 91 0 &tlmm 60 0 &tlmm 61 0 &tlmm 62 0 &tlmm 63 0
+					  &tlmm 88 0>;
 	};
 
 	psci {

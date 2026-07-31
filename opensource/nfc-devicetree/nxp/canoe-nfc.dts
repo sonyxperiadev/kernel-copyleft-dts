@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "canoe-nfc-common-gpios.dtsi"
+/ {
+        model = "Qualcomm Technologies, Inc. Canoe SoC";
+        compatible = "qcom,canoe";
+        qcom,msm-id = <660 0x10000>, <660 0x20000>, <661 0x10000>, <661 0x20000>,
+                      <0x1000294 0x10000>, <0x1000294 0x20000>,
+                      <0x1000295 0x10000>, <0x1000295 0x20000>,
+                      <704 0x10000>, <704 0x20000>, <722 0x30000>, <723 0x30000>,
+                      <743 0x10000>, <743 0x20000>;
+        qcom,board-id = <0x30001 0>, <0x30101 0>, <0x20008 0>, <0x50008 0>, <0x30015 0>;
+};

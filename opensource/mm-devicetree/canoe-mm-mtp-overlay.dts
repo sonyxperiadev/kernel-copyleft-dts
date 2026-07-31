@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "hw_fence/canoe-hw-fence.dtsi"
+#include "hfi_core/canoe-hfi-core.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Canoe MTP + ST54L + Kundu";
+	compatible = "qcom,canoe-mtp", "qcom,canoe", "qcom,canoep-cdp", "qcom,canoep",
+			   "qcom,mtp";
+	qcom,msm-id = <660 0x10000>, <660 0x20000>, <661 0x10000>, <661 0x20000>,
+		      <0x1000294 0x10000>, <0x1000294 0x20000>,
+		      <0x1000295 0x10000>, <0x1000295 0x20000>;
+	qcom,board-id = <8 0>, <0x20008 0>, <0x30008 0>, <0x40008 0>, <0x50008 0>, <0x60008 0>,
+			<0x70008 0>, <0x80008 0>;
+};

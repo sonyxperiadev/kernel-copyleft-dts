@@ -63,8 +63,6 @@
 	};
 
 	smem_mem: smem_region@81d00000 {
-		compatible = "qcom,smem";
-		hwlocks = <&tcsr_mutex 3>;
 		reg = <0x0 0x81d00000 0x0 0x200000>;
 		no-map;
 	};
@@ -248,19 +246,9 @@
 
 	/* Linux kernel image is loaded at 0xa8000000 */
 
-	hypervisor_extended_heap_mem: hypervisor_extended_heap_region@d74e0000 {
-		reg = <0x0 0xd74e0000 0x0 0x520000>;
-		no-map;
-	};
-
 	global_sync_mem: global_sync_region@d7a00000 {
 		reg = <0x0 0xd7a00000 0x0 0x200000>;
 		no-map;
-	};
-
-	hwfence_shbuf: hwfence-shmem {
-		no-map;
-		reg = <0x0 0xd4e23000 0x0 0x2dd000>;
 	};
 
 	/*
@@ -275,7 +263,7 @@
 
 	trust_ui_vm_mem: trust_ui_vm_region@f3800000 {
 		compatible = "shared-dma-pool";
-		reg = <0x0 0xf3800000 0x0 0x4000000>;
+		reg = <0x0 0xf3800000 0x0 0x4400000>;
 		reusable;
 		alignment = <0x0 0x400000>;
 	};
@@ -285,11 +273,4 @@
 		no-map;
 	};
 
-	vm_comm_mem: vm_comm_mem_region {
-		compatible = "shared-dma-pool";
-		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
-		reusable;
-		alignment = <0x0 0x400000>;
-		size = <0x0 0x400000>;
-	};
 };

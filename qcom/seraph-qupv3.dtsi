@@ -778,7 +778,6 @@
 			dmas = <&gpi_dma1 0 4 4 64 0>,
 				<&gpi_dma1 1 4 4 64 0>;
 			dma-names = "tx", "rx";
-			qcom,pm-ctrl-client;
 			status = "disabled";
 		};
 

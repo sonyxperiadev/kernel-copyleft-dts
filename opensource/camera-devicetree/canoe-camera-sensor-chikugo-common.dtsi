@@ -1,0 +1,729 @@
+#include <dt-bindings/msm-camera.h>
+#include <dt-bindings/leds/common.h>
+
+&soc {
+	cam_pmic0_cs: cam_pmic0_cs {
+		compatible = "regulator-fixed";
+		regulator-name = "cam_pmic0_cs";
+		startup-delay-us = <0>;
+		enable-active-high;
+		gpio = <&tlmm 160 0>;
+	};
+
+	sony_camera_module_0: sony,camera_modules@0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cell-index = <0>;
+		interrupt-parent = <&tlmm>;
+		status = "ok";
+		compatible = "sony_camera_0";
+		module_name = "SEM52BC2";
+		cam_pmic_cs0-supply = <&cam_pmic0_cs>;
+		cam_gyro-supply = <&L1B>;
+		cam_vio-supply = <&wl28681c_0_ldo1>;
+		cam_vdig-supply = <&L1N>;
+		cam_vana-supply = <&L4N>;
+		cam_vana2-supply = <&L5N>;
+		cam_vaf-supply = <&L7N>;
+		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		pmic_vin-supply = <&BOB2>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_somc_active &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk0_somc_suspend &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 89 0>, <&tlmm 15 0>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK0", "SONY_CAMERA_RESET";
+		cci-device = <0>;
+		cci-master = <1>;
+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-rates = <24000000>;
+		use_spi = <0>;
+		match_id = <0x34 0x0016 0x02 0x0888>;
+		thremal_enable = <1>;
+		thermal_names = "sony_cam_back0";
+		SEM52BC2 {
+			i2c_freq_mode = <3>;
+			power_off {
+				commands =
+					"gpio_reset",
+					"cam_clk",
+					"cam_vaf",
+					"cam_vdig",
+					"cam_vana2",
+					"cam_vana",
+					"cam_vio",
+					"cam_gyro",
+					"cam_pmic0",
+					"pmic_vin",
+					"exit";
+				gpio_reset = <7 0x0 0 1000>;
+				cam_clk = <5 0xffffffff 0 0>;
+				cam_vaf = <3 0xffffffff 0 0>;
+				cam_vdig = <0 0xffffffff 0 0>;
+				cam_vana = <2 0xffffffff 0 0>;
+				cam_vana2 = <30 0xffffffff 0 5000>;
+				cam_vio = <1 0xffffffff 0 9000>;
+				cam_gyro = <9 0xffffffff 0 0>;
+				cam_pmic0 = <40 0xffffffff 0 0>;
+				pmic_vin = <42 0 3100 0>;
+				exit = <99 0x0 0 0>;
+			};
+			power_on {
+				commands =
+					"pmic_vin",
+					"cam_pmic0",
+					"cam_gyro",
+					"cam_vio",
+					"cam_vana",
+					"cam_vana2",
+					"cam_vdig",
+					"cam_vaf",
+					"cam_clk",
+					"gpio_reset",
+					"exit";
+				pmic_vin = <42 3100 3100 1000>;
+				cam_pmic0 = <40 0 0 10000>;
+				cam_gyro = <9 1800 0 1000>;
+				cam_vio = <1 1200 0 0>;
+				cam_vana = <2 2800 0 0>;
+				cam_vana2 = <30 2000 0 5000>;
+				cam_vdig = <0 872 0 0>;
+				cam_vaf = <3 3304 0 1000>;
+				cam_clk = <5 24000000 0 1>;
+				gpio_reset = <7 1 0 1500>;
+				exit = <99 0x0 0 0>;
+			};
+		};
+	};
+	sony_camera_module_1: sony,camera_modules@1 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cell-index = <1>;
+		interrupt-parent = <&tlmm>;
+		status = "ok";
+		compatible = "sony_camera_1";
+		module_name = "SEM48BC2";
+		cam_pmic_cs0-supply = <&cam_pmic0_cs>;
+		cam_vio-supply = <&wl28681c_0_ldo1>;
+		cam_vdig-supply = <&L1M>;
+		cam_vana-supply = <&L5M>;
+		cam_vana2-supply = <&L3M>;
+		cam_vaf-supply = <&L7M>;
+		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_somc_active &cam_sensor_active_rst2>;
+		pinctrl-1 = <&cam_sensor_mclk1_somc_suspend &cam_sensor_suspend_rst2>;
+		gpios = <&tlmm 90 0>, <&tlmm 3 0>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK1", "SONY_CAMERA_RESET";
+		cci-device = <2>;
+		cci-master = <1>;
+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-rates = <24000000>;
+		use_spi = <0>;
+		match_id = <0x66 0x0016 0x02 0x0906>;
+		thremal_enable = <1>;
+		thermal_names = "sony_cam_back1";
+
+		SEM48BC2 {
+			i2c_freq_mode = <3>;
+			power_off {
+				commands =
+					"cam_clk",
+					"gpio_reset",
+					"cam_vaf",
+					"cam_vdig",
+					"cam_vana2",
+					"cam_vana",
+					"cam_vio",
+					"cam_pmic0",
+					"exit";
+				cam_clk = <5 0xffffffff 0 0>;
+				gpio_reset = <7 0x0 0 5>;
+				cam_vaf = <3 0xffffffff 0 1000>;
+				cam_vdig = <0 0xffffffff 0 0>;
+				cam_vana2 = <30 0xffffffff 0 5000>;
+				cam_vana = <2 0xffffffff 0 0>;
+				cam_vio = <1 0xffffffff 0 9000>;
+				cam_pmic0 = <40 0xffffffff 0 0>;
+				exit = <99 0x0 0 0>;
+			};
+			power_on {
+				commands =
+					"cam_pmic0",
+					"cam_vio",
+					"cam_vana",
+					"cam_vana2",
+					"cam_vdig",
+					"cam_vaf",
+					"cam_clk",
+					"gpio_reset",
+					"exit";
+				cam_pmic0 = <40 0 0 10000>;
+				cam_vio = <1 1200 0 1>;
+				cam_vana = <2 2800 0 1>;
+				cam_vana2 = <30 1800 0 5000>;
+				cam_vdig = <0 1168 0 1>;
+				cam_vaf = <3 3304 0 1000>;
+				cam_clk = <5 24000000 0 1>;
+				gpio_reset = <7 1 0 1100>;
+				exit = <99 0x0 0 0>;
+			};
+		};
+	};
+	sony_camera_module_2: sony,camera_modules@2 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cell-index = <2>;
+		interrupt-parent = <&tlmm>;
+		status = "ok";
+		compatible = "sony_camera_2";
+		module_name = "SUN12BS0";
+		cam_pmic_cs0-supply = <&cam_pmic0_cs>;
+		cam_vio-supply = <&L6N>;
+		cam_vana-supply = <&L3N>;
+		cam_vdig-supply = <&L2N>;
+		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk3_active &cam_sensor_active_rst4>;
+		pinctrl-1 = <&cam_sensor_mclk3_suspend &cam_sensor_suspend_rst4>;
+		gpios = <&tlmm 92 0>, <&tlmm 7 0>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK3", "SONY_CAMERA_RESET";
+		cci-device = <1>;
+		cci-master = <0>;
+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
+		clock-names = "cam_clk";
+		use_spi = <0>;
+		clock-rates = <24000000>;
+		match_id = <0x20 0x0016 0x02 0x0663>;
+		thremal_enable = <1>;
+		thermal_names = "sony_cam_front0";
+		SUN12BS0 {
+			i2c_freq_mode = <3>;
+			power_off {
+				commands =
+					"gpio_reset",
+					"cam_clk",
+					"cam_vdig",
+					"cam_vana",
+					"cam_vio",
+					"cam_pmic0",
+					"exit";
+				gpio_reset = <7 0x0 0 1>;
+				cam_clk = <5 0xffffffff 0 0>;
+				cam_vdig = <0 0xffffffff 0 0>;
+				cam_vana = <2 0xffffffff 0 0>;
+				cam_vio = <1 0xffffffff 0 9000>;
+				cam_pmic0 = <40 0xffffffff 0 0>;
+				exit = <99 0x0 0 0>;
+			};
+			power_on {
+				commands =
+					"cam_pmic0",
+					"cam_vio",
+					"cam_vana",
+					"cam_vdig",
+					"cam_clk",
+					"gpio_reset",
+					"exit";
+				cam_pmic0 = <40 0 0 10000>;
+				cam_vio = <1 1800 0 0>;
+				cam_vana = <2 2800 0 0>;
+				cam_vdig = <0 1056 0 0>;
+				cam_clk = <5 24000000 0 1>;
+				gpio_reset = <7 1 0 1000>;
+				exit = <99 0x0 0 0>;
+			};
+		};
+	};
+	sony_camera_module_3: sony,camera_modules@3 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		cell-index = <3>;
+		interrupt-parent = <&tlmm>;
+		status = "ok";
+		compatible = "sony_camera_3";
+		module_name = "SEM48BC1";
+		cam_pmic_cs0-supply = <&cam_pmic0_cs>;
+		cam_vio-supply = <&wl28681c_0_ldo1>;
+		cam_vana-supply = <&wl28681c_0_ldo4>;
+		cam_vana2-supply = <&wl28681c_0_ldo7>;
+		cam_vdig-supply = <&wl28681c_0_ldo2>;
+		cam_vaf-supply = <&wl28681c_0_ldo5>;
+		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk5_somc_active &cam_sensor_active_rst3>;
+		pinctrl-1 = <&cam_sensor_mclk5_somc_suspend &cam_sensor_suspend_rst3>;
+		gpios = <&tlmm 94 0>, <&tlmm 105 0>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags = <1 0>;
+		gpio-req-tbl-label = "CAMIF_MCLK5", "SONY_CAMERA_RESET";
+		cci-device = <0>;
+		cci-master = <0>;
+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK5_CLK>;
+		clock-names = "cam_clk";
+		use_spi = <0>;
+		clock-rates = <24000000>;
+		match_id = <0x66 0x0016 0x02 0x0906>;
+		thremal_enable = <1>;
+		thermal_names = "sony_cam_back2";
+		SEM48BC1 {
+			i2c_freq_mode = <3>;
+			power_off {
+				commands =
+					"cam_clk",
+					"gpio_reset",
+					"cam_vaf",
+					"cam_vdig",
+					"cam_vana2",
+					"cam_vana",
+					"cam_vio",
+					"cam_pmic0",
+					"exit";
+				cam_clk = <5 0xffffffff 0 1000>;
+				gpio_reset = <7 0x0 0 1000>;
+				cam_vaf = <3 0xffffffff 0 1000>;
+				cam_vdig = <0 0xffffffff 0 1000>;
+				cam_vana2 = <30 0xffffffff 0 1000>;
+				cam_vana = <2 0xffffffff 0 1000>;
+				cam_vio = <1 0xffffffff 0 0>;
+				cam_pmic0 = <40 0xffffffff 0 0>;
+				exit = <99 0x0 0 0>;
+			};
+			power_on {
+				commands =
+					"cam_pmic0",
+					"cam_vio",
+					"cam_vana",
+					"cam_vana2",
+					"cam_vdig",
+					"cam_vaf",
+					"cam_clk",
+					"gpio_reset",
+					"exit";
+				cam_pmic0 = <40 0 0 10000>;
+				cam_vio = <1 1200 0 0>;
+				cam_vana = <2 2804 0 0>;
+				cam_vana2 = <30 1804 0 0>;
+				cam_vdig = <0 1144 0 0>;
+				cam_vaf = <3 3300 0 0>;
+				cam_clk = <5 24000000 0 1>;
+				gpio_reset = <7 1 0 1000>;
+				exit = <99 0x0 0 0>;
+			};
+		};
+	};
+};
+
+&cam_csiphy_tpg13 {
+	status = "disabled";
+};
+
+&cam_csiphy_tpg14 {
+	status = "disabled";
+};
+
+&cam_csiphy_tpg15 {
+	status = "disabled";
+};
+
+&pmh0101_flash_led0 {
+	color = <LED_COLOR_ID_WHITE>;
+	led-max-microamp = <350000>;
+	flash-max-microamp = <1100000>;
+	flash-max-timeout-us = <400000>;
+};
+
+&pm8010_m_l1 {
+	regulator-min-microvolt = <1000000>;
+	regulator-max-microvolt = <1168000>;
+	qcom,init-voltage = <1000000>;
+	status = "okay";
+};
+
+&pm8010_m_l3 {
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <1800000>;
+	qcom,init-voltage = <1800000>;
+	status = "okay";
+};
+
+&pm8010_m_l5 {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+	status = "okay";
+};
+
+&pm8010_m_l7 {
+	regulator-min-microvolt = <3304000>;
+	regulator-max-microvolt = <3304000>;
+	qcom,init-voltage = <3304000>;
+	status = "okay";
+};
+
+&pm8010_n_l1 {
+	regulator-min-microvolt = <872000>;	  /* LDO */
+	regulator-max-microvolt = <1104000>;
+	qcom,init-voltage = <872000>;
+	status = "okay";
+};
+
+&pm8010_n_l2 {
+	regulator-min-microvolt = <1056000>;
+	regulator-max-microvolt = <1056000>;
+	qcom,init-voltage = <1056000>;
+	status = "okay";
+};
+&pm8010_n_l3 {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+	status = "okay";
+};
+
+&pm8010_n_l4 {
+	regulator-min-microvolt = <2800000>;
+	regulator-max-microvolt = <2800000>;
+	qcom,init-voltage = <2800000>;
+	status = "okay";
+};
+
+&pm8010_n_l5 {
+	regulator-min-microvolt = <2000000>;
+	regulator-max-microvolt = <2000000>;
+	qcom,init-voltage = <2000000>;
+	status = "okay";
+};
+
+&pm8010_n_l6 {
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <1800000>;
+	qcom,init-voltage = <1800000>;
+	status = "okay";
+};
+
+&gcc {
+	qcom,critical-devices = <&qupv3_se6_i2c>;
+};
+
+&qupv3_se6_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	will_pmic_0:wl28681c@35 {
+		compatible = "will,wl28681c";
+		qcom,clk-freq-out = <2000000>;
+		reg = <0x35>;
+		irq-gpios = <&tlmm 78 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sm_gpio_160>;
+		cs-supply = <&cam_pmic0_cs>;
+		off_time = <0 0 0 0 0 0 4000>;
+		status = "ok";
+
+		vin12 = <&S7F>;
+		vin34 = <&BOB2>;
+		vin5 = <&BOB1>;
+		vin6 = <&S8F>;
+		vin7 = <&S8F>;
+		regulators {
+			wl28681c_0_ldo1: ldo1 {
+				regulator-name = "wl28681c_a_ldo1";
+				regulator-min-microvolt = <496000>;
+				regulator-max-microvolt = <2048000>;
+			};
+
+			wl28681c_0_ldo2: ldo2 {
+				regulator-name = "wl28681c_a_ldo2";
+				regulator-min-microvolt = <496000>;
+				regulator-max-microvolt = <2048000>;
+			};
+
+			wl28681c_0_ldo3: ldo3 {
+				regulator-name = "wl28681c_a_ldo3";
+				regulator-min-microvolt = <1372000>;
+				regulator-max-microvolt = <3412000>;
+			};
+
+			wl28681c_0_ldo4: ldo4 {
+				regulator-name = "wl28681c_a_ldo4";
+				regulator-min-microvolt = <1372000>;
+				regulator-max-microvolt = <3412000>;
+			};
+
+			wl28681c_0_ldo5: ldo5 {
+				regulator-name = "wl28681c_a_ldo5";
+				regulator-min-microvolt = <1372000>;
+				regulator-max-microvolt = <3412000>;
+			};
+
+			wl28681c_0_ldo6: ldo6 {
+				regulator-name = "wl28681c_a_ldo6";
+				regulator-min-microvolt = <1372000>;
+				regulator-max-microvolt = <3412000>;
+			};
+
+			wl28681c_0_ldo7: ldo7 {
+				regulator-name = "wl28681c_a_ldo7";
+				regulator-min-microvolt = <1372000>;
+				regulator-max-microvolt = <3412000>;
+			};
+		};
+	};
+};
+
+&qupv3_se8_i2c {
+	status = "ok";
+	qcom,clk-freq-out = <1000000>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&somc_qupv3_se8_i2c_sda_active>, <&somc_qupv3_se8_i2c_scl_active>;
+	pinctrl-1 = <&somc_qupv3_se8_i2c_sleep>;
+	cam_sensor0:cam_sensor0 {
+		compatible = "sony,camera_subdev";
+		reg = <0x1A>;
+		camera_id = <0>;
+		device_type = <0>;
+		status = "okay";
+	};
+	cam_eeprom0:cam_eeprom0 {
+		compatible = "sony,camera_subdev";
+		reg = <0x50>;
+		camera_id = <0>;
+		device_type = <2>;
+		status = "okay";
+	};
+	cam_eeprom_swp0:cam_eeprom_swp0 {
+		compatible = "sony,camera_subdev";
+		reg = <0x54>;
+		camera_id = <0>;
+		device_type = <4>;
+		status = "okay";
+	};
+};
+
+&qupv3_se9_i2c {
+	status = "ok";
+	qcom,clk-freq-out = <1000000>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&somc_qupv3_se9_i2c_sda_active>, <&somc_qupv3_se9_i2c_scl_active>;
+	pinctrl-1 = <&somc_qupv3_se9_i2c_sleep>;
+	cam_sensor1:cam_sensor1 {
+		compatible = "sony,camera_subdev";
+		reg = <0x33>;
+		camera_id = <1>;
+		device_type = <0>;
+		status = "okay";
+	};
+	cam_eeprom1:cam_eeprom1 {
+		compatible = "sony,camera_subdev";
+		reg = <0x50>;
+		camera_id = <1>;
+		device_type = <2>;
+		status = "okay";
+	};
+	cam_eeprom_swp1:cam_eeprom_swp1 {
+		compatible = "sony,camera_subdev";
+		reg = <0x54>;
+		camera_id = <1>;
+		device_type = <4>;
+		status = "okay";
+	};
+};
+
+&tlmm {
+	sm_gpio_160: sm_gpio_160 {
+		mux {
+			pins = "gpio160";
+			function = "gpio";
+		};
+		config {
+			output-low;
+			bias-disable;
+			power-source = <0>;
+		};
+	};
+
+	cam_sensor_mclk0_somc_active: cam_sensor_mclk0_somc_active {
+		/* MCLK0 */
+		mux {
+			pins = "gpio89";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio89";
+			bias-disable; /* No PULL */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	cam_sensor_mclk0_somc_suspend: cam_sensor_mclk0_somc_suspend {
+		/* MCLK0 */
+		mux {
+			pins = "gpio89";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio89";
+			bias-pull-down; /* PULL DOWN */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	cam_sensor_mclk1_somc_active: cam_sensor_mclk1_somc_active {
+		/* MCLK1 */
+		mux {
+			pins = "gpio90";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio90";
+			bias-disable; /* No PULL */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	cam_sensor_mclk1_somc_suspend: cam_sensor_mclk1_somc_suspend {
+		/* MCLK1 */
+		mux {
+			pins = "gpio90";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio90";
+			bias-pull-down; /* PULL DOWN */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	cam_sensor_mclk5_somc_active: cam_sensor_mclk5_somc_active {
+		/* MCLK5 */
+		mux {
+			pins = "gpio94";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio94";
+			bias-disable; /* No PULL */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	cam_sensor_mclk5_somc_suspend: cam_sensor_mclk5_somc_suspend {
+		/* MCLK5 */
+		mux {
+			pins = "gpio94";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio94";
+			bias-pull-down; /* PULL DOWN */
+			drive-strength = <4>; /* 4 MA */
+		};
+	};
+
+	somc_qupv3_se8_i2c_pins: somc_qupv3_se8_i2c_pins {
+		somc_qupv3_se8_i2c_sda_active: somc_qupv3_se8_i2c_sda_active {
+			mux {
+				pins = "gpio0";
+				function = "qup2_se0_l0";
+			};
+
+			config {
+				pins = "gpio0";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+			};
+		};
+
+		somc_qupv3_se8_i2c_scl_active: somc_qupv3_se8_i2c_scl_active {
+			mux {
+				pins = "gpio1";
+				function = "qup2_se0_l1";
+			};
+
+			config {
+				pins = "gpio1";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+			};
+		};
+
+		somc_qupv3_se8_i2c_sleep: somc_qupv3_se8_i2c_sleep {
+			mux {
+				pins = "gpio0", "gpio1";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio0", "gpio1";
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+	};
+
+	somc_qupv3_se9_i2c_pins: somc_qupv3_se9_i2c_pins {
+		somc_qupv3_se9_i2c_sda_active: somc_qupv3_se9_i2c_sda_active {
+			mux {
+				pins = "gpio4";
+				function = "qup2_se1_l0";
+			};
+
+			config {
+				pins = "gpio4";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+				qcom,apps;
+			};
+		};
+
+		somc_qupv3_se9_i2c_scl_active: somc_qupv3_se9_i2c_scl_active {
+			mux {
+				pins = "gpio5";
+				function = "qup2_se1_l1";
+			};
+
+			config {
+				pins = "gpio5";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+				qcom,apps;
+			};
+		};
+
+		somc_qupv3_se9_i2c_sleep: somc_qupv3_se9_i2c_sleep {
+			mux {
+				pins = "gpio4", "gpio5";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio4", "gpio5";
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+	};
+};
+

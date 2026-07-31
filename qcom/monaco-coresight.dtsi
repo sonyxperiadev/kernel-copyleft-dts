@@ -14,7 +14,7 @@
 		tgu-regs = <8>;
 		tgu-timer-counters = <3>;
 		interrupts = <0 53 1>, <0 54 1>, <0 55 1>, <0 56 1>;
-		device-name = "tgu_apss";
+		coresight-name = "coresight-tgu-apss";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -25,7 +25,7 @@
 		reg = <0x8001000 0x1000>;
 		reg-names = "csr-base";
 
-		device-name = "csr";
+		coresight-name = "coresight-csr";
 		qcom,usb-bam-support;
 		qcom,hwctrl-set-support;
 		qcom,set-byte-cntr-support;
@@ -40,7 +40,7 @@
 		reg = <0x8a03000 0x1000>;
 		reg-names = "csr-base";
 
-		device-name = "swao_csr";
+		coresight-name = "coresight-swao-csr";
 
 		qcom,timestamp-support;
 		qcom,aodbg-csr-support;
@@ -59,7 +59,7 @@
 		      <0xe280000 0x180000>;
 		reg-names = "stm-base", "stm-stimulus-base";
 
-		device-name = "stm0";
+		coresight-name = "coresight-stm";
 		atid = <16>;
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -76,11 +76,11 @@
 
 	tpdm_center: tpdm@8b58000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x8b58000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_center";
+		coresight-name = "coresight-tpdm-center";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -100,10 +100,9 @@
 		reg = <0x8940000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_gpu";
+		coresight-name = "coresight-tpdm-gpu";
 
 		status = "disabled";
-
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 		out-ports {
@@ -119,7 +118,7 @@
 	modem_rfxe: modem_rfxe {
 		compatible = "arm,coresight-dummy-source";
 
-		device-name = "modem_rfxe";
+		coresight-name = "coresight-modem-rfxe";
 		atid = <50>;
 		out-ports {
 			port {
@@ -133,7 +132,7 @@
 
 	audio_etm0: audio_etm0 {
 		compatible = "qcom,coresight-remote-etm";
-		device-name = "audio_etm0";
+		coresight-name = "coresight-audio-etm0";
 
 		atid = <40>;
 
@@ -159,7 +158,7 @@
 	audio-qmi {
 		compatible = "qcom,coresight-qmi";
 
-		device-name = "qmi_auido";
+		coresight-name = "coresight-qmi-auido";
 		qcom,inst-id = <5>;
 
 		in-ports {
@@ -174,7 +173,7 @@
 
 	snoc: snoc {
 		compatible = "arm,coresight-dummy-source";
-		device-name = "snoc";
+		coresight-name = "coresight-snoc";
 
 		atid = <18>;
 
@@ -191,9 +190,7 @@
 	tpdm_lpass: tpdm@8a26000 {
 		compatible = "arm,coresight-dummy-source";
 
-		device-name = "tpdm_lpass";
-		qcom,dsb-element-bits = <64>;
-
+		coresight-name = "coresight-tpdm-lpass";
 		atid = <26>;
 		out-ports {
 			port {
@@ -211,7 +208,7 @@
 		reg = <0x8a50000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_ddr";
+		coresight-name = "coresight-tpdm-ddr";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -233,7 +230,7 @@
 		reg = <0x8a51000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_shrm";
+		coresight-name = "coresight-tpdm-shrm";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -255,11 +252,9 @@
 		reg = <0x8840000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_vsense";
+		coresight-name = "coresight-tpdm-vsense";
 
 		status = "disabled";
-
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 		out-ports {
@@ -274,15 +269,14 @@
 
 	tpdm_dcc: tpdm@8870000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x8870000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_dcc";
+		coresight-name = "coresight-tpdm-dcc";
 
 		qcom,hw-enable-check;
 
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -299,13 +293,12 @@
 
 	tpdm_prng: tpdm@884c000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x884c000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_prng";
+		coresight-name = "coresight-tpdm-prng";
 
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -322,13 +315,12 @@
 
 	tpdm_qm: tpdm@89d0000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x89d0000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_qm";
+		coresight-name = "coresight-tpdm-qm";
 
-		qcom,dsb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 		out-ports {
@@ -343,11 +335,11 @@
 
 	tpdm_west: tpdm@8a58000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x8a58000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_west";
+		coresight-name = "coresight-tpdm-west";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -363,14 +355,12 @@
 
 	tpdm_pimem: tpdm@8850000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x8850000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_pimem";
+		coresight-name = "coresight-tpdm-pimem";
 
-		qcom,dsb-element-bits = <32>;
-		qcom,cmb-element-bits = <64>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -387,11 +377,11 @@
 
 	tpdm_mapss: tpdm@8a01000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x8a01000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_mapss";
+		coresight-name = "coresight-tpdm-mapss";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -413,9 +403,8 @@
 		reg = <0x89b9000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_sdcc_2";
+		coresight-name = "coresight-tpdm-sdcc-2";
 
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -437,7 +426,7 @@
 		reg = <0x89b8000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_sdcc_1";
+		coresight-name = "coresight-tpdm-sdcc-1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -456,13 +445,12 @@
 
 	tpdm_spdm: tpdm@800f000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x800f000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_spdm";
+		coresight-name = "coresight-tpdm-spdm";
 
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -479,7 +467,7 @@
 
 	tpdm_wcss: tpdm@899c000 {
 		compatible = "arm,coresight-dummy-source";
-		device-name = "tpdm_wcss";
+		coresight-name = "coresight-tpdm-wcss";
 		atid = <24>;
 
 		out-ports {
@@ -494,7 +482,7 @@
 
 	funnel_wcss: funnel@899e000 {
 		compatible = "arm,coresight-static-funnel";
-		device-name = "funnel_wcss";
+		coresight-name = "coresight-funnel-wcss";
 
 		out-ports {
 			port {
@@ -520,7 +508,7 @@
 
 	modem_etm0: modem_etm0 {
 		compatible = "qcom,coresight-remote-etm";
-		device-name = "modem_etm0";
+		coresight-name = "coresight-modem-etm0";
 
 		atid = <36>;
 
@@ -546,7 +534,7 @@
 	modem-qmi {
 		compatible = "qcom,coresight-qmi";
 
-		device-name = "qmi_modem";
+		coresight-name = "coresight-qmi-modem";
 		qcom,inst-id = <2>;
 
 		in-ports {
@@ -560,11 +548,12 @@
 	};
 
 	etm0: etm@9040000 {
-		compatible = "arm,coresight-etm4x-sysreg";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb95d>;
 		reg = <0x9040000 0x1000>;
 		cpu = <&CPU0>;
 		qcom,skip-power-up;
-		device-name = "etm0";
+		coresight-name = "coresight-etm0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -579,11 +568,12 @@
 	};
 
 	etm1: etm@9140000 {
-		compatible = "arm,coresight-etm4x-sysreg";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb95d>;
 		reg = <0x9140000 0x1000>;
 		cpu = <&CPU1>;
 		qcom,skip-power-up;
-		device-name = "etm1";
+		coresight-name = "coresight-etm1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -598,11 +588,12 @@
 	};
 
 	etm2: etm@9240000 {
-		compatible = "arm,coresight-etm4x-sysreg";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb95d>;
 		reg = <0x9240000 0x1000>;
 		cpu = <&CPU2>;
 		qcom,skip-power-up;
-		device-name = "etm2";
+		coresight-name = "coresight-etm2";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -617,11 +608,12 @@
 	};
 
 	etm3: etm@9340000 {
-		compatible = "arm,coresight-etm4x-sysreg";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb95d>;
 		reg = <0x9340000 0x1000>;
 		cpu = <&CPU3>;
 		qcom,skip-power-up;
-		device-name = "etm3";
+		coresight-name = "coresight-etm3";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -637,13 +629,12 @@
 
 	tpdm_actpm: tpd@9830000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x9830000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_actpm";
+		coresight-name = "coresight-tpdm-actpm";
 
-		qcom,cmb-element-bits = <64>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -660,13 +651,12 @@
 
 	tpdm_llm_silver: tpdm@98a0000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x98a0000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_llm_silver";
+		coresight-name = "coresight-tpdm-llm-silver";
 
-		qcom,cmb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
@@ -683,13 +673,12 @@
 
 	tpdm_apss: tpdm@9860000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb968>;
 		reg = <0x9860000 0x1000>;
 		reg-names = "tpdm-base";
 
-		device-name = "tpdm_apss";
+		coresight-name = "coresight-tpdm-apss";
 
-		qcom,dsb-element-bits = <32>;
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 		out-ports {
@@ -704,11 +693,11 @@
 
 	funnel_apss0: funnel@9800000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0e00>;
+		arm,primecell-periphid = <0x000bb908>;
 		reg = <0x9800000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_apss0";
+		coresight-name = "coresight-funnel-apss0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -787,11 +776,11 @@
 
 	tpda_actpm: tpda@9832000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0f00>;
+		arm,primecell-periphid = <0x000bb969>;
 		reg = <0x9832000 0x1000>;
 		reg-names = "tpda-base";
 
-		device-name = "tpda_actpm";
+		coresight-name = "coresight-tpda-actpm";
 
 		qcom,tpda-atid = <77>;
 		qcom,cmb-elem-size = <0 32>;
@@ -823,11 +812,11 @@
 
 	tpda_apss: tpda@9862000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0f00>;
+		arm,primecell-periphid = <0x000bb969>;
 		reg = <0x9862000 0x1000>;
 		reg-names = "tpda-base";
 
-		device-name = "tpda_apss";
+		coresight-name = "coresight-tpda-apss";
 
 		qcom,tpda-atid = <66>;
 		qcom,dsb-elem-size = <0 32>;
@@ -860,11 +849,11 @@
 
 	tpda_llm_silver: tpda@98c0000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0f00>;
+		arm,primecell-periphid = <0x000bb969>;
 		reg = <0x98c0000 0x1000>;
 		reg-names = "tpda-base";
 
-		device-name = "tpda_llm_silver";
+		coresight-name = "coresight-tpda-llm-silver";
 
 		qcom,tpda-atid = <72>;
 		qcom,cmb-elem-size = <0 32>;
@@ -896,11 +885,11 @@
 
 	tpda_mapss: tpda@8a04000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0f00>;
+		arm,primecell-periphid = <0x000bb969>;
 		reg = <0x8a04000 0x1000>;
 		reg-names = "tpda-base";
 
-		device-name = "tpda_mapss";
+		coresight-name = "coresight-tpda-mapss";
 
 		qcom,tpda-atid = <76>;
 		qcom,cmb-elem-size = <0 32>;
@@ -940,7 +929,7 @@
 		reg = <0x8944000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_gpu";
+		coresight-name = "coresight-funnel-gpu";
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -970,11 +959,11 @@
 
 	tpda_dl: tpda@8004000 {
 		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000f0f00>;
+		arm,primecell-periphid = <0x000bb969>;
 		reg = <0x8004000 0x1000>;
 		reg-names = "tpda-base";
 
-		device-name = "tpda_dl";
+		coresight-name = "coresight-tpda-dl";
 
 		qcom,tpda-atid = <65>;
 		qcom,dsb-elem-size = <0 32>,
@@ -1121,7 +1110,7 @@
 		reg = <0x8005000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_qatb";
+		coresight-name = "coresight-funnel-qatb";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1162,7 +1151,7 @@
 		reg = <0x8041000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_in0";
+		coresight-name = "coresight-funnel-in0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1214,7 +1203,7 @@
 		reg = <0x8042000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_in1";
+		coresight-name = "coresight-funnel-in1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1277,7 +1266,7 @@
 
 	funnel_lpass: funnel@8a24000 {
 		compatible = "arm,coresight-static-funnel";
-		device-name = "funnel_lpass";
+		coresight-name = "coresight-funnel-lpass";
 
 		out-ports {
 			port {
@@ -1316,7 +1305,7 @@
 		reg = <0x08a57000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_ddr";
+		coresight-name = "coresight-funnel-ddr";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1369,7 +1358,7 @@
 		reg = <0x8045000 0x1000>;
 		reg-names = "funnel-base";
 
-		device-name = "funnel_merg";
+		coresight-name = "coresight-funnel-merg";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1406,11 +1395,12 @@
 	};
 
 	tmc_etf: tmc@8047000 {
-		compatible = "arm,coresight-tmc", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb961>;
 		reg = <0x8047000 0x1000>;
 		reg-names = "tmc-base";
 
-		device-name = "tmc_etf0";
+		coresight-name = "coresight-tmc-etf";
 
 		coresight-ctis = <&cti0 &cti6>;
 		cti-flush-trig-num = <1>;
@@ -1445,7 +1435,7 @@
 		reg = <0x8046000 0x1000>;
 		reg-names = "replicator-base";
 
-		device-name = "replicator_qdss";
+		coresight-name = "coresight-replicator-qdss";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1469,17 +1459,14 @@
 		};
 	};
 
-	etr_iommu_region: etr_iommu_region {
-		iommu-addresses = <&tmc_etr 0xffc00000 0x400000>;
-	};
-
 	tmc_etr: tmc@8048000 {
-		compatible = "arm,coresight-tmc", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb961>;
 		reg = <0x8048000 0x1000>,
 			<0x8064000 0x15000>;
 		reg-names = "tmc-base","bam-base";
 
-		device-name = "tmc_etr0";
+		coresight-name = "coresight-tmc-etr";
 		qcom,mem_support;
 
 		iommus = <&apps_smmu 0x0180 0>,
@@ -1505,8 +1492,7 @@
 		interrupt-names = "byte-cntr-irq";
 		qcom,sw-usb;
 		qcom,iommu-dma = "bypass";
-		memory-region = <&etr_iommu_region>;
-		iommu-addresses = <0x0 0xffc00000>;
+		qcom,iommu-dma-addr-pool = <0x0 0xffc00000>;
 
 		in-ports {
 			port {
@@ -1519,33 +1505,36 @@
 	};
 
 	cti_cortex_m3: cti@8b30000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8b30000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_cortex_m3";
+		coresight-name = "coresight-cti-cortex_m3";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_apss_cti0: cti@98e0000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x98e0000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_apss_cti0";
+		coresight-name = "coresight-cti-apss-cti0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_apss_cti1: cti@98f0000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x98f0000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_apss_cti1";
+		coresight-name = "coresight-cti-apss-cti1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1557,7 +1546,7 @@
 		reg = <0x89a4000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_wcss_cti0";
+		coresight-name = "coresight-cti-wcss-cti0";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1570,7 +1559,7 @@
 		reg = <0x89a5000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_wcss_cti1";
+		coresight-name = "coresight-cti-wcss-cti1";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1583,7 +1572,7 @@
 		reg = <0x89a6000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_wcss_cti2";
+		coresight-name = "coresight-cti-wcss-cti2";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1596,7 +1585,7 @@
 		reg = <0x8a21000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_lpass_lpi";
+		coresight-name = "coresight-cti-lpass-lpi";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1609,7 +1598,7 @@
 		reg = <0x8a2b000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_lpass_q6";
+		coresight-name = "coresight-cti-lpass-q6";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1617,11 +1606,12 @@
 	};
 
 	cti_mss_q6: cti@8833000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8833000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_mss_q6_cti";
+		coresight-name = "coresight-cti-mss-q6";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1632,7 +1622,7 @@
 		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8941000 0x1000>;
 		reg-names = "cti-base";
-		device-name = "cti_isdb_gpu";
+		coresight-name = "coresight-cti-isdb-gpu";
 
 		status = "disabled";
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
@@ -1640,88 +1630,96 @@
 	};
 
 	cti_mapss: cti@8a02000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8a02000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_mapss";
+		coresight-name = "coresight-cti-mapss";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_dlct_cti0: cti@8b59000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8b59000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_dlct_cti0";
+		coresight-name = "coresight-cti-dlct-cti0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_dlct_cti1: cti@8b5a000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8b5a000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_dlct_cti1";
+		coresight-name = "coresight-cti-dlct-cti1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_dlct_cti2: cti@8b5b000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8b5b000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_dlct_cti2";
+		coresight-name = "coresight-cti-dlct-cti2";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti_dlct_cti3: cti@8b5c000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8b5c000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti_dlct_cti3";
+		coresight-name = "coresight-cti-dlct-cti3";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti0: cti@8010000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8010000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti0";
+		coresight-name = "coresight-cti0";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti1: cti@8011000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8011000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti1";
+		coresight-name = "coresight-cti1";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti2: cti@8012000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8012000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti2";
+		coresight-name = "coresight-cti2";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
@@ -1733,143 +1731,156 @@
 	};
 
 	cti3: cti@8013000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8013000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti3";
+		coresight-name = "coresight-cti3";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti4: cti@8014000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8014000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti4";
+		coresight-name = "coresight-cti4";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti5: cti@8015000 {
-		compatible = "arm,coresight-cti" ,"arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8015000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti5";
+		coresight-name = "coresight-cti5";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti6: cti@8016000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8016000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti6";
+		coresight-name = "coresight-cti6";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti7: cti@8017000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8017000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti7";
+		coresight-name = "coresight-cti7";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti8: cti@8018000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8018000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti8";
+		coresight-name = "coresight-cti8";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti9: cti@8019000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x8019000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti9";
+		coresight-name = "coresight-cti9";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti10: cti@801a000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801a000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti10";
+		coresight-name = "coresight-cti10";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti11: cti@801b000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801b000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti11";
+		coresight-name = "coresight-cti11";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti12: cti@801c000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801c000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti12";
+		coresight-name = "coresight-cti12";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti13: cti@801d000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801d000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti13";
+		coresight-name = "coresight-cti13";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti14: cti@801e000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801e000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti14";
+		coresight-name = "coresight-cti14";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 	};
 
 	cti15: cti@801f000 {
-		compatible = "arm,coresight-cti", "arm,primecell";
+		compatible = "arm,primecell";
+		arm,primecell-periphid = <0x000bb9a8>;
 		reg = <0x801f000 0x1000>;
 		reg-names = "cti-base";
 
-		device-name = "cti15";
+		coresight-name = "coresight-cti15";
 
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";

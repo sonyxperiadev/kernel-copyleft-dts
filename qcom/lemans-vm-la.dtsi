@@ -7,6 +7,24 @@
 
 &soc {
 
+	mtl_rx_setup: rx-queues-config {
+		snps,rx-queues-to-use = <1>;
+		snps,rx-sched-sp;
+
+		queue {
+			snps,dcb-algorithm;
+			snps,priority = <0x1>;
+		};
+	};
+
+	mtl_tx_setup: tx-queues-config {
+		snps,tx-queues-to-use = <1>;
+		snps,tx-sched-sp;
+		queue {
+			snps,dcb-algorithm;
+		};
+	};
+
 	ipcc_mproc_apps_ns1: qcom,ipcc@421000 {
 		compatible = "qcom,ipcc";
 		reg = <0x421000 0x1000>;
@@ -94,7 +112,7 @@
 / {
 	chosen {
 		bootargs = "rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup.memory=nokmem,nosocket kpti=0 ufshcd-core.use_mcq_mode=n qcom_dma_heaps.enable_bitstream_contig_heap=y arm64.nopauth kasan=off msm_show_resume_irq.debug_mask=1 ";
-		bootconfig = "androidboot.usbcontroller=a600000.dwc3 androidboot.fstab_suffix=gen4.qcom androidboot.dtbo_idx=4";
+		bootconfig = "androidboot.usbcontroller=a600000.dwc3 androidboot.fstab_suffix=gen4.qcom androidboot.dtbo_idx=0";
 	};
 
 	rename_devices: rename_devices {
@@ -114,18 +132,6 @@
 
 &hab {
 	vmid = <2>;
-};
-
-&ethernet1 {
-	status = "ok";
-};
-
-&serdes1 {
-	status = "ok";
-};
-
-&emac_mdio_fe {
-	status = "ok";
 };
 
 &pcie0 {
@@ -180,19 +186,7 @@
 	status = "ok";
 };
 
-&qupv3_2 {
-	status = "ok";
-};
-
 &qupv3_se17_4uart {
-	status = "ok";
-};
-
-&qupv3_0 {
-	status = "ok";
-};
-
-&qupv3_se3_4uart {
 	status = "ok";
 };
 

@@ -18,7 +18,6 @@ properties:
     items:
       - enum:
           - qcom,pm2250-gpio
-          - qcom,pm4125-gpio
           - qcom,pm5100-gpio
           - qcom,pm660-gpio
           - qcom,pm660l-gpio
@@ -224,7 +223,6 @@ allOf:
           contains:
             enum:
               - qcom,pm2250-gpio
-              - qcom,pm4125-gpio
               - qcom,pm6150-gpio
               - qcom,pm7325-gpio
               - qcom,pm8150-gpio
@@ -504,7 +502,6 @@ $defs:
                  - gpio1-gpio16 for pmx65
                  - gpio1-gpio14 for pmar2230
                  - gpio1-gpio12 for pmxr2230
-                 - gpio1-gpio10 for pm4125
                  - gpio1-gpio16 for pm5100
 
         items:

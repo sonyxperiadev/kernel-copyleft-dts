@@ -11,6 +11,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Alor QRD + Peach WLAN + Kundu";
 	compatible = "qcom,alor-qrd", "qcom,alor", "qcom,alorp-qrd", "qcom,alorp", "qcom,qrd";
-	qcom,msm-id = <685 0x10000>, <727 0x10000>, <764 0x10000>;
+	qcom,msm-id = <685 0x10000>, <727 0x10000>;
 	qcom,board-id = <0x2000B 0>;
 };

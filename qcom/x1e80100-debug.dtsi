@@ -12,7 +12,7 @@
 
 	dump_mem: dump_mem_region {
 		alloc-ranges = <0x1 0x00000000 0xfffffffe 0xffffffff>;
-		size = <0x0 0xa800000>;
+		size = <0x0 0xa4cf000>;
 	};
 };
 
@@ -20,8 +20,9 @@
 	dcc: dcc@100ff000 {
 		compatible = "qcom,dcc-v2";
 		reg = <0x0 0x100ff000 0x0 0x1000>,
-		      <0x0 0x10080000 0x0 0x18000>;
+		      <0x0 0x10080000 0x0 0x8000>;
 		reg-names = "dcc-base", "dcc-ram-base";
+		status = "disabled";
 
 		qcom,transaction_timeout = <0>;
 		dcc-ram-offset = <0x0>;

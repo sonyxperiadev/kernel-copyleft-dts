@@ -1,0 +1,142 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+#include "canoe-audio-cdp.dtsi"
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&cdc_sen_mi2s_gpios {
+	status = "ok";
+};
+
+&swr_haptics {
+	status = "disabled";
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+};
+
+&wcd939x_rst_gpio {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&qupv3_se3_i2c  {
+	wsa885x_i2c: wsa885x-i2c-codec@c {
+		compatible = "qcom,wsa885x-i2c";
+		reg = <0x0c>;
+		powerdown-gpios = <&tlmm 76 GPIO_ACTIVE_LOW>;
+		interrupt-gpios = <&tlmm 77 GPIO_ACTIVE_HIGH>;
+		vdd-1p8-supply = <&L15B>;
+		vdd-io-supply = <&L1G>;
+		qcom,codec-name = "wsa885x_i2c";
+		qcom,wsa-prefix = "WSA885X_I2C";
+		wsa885x-init-table =
+			<0x8606 0x24  /* CDC_RX0_RX_PATH_CTL - CLK_EN(1) */
+			0x8626 0x24  /* CDC_RX1_RX_PATH_CTL - CLK_EN(1) */
+			0x8613 0x1   /* RX0_RX_PATH_DSMDEM_CTL - DSMDEM_CLK_EN(1) */
+			0x8633 0x1   /* RX1_RX_PATH_DSMDEM_CTL - DSMDEM_CLK_EN(1) */
+			0x8640 0x1   /* CDC_COMPANDER0_CTL0 - CLK_EN(1) */
+			0x8660 0x1   /* CDC_COMPANDER1_CTL0 - CLK_EN(1) */
+			0x86A1 0x14  /* CDC_VSENSE0_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+			0x86B1 0x14  /* CDC_VSENSE1_SPKR_PROT_PATH_CTL - CLK_EN(1)*/
+			0x86A9 0x14  /* CDC_ISENSE0_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+			0x86B9 0x14  /* CDC_ISENSE1_SPKR_PROT_PATH_CTL - CLK_EN(1) */
+			0x841C 0xF   /* DIG_CTRL0_CDC_CLK_CTL  - SYS_CLOCK_EN(1) */
+			0x841C 0x4F  /* DIG_CTRL0_CDC_CLK_CTL - FSM_INTP_CG_DISABLE */
+			0x8470 0x2   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(1) */
+			0x8470 0x0   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_CLR(0) */
+			0x8470 0x1   /* DIG_CTRL0_CDC_RXTX_FSCNT_CTL - FS_CNT_EN(1) */
+			0x0004 0x1   /* SMP_AMP_CTRL_STEREO_CMT_GRP_MASK - CMT_GRP_MASK(1) */
+			0x8602 0x60  /* CDC_RX0_RX_PATH_CFG1 - HPF_EN(0) */
+			0x8622 0x60  /* CDC_RX1_RX_PATH_CFG1 - HPF_EN(0) */
+			0x8108 0xA5  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH1_CTRL3 */
+			0x810E 0xA5  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH2_CTRL3 */
+			0x80CA 0x85  /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL2 - SPARE_BITS_0(Sets LDO to 1.6V) */
+			0x80CB 0xC   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL3 - ADC_VREF_VCTL_I(Sets VREF_I to 1.35V) */
+			0x80CB 0xE   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_MODE_CTL3 - ADC_VREF_VCTL_I(Sets VREF_I to 1.35V) */
+			0x80CC 0xC   /* PANDEIRO_ANA_TOP_IVSENSE_ADC_REF_CTL - ADC_VREF_VCTL_V(Sets VREF_V to 1.35V) */
+			0x84B4 0x1   /* PANDEIRO_DIG_CTRL0_GAIN_RAMP0_CTL1 - ANA_BYPASS(1) */
+			0x84B7 0x1   /* PANDEIRO_DIG_CTRL0_GAIN_RAMP1_CTL1 - ANA_BYPASS(1) */
+			0x8601 0x88  /* CDC_RX0_RX_PATH_CFG0 - DLY_ZN_EN(1) */
+			0x8601 0x89  /* CDC_RX0_RX_PATH_CFG0 - PH_EQ_EN */
+			0x8621 0x88  /* CDC_RX1_RX_PATH_CFG0 - DLY_ZN_EN(1) */
+			0x8621 0x89  /* CDC_RX1_RX_PATH_CFG0 - PH_EQ_EN */
+			0x805B 0x82  /* PANDEIRO_ANA_TOP_BOOST_STB_CTRL2 */
+			0x805C 0x34  /* PANDEIRO_ANA_TOP_BOOST_STB_CTRL3 */
+			0x8065 0x41  /* PANDEIRO_ANA_TOP_BOOST_PWRSTAGE_CTRL2 */
+			0x8067 0x7F  /* PANDEIRO_ANA_TOP_BOOST_PWRSTAGE_CTRL4 */
+			0x86CD 0x50  /* CDC_CLSH_V1P8_BP_CTL1 */
+			0x86CC 0x6C  /* CDC_CLSH_V1P8_BP_CTL0 */
+			0x86C7 0xD   /* CDC_CLSH_CLSH_SIG_DP_CTL0 */
+			0x86C3 0x3   /* CDC_CLSH_CLSH_V_HD_PA */
+			0x8423 0x5   /* PANDEIRO_DIG_CTRL0_POWER_FSM_CTL0 */
+			0x800D 0x20   /* PANDEIRO_DIG_CTRL0_POWER_FSM_CTL0 BST_CLK_FLIP_EN(Boost enable FSM issue(Work around for I2S mode, flip boost div2 clk)) */
+			0x810B 0x45  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH1_TUNE3 */
+			0x8111 0x45  /* PANDEIRO_ANA_TOP_SPK_TOP_PWRSTG_CH2_TUNE3 */
+			0x86CE 0x5   /* CDC_CLSH_V1P8_BP_CTL2 - BP_CNT  */
+			0x8024 0x35  /* PANDEIRO_ANA_TOP_BG_TVP_UVLO1_PROG - VTH 2.1v */
+			0x8025 0x21  /* PANDEIRO_ANA_TOP_BG_TVP_UVLO2_PROG - VTH 2.0v */
+			0x805E 0xC7  /* PANDEIRO_ANA_TOP_BOOST_BYP_CTRL2 */
+			0x805F 0x11  /* PANDEIRO_ANA_TOP_BOOST_BYP_CTRL3 */
+			0x80D0 0x80 /* PANDEIRO_ANA_TOP_IVSENSE_ADC_CDAC_CAL_CTL2 */
+			0x813C 0x08 /* PANDEIRO_ANA_TOP_SPK_TOP_SPARE3 */
+			0x842B 0x47 /* PANDEIRO_DIG_CTRL0_PA0_FSM_CTL1 - SILENT_STATE_IVS_EN */
+			0x8435 0x47 /* PANDEIRO_DIG_CTRL0_PA1_FSM_CTL1 - SILENT_STATE_IVS_EN */
+			0x8647 0x34 /* CDC_COMPANDER0_CTL7 - AGAIN_DELAY */
+			0x8667 0x34 /* CDC_COMPANDER1_CTL7 - AGAIN_DELAY */
+			0x8458 0x79>; /* PANDEIRO_DIG_CTRL0_VBAT_THRM_FLT_CTL - VBAT_COEF_SEL */
+	};
+};
+
+&canoe_snd {
+	qcom,model = "canoe-cdp-wsa885xi2s-snd-card";
+	swr-haptics-unsupported;
+	qcom,audio-routing =
+			"RX_TX DEC0_INP", "TX DEC0 MUX",
+			"RX_TX DEC1_INP", "TX DEC1 MUX",
+			"RX_TX DEC2_INP", "TX DEC2 MUX",
+			"RX_TX DEC3_INP", "TX DEC3 MUX";
+	qcom,sen-mi2s-gpios = <&cdc_sen_mi2s_gpios>;
+	qcom,tdm-audio-intf = <1>;
+	qcom,wsa-max-devs = <0>;
+	qcom,wsa885x-tdm = <1>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&swr_haptics>,
+			<&wsa885x_i2c>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"swr-haptics",
+			"wsa885x_i2c";
+	qcom,wcn-bt = <0>;
+	qcom,ext-disp-audio-rx = <0>;
+	qcom,wcd-disabled = <1>;
+};
+

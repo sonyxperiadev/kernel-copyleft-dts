@@ -1,0 +1,57 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+&soc {
+	msm_mmrm: qcom,mmrm {
+		compatible = "qcom,msm-mmrm", "qcom,canoe-mmrm";
+		status = "okay";
+
+		/* MMRM clock threshold */
+		mmrm-peak-threshold = <10000>;
+
+		/* MM Rail info */
+		mm-rail-corners = "lowsvsd1", "lowsvs", "svs", "svsl1", "nom", "noml1", "turbo", "turbol0", "turbol1";
+		mm-rail-fact-volt = <34604 36439 40109 43254 46662 49284 50856 54526 54526>;
+
+		/* Scaling factors */
+		scaling-fact-dyn = <35390 39322 48497 57017 66847 75367 80610 93717 93717>;
+		scaling-fact-leak = <568853 618660 724829 824443 943064 1042678 1105593 1268777 1268777>;
+
+		/* Client info */
+		mmrm-client-info =
+			<0x1 CAM_CC_CAMNOC_RT_AXI_CLK_SRC	2844263		86508	1>,
+			<0x1 CAM_CC_CSID_CLK_SRC		400425		18351	3>,
+			<0x1 CAM_CC_ICP_0_CLK_SRC		209060		19661	1>,
+			<0x1 CAM_CC_ICP_1_CLK_SRC		209060		19661	1>,
+			<0x1 CAM_CC_IFE_LITE_CLK_SRC		180224		5243	2>,
+			<0x1 CAM_CC_IPE_NPS_CLK_SRC		39256064	498074	1>,
+			<0x1 CAM_CC_JPEG_CLK_SRC		284099		8520	2>,
+			<0x1 CAM_CC_OFE_CLK_SRC			66437776	534119	1>,
+			<0x1 CAM_CC_TFE_0_CLK_SRC		28418376	330957	3>,
+			<0x1 CAM_CC_TFE_1_CLK_SRC		28418376	330957	3>,
+			<0x1 CAM_CC_TFE_2_CLK_SRC		28418376	330957	3>,
+			<0x1 CAM_CC_FAST_AHB_CLK_SRC		32768		6554	1>,
+			<0x1 CAM_CC_SLOW_AHB_CLK_SRC		58983		11797	1>,
+			<0x1 CAM_CC_CCI_0_CLK_SRC		0		656	1>,
+			<0x1 CAM_CC_CCI_1_CLK_SRC		0		656	1>,
+			<0x1 CAM_CC_CCI_2_CLK_SRC		0		656	1>,
+			<0x1 CAM_CC_CRE_CLK_SRC			6554		656	1>,
+			<0x1 CAM_CC_CSI0PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CSI1PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CSI2PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CSI3PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CSI4PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CSI5PHYTIMER_CLK_SRC	6554		0	1>,
+			<0x1 CAM_CC_CPHY_RX_CLK_SRC		19661		33424	6>,
+			<0x1 CAM_CC_IFE_LITE_CSID_CLK_SRC	419431		1967	2>,
+
+			<0x4 VIDEO_CC_MVS0_CLK_SRC		1272054		64226	1>,
+			<0x4 VIDEO_CC_MVS0A_CLK_SRC		6554		0	1>,
+			<0x4 VIDEO_CC_MVS0B_CLK_SRC		6554		0	1>,
+			<0x4 VIDEO_CC_MVS0C_CLK_SRC		18702336	1140982	1>,
+			<0x2 EVA_CC_MVS0_CLK_SRC		51838976	868352	1>,
+			<0x3 DISP_CC_MDSS_MDP_CLK_SRC		13582336	511378	1>;
+	};
+};

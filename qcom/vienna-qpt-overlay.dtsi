@@ -52,21 +52,6 @@
 				power-channels =
 					<&pmw6100_qpt QPT_GEN1_CHAN_ID(QPT_LANDO_SID, QPT_S9_REG)>;
 			};
-
-			debug-4 {
-				power-channels =
-					<&pmw6100_qpt QPT_GEN1_CHAN_ID(QPT_LANDO_SID, QPT_S7_REG)>;
-			};
-
-			debug-5 {
-				power-channels =
-					<&pmw6100_qpt QPT_GEN1_CHAN_ID(QPT_LANDO_SID, QPT_S11_REG)>;
-			};
-
-			debug-6 {
-				power-channels =
-					<&pmw6100_qpt QPT_GEN1_CHAN_ID(QPT_LANDO_SID, QPT_S1_REG)>;
-			};
 		};
 	};
 };

@@ -299,29 +299,6 @@ properties:
       - qcom,pikachu-nsp_noc
       - qcom,pikachu-pcie_anoc
       - qcom,pikachu-system_noc
-      - qcom,lahaina-aggre1_noc
-      - qcom,lahaina-aggre2_noc
-      - qcom,lahaina-clk_virt
-      - qcom,lahaina-config_noc
-      - qcom,lahaina-dc_noc
-      - qcom,lahaina-gem_noc
-      - qcom,lahaina-lpass_ag_noc
-      - qcom,lahaina-mc_virt
-      - qcom,lahaina-mmss_noc
-      - qcom,lahaina-nsp_noc
-      - qcom,lahaina-system_noc
-      - qcom,ravelin-clk_virt
-      - qcom,ravelin-mc_virt
-      - qcom,ravelin-aggre1_noc
-      - qcom,ravelin-aggre2_noc
-      - qcom,ravelin-cnoc2
-      - qcom,ravelin-cnoc3
-      - qcom,ravelin-gem_noc
-      - qcom,ravelin-lpass_ag_noc
-      - qcom,ravelin-mmss_noc
-      - qcom,ravelin-pcie_anoc
-      - qcom,ravelin-system_noc
-      - qcom,ravelin-video_aggre_noc
 
   '#interconnect-cells': true
 

@@ -858,8 +858,7 @@
 			pinctrl-names = "default", "sleep";
 			pinctrl-0 = <&qupv3_se12_spi_mosi_active>, <&qupv3_se12_spi_miso_active>,
 				<&qupv3_se12_spi_clk_active>, <&qupv3_se12_spi_cs_active>;
-			pinctrl-1 = <&qupv3_se12_spi_sleep>, <&qupv3_se12_spi_miso_sleep>,
-				<&qupv3_se12_spi_cs_sleep>;
+			pinctrl-1 = <&qupv3_se12_spi_sleep>, <&qupv3_se12_spi_cs_sleep>;
 			dmas = <&gpi_dma2 0 4 1 64 0>,
 				<&gpi_dma2 1 4 1 64 0>;
 			dma-names = "tx", "rx";

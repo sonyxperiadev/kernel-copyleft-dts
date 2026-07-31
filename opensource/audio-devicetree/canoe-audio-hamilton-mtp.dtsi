@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "canoe-audio-mtp-wsa885x.dtsi"
+
+&lpass_bt_swr {
+	status = "disabled";
+};
+
+&canoe_snd {
+	qcom,model = "canoe-mtp-snd-card";
+	qcom,wcn-bt = <1>;
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+                               <&lpass_cdc>;
+	qcom,wcn-bt-ext = <0>;
+};
+

@@ -67,7 +67,7 @@
 		cooling-maps {
 			lbat_gpu0 {
 				trip = <&b_bcl_lvl0>;
-				cooling-device = <&msm_gpu 0 1>,
+				cooling-device = <&msm_gpu 1 1>,
 						 <&cdsp_sw 0 4>;
 			};
 		};
@@ -101,7 +101,7 @@
 		cooling-maps {
 			lbat_gpu1 {
 				trip = <&b_bcl_lvl1>;
-				cooling-device = <&msm_gpu 0 2>;
+				cooling-device = <&msm_gpu 2 2>;
 			};
 		};
 	};
@@ -134,7 +134,7 @@
 		cooling-maps {
 			lbat_gpu2 {
 				trip = <&b_bcl_lvl2>;
-				cooling-device = <&msm_gpu 0 3>;
+				cooling-device = <&msm_gpu 3 3>;
 			};
 		};
 	};
@@ -209,7 +209,7 @@
 
 			vph_gpu0 {
 				trip = <&bcl_lvl0>;
-				cooling-device = <&msm_gpu 0 1>;
+				cooling-device = <&msm_gpu 1 1>;
 			};
 		};
 	};
@@ -230,7 +230,7 @@
 		cooling-maps {
 			vph_gpu1 {
 				trip = <&bcl_lvl1>;
-				cooling-device = <&msm_gpu 0 2>;
+				cooling-device = <&msm_gpu 2 2>;
 			};
 		};
 	};
@@ -251,7 +251,7 @@
 		cooling-maps {
 			vph_gpu2 {
 				trip = <&bcl_lvl2>;
-				cooling-device = <&msm_gpu 0 3>;
+				cooling-device = <&msm_gpu 3 3>;
 			};
 		};
 	};
@@ -315,7 +315,7 @@
 		cooling-maps {
 			pmc8380_d_apc2 {
 				trip = <&pmc8380_d_trip0>;
-				cooling-device = <&APC2_MX_CX_PAUSE 0 1>;
+				cooling-device = <&APC2_MX_CX_PAUSE 1 1>;
 			};
 		};
 	};
@@ -347,7 +347,7 @@
 		cooling-maps {
 			pmc8380_e_gpu {
 				trip = <&pmc8380_e_trip0>;
-				cooling-device = <&msm_gpu 0 1>;
+				cooling-device = <&msm_gpu 1 1>;
 			};
 		};
 	};
@@ -379,7 +379,7 @@
 		cooling-maps {
 			pmc8380_f_apc1 {
 				trip = <&pmc8380_f_trip0>;
-				cooling-device = <&APC1_MX_CX_PAUSE 0 1>;
+				cooling-device = <&APC1_MX_CX_PAUSE 1 1>;
 			};
 		};
 	};
@@ -411,7 +411,7 @@
 		cooling-maps {
 			pmc8380_g_apc0 {
 				trip = <&pmc8380_g_trip0>;
-				cooling-device = <&APC0_MX_CX_PAUSE 0 1>;
+				cooling-device = <&APC0_MX_CX_PAUSE 1 1>;
 			};
 		};
 	};

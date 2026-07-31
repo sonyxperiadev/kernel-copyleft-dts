@@ -1,0 +1,347 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+&mdss_mdp {
+	dsi_ss_video_psr_vid_vhm: qcom,mdss_dsi_ss_video_psr_vid_vhm {
+		qcom,mdss-dsi-panel-name =
+			"samsung video PSR amoled VHM 120hz dsi panel with DSC";
+		qcom,mdss-dsi-panel-type = "dsi_video_mode";
+		qcom,mdss-dsi-panel-physical-type = "oled";
+		qcom,mdss-dsi-virtual-channel-id = <0>;
+		qcom,mdss-dsi-stream = <0>;
+		qcom,mdss-dsi-bpp = <24>;
+		qcom,mdss-dsi-color-order = "rgb_swap_rgb";
+		qcom,mdss-dsi-underflow-color = <0xff>;
+		qcom,mdss-dsi-border-color = <0>;
+		qcom,dsi-ctrl-num = <0>;
+		qcom,dsi-phy-num = <0>;
+		qcom,dsi-sec-ctrl-num = <1>;
+		qcom,dsi-sec-phy-num = <1>;
+		qcom,mdss-dsi-traffic-mode = "non_burst_sync_event";
+		qcom,mdss-dsi-lane-map = "lane_map_0123";
+		qcom,mdss-dsi-bllp-eof-power-mode;
+		qcom,mdss-dsi-bllp-power-mode;
+		qcom,mdss-dsi-lane-0-state;
+		qcom,mdss-dsi-lane-1-state;
+		qcom,mdss-dsi-lane-2-state;
+		qcom,mdss-dsi-lane-3-state;
+		qcom,mdss-dsi-dma-trigger = "trigger_sw";
+		qcom,mdss-dsi-mdp-trigger = "none";
+		qcom,mdss-dsi-reset-sequence = <1 10>, <0 10>, <1 10>;
+		qcom,mdss-dsi-tx-eot-append;
+		qcom,adjust-timer-wakeup-ms = <1>;
+
+		qcom,mdss-dsi-te-pin-select = <1>;
+		qcom,mdss-dsi-wr-mem-start = <0x2c>;
+		qcom,mdss-dsi-wr-mem-continue = <0x3c>;
+		qcom,mdss-dsi-te-dcs-command = <1>;
+		qcom,mdss-dsi-te-check-enable;
+		qcom,mdss-dsi-te-using-te-pin;
+		qcom,spr-pack-type = "pentile";
+		qcom,mdss-dsi-panel-privacy-enabled;
+		qcom_mdss_dsi_display_timings_271: qcom,mdss-dsi-display-timings {
+			timing_0_272: timing@0 {
+				cell-index = <0>;
+				qcom,mdss-dsi-panel-framerate = <120>;
+				qcom,mdss-dsi-panel-width = <1440>;
+				qcom,mdss-dsi-panel-height = <3120>;
+				qcom,mdss-dsi-h-front-porch = <80>;
+				qcom,mdss-dsi-h-back-porch = <40>;
+				qcom,mdss-dsi-h-pulse-width = <16>;
+				qcom,mdss-dsi-h-sync-skew = <0>;
+				qcom,mdss-dsi-v-back-porch = <29>;
+				qcom,mdss-dsi-v-front-porch = <33>;
+				qcom,mdss-dsi-v-pulse-width = <2>;
+				qcom,mdss-dsi-h-left-border = <0>;
+				qcom,mdss-dsi-h-right-border = <0>;
+				qcom,mdss-dsi-v-top-border = <0>;
+				qcom,mdss-dsi-v-bottom-border = <0>;
+
+				qcom,mdss-dsi-on-command = [
+						39 01 00 00 00 00 03 F0 5A 5A
+						39 01 00 00 00 00 03 F1 5A 5A
+						39 01 00 00 00 00 03 FC 5A 5A
+						39 01 00 00 00 00 02 D0 08
+						39 01 00 00 00 00 04 B0 00 10 AB
+						39 01 00 00 00 00 02 AB 74
+						39 01 00 00 00 00 04 B0 00 74 62
+						39 01 00 00 00 00 02 62 01
+						39 01 00 00 00 00 7F F9 F1 00 00 00 00 02 20 00 80 3F 3A 77 77 48 00 00 00 00 00 00 00 80 01 AF 15 00 68 0A 00 00 20 3F 01 50 52 00 00 00 00 60 02 3F 1C 00 7D 0A 00 00 20 3F 01 C0 3D 00 00 00 00 30 01 67 11 00 7D 0A 00 00 20 3F 01 10 52 00 00 00 00 40 03 5F 2B 00 56 0A 00 00 20 3F 02 B0 52 00 00 00 00 20 01 8C 1B 00 17 09 00 00 17 3F 13 D0 52 00 00 00 00 00 00 0C 00 00 00 00 00 00 00 03 20 00 00 00
+						39 01 00 00 00 00 04 B0 01 0D BD
+						39 01 00 00 00 00 F2 BD 00 00 00 00 00 00 00 00 00 00 61 00 00 00 01 60 03 00 77 00 0B 00 00 60 77 00 00 00 00 00 77 00 00 60 00 00 77 00 00 00 00 00 77 00 0B C0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 B0 00 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 06 01 12 01 EE 00 EE 00 00 EE 00 EE 00 EE 00 EE 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 01 12 01 EE 00 EE 00 00 EE 00 EE 00 EE 00 EE 00 02 00 00 00 00 00 00 20 00 00 00 00 04 00 00 00
+						39 01 00 00 00 00 EE B9 00 00 00 00 00 00 00 00 00 0B B8 00 00 C8 00 0B B8 00 00 C8 00 00 00 00 12 98 00 40 12 68 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 09 09 19 09 80 82 B0 82 00 05 00 07 02 40 02 40 02 40 02 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 02 02 02 02 02 02 02 00 FF 26 00 00 10 00 00 00 80 03 00 00 00 80 03 80 00 00 80 03 80 00 00 00 03 00 00 0C 60 05 D4 00 00 00 04 00 00 00 00 00 0C 60 05 D4 00 00 00 04 00 00 00 00 00 8C 60 80 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+						39 01 00 00 00 00 02 35 00
+						39 01 00 00 00 00 04 B0 00 C0 B9
+						39 01 00 00 00 00 05 B9 0C 4A 06 16
+						39 01 00 00 00 00 04 B0 00 56 EF
+						39 01 00 00 00 00 02 EF F4
+						39 01 00 00 00 00 04 B0 00 13 F9
+						39 01 00 00 00 00 02 F9 30
+						39 01 00 00 00 00 03 F2 01 04
+						39 01 00 00 00 00 02 F7 0F
+						39 01 00 00 00 00 03 FC A5 A5
+						39 01 00 00 00 00 03 F1 A5 A5
+						39 01 00 00 00 00 03 F0 A5 A5
+						05 01 00 00 00 00 01 1B
+				];
+
+				qcom,mdss-dsi-esync-post-on-commands = [
+						39 01 00 00 00 00 03 F0 5A 5A
+						39 01 00 00 00 00 03 F1 5A 5A
+						39 01 00 00 00 00 03 FC 5A 5A
+						39 01 00 00 00 00 02 71 01
+						05 01 00 00 78 00 01 11
+						39 01 00 00 00 00 05 2A 00 00 05 9F
+						39 01 00 00 00 00 05 2B 00 00 0C 2F
+						39 01 00 00 00 00 02 9D 01
+						39 01 00 00 00 00 03 F2 01 04
+						39 01 00 00 00 00 04 B0 00 16 69
+						39 01 00 00 00 00 03 69 34 01
+						39 01 00 00 00 00 02 53 20
+						39 01 00 00 00 00 03 51 03 FF
+						39 01 00 00 00 00 5B 9E 11 00 00 89 30 80 0C 30 05 A0 00 18 02 D0 02 D0 02 00 02 68 00 20 02 A1 00 0A 00 0C 04 2D 03 2E 18 00 10 F0 03 0C 20 00 06 0B 0B 33 0E 1C 2A 38 46 54 62 69 70 77 79 7B 7D 7E 01 02 01 00 09 40 09 BE 19 FC 19 FA 19 F8 1A 38 1A 78 1A B6 2A F6 2B 34 2B 74 3B 74 6B F4 00 00
+						05 01 00 00 00 00 01 29
+						39 01 00 00 00 00 02 F7 0F
+						39 01 00 00 00 00 03 FC A5 A5
+						39 01 00 00 00 00 03 F1 A5 A5
+						39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-sticky_still_en-command = [
+					05 01 00 00 00 00 01 1B];
+
+				qcom,mdss-dsi-sticky_still_disable-command = [
+					05 01 00 00 00 00 01 1C];
+
+				qcom,mdss-dsi-sticky_still_en-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-sticky_still_disable-command-state = "dsi_hs_mode";
+
+				qcom,mdss-dsi-sticky_on_fly-command = [
+					05 01 00 00 00 00 01 1D];
+
+				qcom,mdss-dsi-qsync-freq-pattren-needs-selfrefresh =
+					<1 1 1 1>;
+				qcom,mdss-dsi-qsync-freq-step-sequence-interval =
+					<0 120000 4>, <0 48000 4>, <0 40000 4>, <1 120000 1>;
+				qcom,mdss-dsi-qsync-freq-step-sequence  =
+					<40000 1>, <40000 1>, <20000 2>, <10000 2>,
+					<40000 1>, <24000 2>, <10000 1>, <10000 1>,
+					<20000 1>, <20000 1>, <10000 2>, <10000 2>,
+					//video stepping sequence
+					<10000 3>;
+
+				qcom,mdss-dsi-freq-step-pattern1-command = [
+						39 01 00 00 00 00 03 F0 5A 5A
+						39 01 00 00 00 00 04 B0 01 73 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 1C BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 67 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 58 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 24 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 69 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 53 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 7A BD
+						39 01 00 00 00 00 02 BD 10
+						39 01 00 00 00 00 04 B0 01 F0 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 62 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 2C BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 6C BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 4E BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 17 BD
+						39 01 00 00 00 00 02 BD 21
+						39 01 00 00 00 00 04 B0 01 6E BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 49 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 0D BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 71 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 44 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 89 BD
+						39 01 00 00 00 00 11 BD 06 01 12 01 EA 00 EA 00 00 EE 00 EE 00 EE 00 EE
+						39 01 00 00 00 00 02 F7 0F
+						39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-freq-step-pattern2-command = [
+						39 01 00 00 00 00 03 F0 5A 5A
+						39 01 00 00 00 00 04 B0 01 73 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 1C BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 67 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 58 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 24 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 69 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 53 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 7A BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 F0 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 62 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 2C BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 6C BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 4E BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 17 BD
+						39 01 00 00 00 00 02 BD 41
+						39 01 00 00 00 00 04 B0 01 6E BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 49 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 0D BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 71 BD
+						39 01 00 00 00 00 02 BD 40
+						39 01 00 00 00 00 04 B0 01 44 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 89 BD
+						39 01 00 00 00 00 11 BD 0E 00 0E 00 E6 00 E6 00 00 EE 00 EE 00 EE 00 EE
+						39 01 00 00 00 00 02 F7 0F
+						39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-freq-step-pattern3-command = [
+						39 01 00 00 00 00 03 F0 5A 5A
+						39 01 00 00 00 00 04 B0 01 73 BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 1C BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 67 BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 58 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 24 BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 69 BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 53 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 7A BD
+						39 01 00 00 00 00 02 BD 10
+						39 01 00 00 00 00 04 B0 01 F0 BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 62 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 2C BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 6C BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 4E BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 17 BD
+						39 01 00 00 00 00 02 BD 21
+						39 01 00 00 00 00 04 B0 01 6E BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 49 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 0D BD
+						39 01 00 00 00 00 02 BD 20
+						39 01 00 00 00 00 04 B0 01 71 BD
+						39 01 00 00 00 00 02 BD 50
+						39 01 00 00 00 00 04 B0 01 44 BD
+						39 01 00 00 00 00 02 BD 00
+						39 01 00 00 00 00 04 B0 01 89 BD
+						39 01 00 00 00 00 11 BD 0C 01 0C 01 E4 00 E4 00 00 EE 00 EE 00 EE 00 EE
+						39 01 00 00 00 00 02 F7 0F
+						39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-freq-step-pattern4-command = [
+					39 01 00 00 00 00 03 F0 5A 5A
+					39 01 00 00 00 00 04 B0 01 73 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 1C BD
+					39 01 00 00 00 00 02 BD 20
+					39 01 00 00 00 00 04 B0 01 67 BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 58 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 24 BD
+					39 01 00 00 00 00 02 BD 20
+					39 01 00 00 00 00 04 B0 01 69 BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 53 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 7A BD
+					39 01 00 00 00 00 02 BD 10
+					39 01 00 00 00 00 04 B0 01 F0 BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 62 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 2C BD
+					39 01 00 00 00 00 02 BD 20
+					39 01 00 00 00 00 04 B0 01 6C BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 4E BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 17 BD
+					39 01 00 00 00 00 02 BD 21
+					39 01 00 00 00 00 04 B0 01 6E BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 49 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 0D BD
+					39 01 00 00 00 00 02 BD 20
+					39 01 00 00 00 00 04 B0 01 71 BD
+					39 01 00 00 00 00 02 BD B0
+					39 01 00 00 00 00 04 B0 01 44 BD
+					39 01 00 00 00 00 02 BD 00
+					39 01 00 00 00 00 04 B0 01 89 BD
+					39 01 00 00 00 00 11 BD 00 01 00
+					   01 D8 00 D8 00 00 EE 00 EE 00 EE 00 EE
+					39 01 00 00 00 00 04 B0 00 A6 B9
+					39 01 00 00 00 00 02 B9 24
+					39 01 00 00 00 00 04 B0 00 05 F2
+					39 01 00 00 00 00 02 F2 50
+					39 01 00 00 00 00 02 F7 0F
+					39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-freq-step-pattern1-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-freq-step-pattern2-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-freq-step-pattern3-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-freq-step-pattern4-command-state = "dsi_hs_mode";
+
+				qcom,mdss-dsi-off-command = [
+					05 01 00 00 14 00 02 28 00
+					05 01 00 00 78 00 02 10 00];
+				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-timing-switch-command-state =
+					"dsi_lp_mode";
+				qcom,mdss-dsi-h-sync-pulse = <0>;
+				qcom,compression-mode = "dsc";
+				qcom,mdss-dsc-slice-height = <24>;
+				qcom,mdss-dsc-slice-width = <720>;
+				qcom,mdss-dsc-slice-per-pkt = <1>;
+				qcom,mdss-dsc-bit-per-component = <8>;
+				qcom,mdss-dsc-bit-per-pixel = <8>;
+				qcom,mdss-dsc-block-prediction-enable;
+			};
+		};
+	};
+};

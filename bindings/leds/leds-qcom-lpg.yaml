@@ -18,8 +18,6 @@ properties:
   compatible:
     oneOf:
       - enum:
-          - qcom,pm2250-pwm
-          - qcom,pm6450-pwm
           - qcom,pm660l-lpg
           - qcom,pm8150b-lpg
           - qcom,pm8150l-lpg

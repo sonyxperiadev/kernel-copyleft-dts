@@ -390,7 +390,10 @@
 
 	tlmm_vm_mem_access: tlmm-vm-mem-access {
 		compatible = "qcom,tlmm-vm-mem-access";
-		depends-on-supply = <&tlmm>;
+		tlmm-vm-gpio-list = <&tlmm 86 0 &tlmm 87 0 &tlmm 97 0 &tlmm 98 0 &tlmm 48 0
+					&tlmm 49 0 &tlmm 50 0 &tlmm 51 0 &tlmm 158 0 &tlmm 66 0
+					&tlmm 100 0 &tlmm 8 0 &tlmm 9 0 &tlmm 10 0 &tlmm 11 0
+					&tlmm 88 0>;
 	};
 
 	tlmm_vm_test: tlmm-vm-test {
@@ -617,7 +620,7 @@
 		dma-coherent;
 		ranges;
 		status = "ok";
-		required-subnodes = <&qupv3_se14_i2c &qupv3_se14_spi &i3c3>;
+		required-subnodes = <&qupv3_se14_i2c &qupv3_se14_spi>;
 
 		qupv3_se14_i2c: i2c@1984000 {
 			compatible = "qcom,i2c-geni";
@@ -645,19 +648,6 @@
 			status = "disabled";
 		};
 
-		/* I3C Instance QUPV3_1, SE1: NAON */
-		i3c3: i3c-master@1984000 {
-			compatible = "qcom,geni-i3c";
-			reg = <0x1984000 0x4000>,
-			      <0xb00000 0x10000>;
-			#address-cells = <3>;
-			#size-cells = <0>;
-			dmas = <&gpi_dma3 0 1 4 64 0xc>,
-			       <&gpi_dma3 1 1 4 64 0xc>;
-			dma-names = "tx", "rx";
-			qcom,le-vm;
-			status = "disabled";
-		};
 	};
 
 	/* GPI Instance */
@@ -706,7 +696,7 @@
 		dma-coherent;
 		ranges;
 		status = "ok";
-		required-subnodes = <&qupv3_se19_i2c &qupv3_se19_spi &i3c5>;
+		required-subnodes = <&qupv3_se19_i2c &qupv3_se19_spi>;
 
 		qupv3_se19_i2c: i2c@1a80000 {
 			compatible = "qcom,i2c-geni";
@@ -734,19 +724,6 @@
 			status = "disabled";
 		};
 
-		/* I3C Instance */
-		i3c5: i3c-master@1a80000 {
-			compatible = "qcom,geni-i3c";
-			reg = <0x1a80000 0x4000>,
-			      <0xecf0000 0x10000>;
-			#address-cells = <3>;
-			#size-cells = <0>;
-			dmas = <&gpi_dma4 0 0 4 64 0xc>,
-			       <&gpi_dma4 1 0 4 64 0xc>;
-			dma-names = "tx", "rx";
-			qcom,le-vm;
-			status = "disabled";
-		};
 	};
 
 	qcom_test_dbl_tuivm: qcom,test-dbl-tuivm {

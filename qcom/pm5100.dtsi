@@ -24,19 +24,19 @@
 		#size-cells = <0>;
 
 		pon_hlos@1300 {
-			compatible = "qcom,pm8998-pon";
+			compatible = "qcom,qpnp-power-on";
 			reg = <0x1300>;
-			reg-names = "pon_hlos";
+			interrupts = <0x0 0x13 0x7 IRQ_TYPE_EDGE_BOTH>,
+				     <0x0 0x13 0x6 IRQ_TYPE_EDGE_BOTH>;
+			interrupt-names = "kpdpwr", "resin";
 
-			pwrkey {
-				compatible = "qcom,pmk8350-pwrkey";
-				interrupts = <0x0 0x13 0x7 IRQ_TYPE_EDGE_BOTH>;
+			qcom,pon_1 {
+				qcom,pon-type = <PON_POWER_ON_TYPE_KPDPWR>;
 				linux,code = <KEY_POWER>;
 			};
 
-			resin {
-				compatible = "qcom,pmk8350-resin";
-				interrupts = <0x0 0x13 0x6 IRQ_TYPE_EDGE_BOTH>;
+			qcom,pon_2 {
+				qcom,pon-type = <PON_POWER_ON_TYPE_RESIN>;
 				linux,code = <KEY_VOLUMEDOWN>;
 			};
 		};

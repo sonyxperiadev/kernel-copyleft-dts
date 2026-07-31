@@ -17,19 +17,6 @@
 		ranges;
 		dma-coherent;
 
-		power-domains = <&gpucc GPU_CC_CX_SMMU_GDSC>;
-		interconnects = <&gem_noc MASTER_GPU_TCU &mc_virt SLAVE_EBI1>;
-
-		clocks = <&gpucc GPU_CC_GPU_SMMU_VOTE_CLK>,
-			<&gcc GCC_GPU_MEMNOC_GFX_CLK>,
-			<&gcc GCC_GPU_SNOC_DVM_GFX_CLK>,
-			<&gpucc GPU_CC_AHB_CLK>;
-
-		clock-names = "gpu_cc_gpu_smmu_vote_clk",
-			"gcc_gpu_memnoc_gfx",
-			"gcc_gpu_snoc_dvm_gfx",
-			"gpu_cc_ahb";
-
 		interrupts =	<GIC_SPI 673 IRQ_TYPE_LEVEL_HIGH>,
 				<GIC_SPI 677 IRQ_TYPE_LEVEL_HIGH>,
 				<GIC_SPI 678 IRQ_TYPE_LEVEL_HIGH>,
@@ -70,7 +57,6 @@
 			reg = <0x0 0x3de8000 0x0 0x1000>;
 			qcom,stream-id-range = <0x0 0x400>;
 			qcom,iova-width = <49>;
-			interconnects = <&gem_noc MASTER_GPU_TCU &mc_virt SLAVE_EBI1>;
 			qcom,num-qtb-ports = <2>;
 		};
 	};
@@ -80,7 +66,7 @@
 		reg = <0x0 0x15000000 0x0 0x100000>;
 		#iommu-cells = <2>;
 		qcom,use-3-lvl-tables;
-		qcom,handoff-smrs = <0x400 0x2>;
+		qcom,handoff-smrs = <0x800 0x2>;
 		#global-interrupts = <1>;
 		#size-cells = <2>;
 		#address-cells = <2>;
@@ -254,59 +240,69 @@
 			<0x1184 0x0020 0x00000303>,
 			<0x1187 0x0000 0x00000303>;
 
-		anoc_1_qtb: anoc_1_qtb@1733000 {
+		anoc_1_qtb: anoc_1_qtb@16f2000 {
 			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x1733000 0x0 0x1000>;
+			reg = <0x0 0x16f2000 0x0 0x1000>;
 			qcom,stream-id-range = <0x0 0x400>;
 			qcom,iova-width = <36>;
-			interconnects = <&system_noc MASTER_A1NOC_SNOC &mc_virt SLAVE_EBI1>;
 			qcom,num-qtb-ports = <1>;
 		};
 
-		mdp_hf_qtb: mdp_hf_qtb@14D0000 {
+		anoc_2_qtb: anoc_2_qtb@171e000 {
 			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x14D0000 0x0 0x1000>;
+			reg = <0x0 0x171e000 0x0 0x1000>;
 			qcom,stream-id-range = <0x400 0x400>;
-			qcom,iova-width = <32>;
-			interconnects = <&mmss_noc MASTER_MDP &mc_virt SLAVE_EBI1>;
-			qcom,num-qtb-ports = <1>;
-		};
-
-		lpass_qtb: lpass_qtb@7bb000 {
-			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x7bb000 0x0 0x1000>;
-			qcom,stream-id-range = <0x800 0x400>;
-			qcom,iova-width = <32>;
-			interconnects = <&lpass_ag_noc MASTER_LPASS_PROC &mc_virt SLAVE_EBI1>;
-			qcom,num-qtb-ports = <1>;
-		};
-
-		pcie_qtb: pcie_qtb@16ca000 {
-			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x16ca000 0x0 0x1000>;
-			qcom,stream-id-range = <0xc00 0x400>;
 			qcom,iova-width = <36>;
-			interconnects = <&pcie_anoc MASTER_PCIE_0 &mc_virt SLAVE_EBI1>;
+			qcom,num-qtb-ports = <1>;
+		};
+
+		cam_hf_qtb: cam_hf_qtb@17f7000 {
+			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
+			reg = <0x0 0x17f7000 0x0 0x1000>;
+			qcom,stream-id-range = <0x1c00 0x400>;
+			qcom,iova-width = <36>;
+			qcom,num-qtb-ports = <2>;
+		};
+
+		nsp_qtb: nsp_qtb@7d3000 {
+			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
+			reg = <0x0 0x7d3000 0x0 0x1000>;
+			qcom,stream-id-range = <0xc00 0x400>;
+			qcom,iova-width = <40>;
+			qcom,num-qtb-ports = <2>;
+		};
+
+		lpass_qtb: lpass_qtb@7b3000 {
+			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
+			reg = <0x0 0x7b3000 0x0 0x1000>;
+			qcom,stream-id-range = <0x1000 0x400>;
+			qcom,iova-width = <32>;
+			qcom,num-qtb-ports = <1>;
+		};
+
+		pcie_qtb: pcie_qtb@16cd000 {
+			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
+			reg = <0x0 0x16cd000 0x0 0x1000>;
+			qcom,stream-id-range = <0x1400 0x400>;
+			qcom,iova-width = <36>;
 			qcom,num-qtb-ports = <1>;
 			qcom,opt-out-tbu-halting;
 		};
 
-		sf_qtb: sf_qtb@1451000 {
+		sf_qtb: sf_qtb@17ba000 {
 			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x1451000 0x0 0x1000>;
-			qcom,stream-id-range = <0x1000 0x400>;
+			reg = <0x0 0x17ba000 0x0 0x1000>;
+			qcom,stream-id-range = <0x1800 0x400>;
 			qcom,iova-width = <36>;
-			interconnects = <&mmss_noc MASTER_VIDEO &mc_virt SLAVE_EBI1>;
-			qcom,num-qtb-ports = <1>;
+			qcom,num-qtb-ports = <2>;
 		};
 
-		cam_hf_qtb: cam_hf_qtb@14D2000 {
+		mdp_hf_qtb: mdp_hf_qtb@17f6000 {
 			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
-			reg = <0x0 0x14D2000 0x0 0x1000>;
-			qcom,stream-id-range = <0x1400 0x400>;
-			qcom,iova-width = <36>;
-			interconnects = <&mmss_noc MASTER_CAMNOC_HF &mc_virt SLAVE_EBI1>;
-			qcom,num-qtb-ports = <1>;
+			reg = <0x0 0x17f6000 0x0 0x1000>;
+			qcom,stream-id-range = <0x800 0x400>;
+			qcom,iova-width = <32>;
+			qcom,num-qtb-ports = <2>;
 		};
 	};
 
@@ -320,30 +316,30 @@
 
 		usecase0_apps {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x01c0 0x0>;
+			iommus = <&apps_smmu 0x01c0 0x1>;
 		};
 
 		usecase1_apps_fastmap {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x01c0 0x0>;
+			iommus = <&apps_smmu 0x01c0 0x1>;
 			qcom,iommu-dma = "fastmap";
 		};
 
 		usecase2_apps_atomic {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x01c0 0x0>;
+			iommus = <&apps_smmu 0x01c0 0x1>;
 			qcom,iommu-dma = "atomic";
 		};
 
 		usecase3_apps_dma {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x01c0 0x0>;
+			iommus = <&apps_smmu 0x01c0 0x1>;
 			dma-coherent;
 		};
 
 		usecase4_apps_secure {
 			compatible = "qcom,iommu-debug-usecase";
-			iommus = <&apps_smmu 0x01c0 0x0>;
+			iommus = <&apps_smmu 0x01c0 0x1>;
 			qcom,iommu-vmid = <0xa>; /* VMID_CP_PIXEL */
 		};
 

@@ -153,7 +153,6 @@ pmxr2230: pmxr2230@1 {
 			led-max-microamp = <180000>;
 			flash-max-microamp = <1000000>;
 			flash-max-timeout-us = <1280000>;
-			function-enumerator = <0>;
 		};
 
 		pmxr2230_flash_led1: led-1 {
@@ -163,7 +162,6 @@ pmxr2230: pmxr2230@1 {
 			led-max-microamp = <180000>;
 			flash-max-microamp = <1000000>;
 			flash-max-timeout-us = <1280000>;
-			function-enumerator = <1>;
 		};
 
 		pmxr2230_flash_led2: led-2 {
@@ -173,7 +171,6 @@ pmxr2230: pmxr2230@1 {
 			led-max-microamp = <180000>;
 			flash-max-microamp = <1000000>;
 			flash-max-timeout-us = <1280000>;
-			function-enumerator = <2>;
 		};
 	};
 
@@ -282,18 +279,5 @@ pmxr2230: pmxr2230@1 {
 			qcom,led-name = "led:switch_2";
 			qcom,default-led-trigger = "switch2_trigger";
 		};
-	};
-
-	pmxr2230_bcl: bcl@4700 {
-		compatible = "qcom,pm8550-bcl-v5";
-		reg = <0x4700 0x100>;
-		interrupts = <0x1 0x47 0x0 IRQ_TYPE_NONE>,
-				<0x1 0x47 0x1 IRQ_TYPE_NONE>,
-				<0x1 0x47 0x2 IRQ_TYPE_NONE>;
-		interrupt-names = "bcl-lvl0",
-				"bcl-lvl1",
-				"bcl-lvl2";
-		qcom,pmic7-threshold;
-		#thermal-sensor-cells = <1>;
 	};
 };

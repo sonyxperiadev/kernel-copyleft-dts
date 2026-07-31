@@ -1,5 +1,4 @@
-# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
 
 %YAML 1.2
 ---
@@ -28,7 +27,6 @@ properties:
               - qcom,ipq6018-qusb2-phy
               - qcom,sm4250-qusb2-phy
               - qcom,sm6115-qusb2-phy
-              - qcom,qusb2phy
       - items:
           - enum:
               - qcom,sc7180-qusb2-phy

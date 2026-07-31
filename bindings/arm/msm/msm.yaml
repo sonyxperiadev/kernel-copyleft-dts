@@ -175,38 +175,6 @@ properties:
               - qcom,rcm
           - const: qcom,chorap
 
-      - description: Qualcomm Technologies, Inc. Bourtzi
-        items:
-          - enum:
-              - qcom,bourtzi-atp
-              - qcom,atp
-              - qcom,bourtzi-cdp
-              - qcom,cdp
-              - qcom,bourtzi-mtp
-              - qcom,mtp
-              - qcom,bourtzi-qrd
-              - qcom,qrd
-              - qcom,bourtzi-rcm
-              - qcom,rcm
-              - qcom,bourtzi-rumi
-              - qcom,rumi
-          - const: qcom,bourtzi
-
-      - description: Qualcomm Technologies, Inc. BourtziP
-        items:
-          - enum:
-              - qcom,bourtzip-atp
-              - qcom,atp
-              - qcom,bourtzip-cdp
-              - qcom,cdp
-              - qcom,bourtzip-mtp
-              - qcom,mtp
-              - qcom,bourtzip-qrd
-              - qcom,qrd
-              - qcom,bourtzip-rcm
-              - qcom,rcm
-          - const: qcom,bourtzip
-
       - description: Qualcomm Technologies, Inc. Malabar
         items:
           - enum:
@@ -353,10 +321,6 @@ properties:
           - enum:
               - qcom,x1e80100-crd
               - qcom,crd
-              - qcom,x1e80100-qcb
-              - qcom,qcb
-              - qcom,x1e80100-qcp
-              - qcom,qcp
           - const: qcom,x1e80100
 
       - description: Qualcomm Technologies, Inc. X1P42100
@@ -392,12 +356,6 @@ properties:
               - qcom,sa8195p-adp-air
               - qcom,adp-air
           - const: qcom,sa8195p
-
-      - description: Qualcomm Technologies, Inc. sa8x97p
-        items:
-          - enum:
-              - qcom,qam
-          - const: qcom,sa8797p
 
       - description: Qualcomm Technologies, Inc. QUINVM
         items:
@@ -440,35 +398,12 @@ properties:
               - qcom,rumi
           - const: qcom,pikachu
 
-      - description: Qualcomm Technologies, Inc. SHIKRA CQM
+      - description: Qualcomm Technologies, Inc. SHIKRA
         items:
           - enum:
-              - qcom,shikra-evk
-              - qcom,evk
               - qcom,shikra-rumi
               - qcom,rumi
-          - const: qcom,shikra-cqm
-
-      - description: Qualcomm Technologies, Inc. SHIKRA CQS
-        items:
-          - enum:
-              - qcom,shikra-evk
-              - qcom,evk
-          - const: qcom,shikra-cqs
-
-      - description: Qualcomm Technologies, Inc. SHIKRA Lite CQM
-        items:
-          - enum:
-              - qcom,shikra-lite-evk
-              - qcom,evk
-          - const: qcom,shikra-lite-cqm
-
-      - description: Qualcomm Technologies, Inc. SHIKRA Lite CQS
-        items:
-          - enum:
-              - qcom,shikra-lite-evk
-              - qcom,evk
-          - const: qcom,shikra-lite-cqs
+          - const: qcom,shikra
 
       - description: Qualcomm Technologies, Inc. SERAPH
         items:
@@ -488,8 +423,6 @@ properties:
             - qcom.atp
             - qcom,seraphp-idp
             - qcom,idp
-            - qcom,seraphp-qar
-            - qcom,qar
           - const: qcom,seraphp
 
 additionalProperties: true

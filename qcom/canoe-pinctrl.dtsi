@@ -2,6 +2,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 &tlmm {
 	qupv3_se7_2uart_pins: qupv3_se7_2uart_pins {
@@ -14,7 +19,8 @@
 			config {
 				pins = "gpio62";
 				drive-strength = <2>;
-				bias-disable;
+				bias-pull-down;
+				output-low;
 			};
 		};
 
@@ -27,7 +33,8 @@
 			config {
 				pins = "gpio63";
 				drive-strength = <2>;
-				bias-disable;
+				bias-pull-down;
+				output-low;
 			};
 		};
 
@@ -41,6 +48,7 @@
 				pins = "gpio62", "gpio63";
 				drive-strength = <2>;
 				bias-pull-down;
+				output-low;
 			};
 		};
 	};

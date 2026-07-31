@@ -1,0 +1,24 @@
+&pmic_glink {
+	somc,battchg_ext {
+		compatible = "somc,battery-charger-extension";
+		somc,bcext-product-code = <13>;
+		somc,thermal-fcc-ma = <
+			5000 4050 3600 3250 2850 2500 2100
+			1800 1450 1100 750 400 50 0 0 0>;
+		somc,thermal-usb-icl-ma = <
+			3000 3000 3000 3000 3000 3000 2700
+			2250 1800 1350 900 900 900 0 0 0>;
+		somc,thermal-usb-pd-icl-ma = <
+			3000 2750 2500 2250 2000 1750 1500
+			1250 1000 750 500 500 500 0 0 0>;
+		somc,thermal-charging-indication = <
+			0 0 0 0 0 0 0 0 0 0 0 0 0 1 2 2>;
+		somc,thermal-usb-cc-open = <
+			0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1>;
+	};
+};
+&pmic_glink_log {
+	somc,battman_log {
+		compatible = "somc,battman-log";
+	};
+};

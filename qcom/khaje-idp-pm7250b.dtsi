@@ -189,10 +189,6 @@
 		      "pe_start";
 };
 
-&usb0 {
-	extcon = <&pm7250b_pdphy>, <&pm7250b_charger>, <&eud>;
-};
-
 &qupv3_se1_i2c {
 	fsa4480: fsa4480@42 {
 		compatible = "qcom,fsa4480-i2c";

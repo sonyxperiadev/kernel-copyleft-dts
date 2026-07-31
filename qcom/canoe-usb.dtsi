@@ -2,6 +2,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/clock/qcom,gcc-canoe.h>
 #include <dt-bindings/phy/qcom,usb3-3nm-qmp-combo.h>
@@ -91,7 +96,7 @@
 			num-hc-interrupters = /bits/ 16 <3>;
 			xhci-skip-phy-init-quirk;
 			dr_mode = "otg";
-			maximum-speed = "super-speed-plus";
+			maximum-speed = "super-speed";
 			usb-role-switch;
 		};
 	};

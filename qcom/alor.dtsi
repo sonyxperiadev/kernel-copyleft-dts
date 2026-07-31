@@ -451,9 +451,13 @@
 		qcom,use-smcinvoke = <1>;
 	};
 
-	sdei {
-		compatible = "arm,sdei-1.0";
-		method = "hvc";
+	qti,smmu-proxy {
+		compatible = "smmu-proxy-sender";
+	};
+
+	qcom,seccamtest {
+		compatible = "qcom,seccamtest";
+		qti,smmu-proxy-cb-id = <QTI_SMMU_PROXY_CAMERA_CB>;
 	};
 };
 
@@ -1535,10 +1539,6 @@
 
 	logbuf: qcom,logbuf-vendor-hooks {
 		compatible = "qcom,logbuf-vendor-hooks";
-	};
-
-	qcom,sdei {
-		compatible = "qcom,sdei";
 	};
 
 	qfprom: qfprom@221c8000 {
@@ -3388,10 +3388,6 @@
 		clocks = <&rpmhcc RPMH_CXO_CLK>;
 		clock-names = "xo";
 
-		interconnects = <&aggre2_noc MASTER_SOCCP_PROC &mc_virt SLAVE_EBI1>,
-				<&gem_noc MASTER_APPSS_PROC &cnoc_main SLAVE_SOCCP>;
-		interconnect-names = "rproc_ddr", "rproc_cnoc";
-
 		firmware-name = "soccp.mbn", "soccp_dtb.mbn";
 
 		memory-region = <&soccp_mem &soccp_dtb_mem>;
@@ -3598,7 +3594,7 @@
 		qcom,subsys-name = "soccp";
 
 		battery_charger: battery-charger {
-			compatible = "qcom,canoe-battery-charger";
+			compatible = "qcom,battery-charger";
 		};
 
 		ucsi: ucsi-glink {
@@ -3722,16 +3718,6 @@
 		qcom,cluster-num = <2>;
 		qcom,devfreq = <&msm_gpu>;
 	};
-
-	qti,smmu-proxy {
-		compatible = "smmu-proxy-sender";
-	};
-
-	qcom,seccamtest {
-		compatible = "qcom,seccamtest";
-		qti,smmu-proxy-cb-id = <QTI_SMMU_PROXY_CAMERA_CB>;
-	};
-
 };
 
 #include "alor-debug.dtsi"

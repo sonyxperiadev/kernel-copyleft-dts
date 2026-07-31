@@ -47,7 +47,7 @@
 
 		arm,primecell-periphid = <0x000bb922>;
 		device-name = "cti_tmess_dragonlink1";
-		status = "disabled";
+
 		qcom,extended_cti;
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -59,7 +59,7 @@
 
 		arm,primecell-periphid = <0x000bb922>;
 		device-name = "cti_tmess_dragonlink0";
-		status = "disabled";
+
 		qcom,extended_cti;
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -217,7 +217,6 @@
 
 		arm,primecell-periphid = <0x000bb922>;
 		device-name = "cti_tmess_rvss_seqr";
-		status = "disabled";
 
 		qcom,extended_cti;
 		clocks = <&aoss_qmp>;
@@ -435,6 +434,7 @@
 		qcom,dsb-msrs-num = <16>;
 
 		device-name = "tpdm_ddr_01";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -666,6 +666,7 @@
 		qcom,dsb-msrs-num = <8>;
 
 		device-name = "tpdm_gfx";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -716,6 +717,7 @@
 		qcom,dsb-element-bits = <32>;
 
 		device-name = "tpdm_qm";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -738,6 +740,7 @@
 		qcom,dsb-msrs-num = <16>;
 
 		device-name = "tpdm_gcc";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -935,6 +938,7 @@
 		qcom,cmb-element-bits = <32>;
 
 		device-name = "tpdm_qrng_cmb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -956,6 +960,7 @@
 		qcom,cmb-msrs-num = <1>;
 
 		device-name = "tpdm_pmu_cmb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1005,7 +1010,6 @@
 
 		device-name = "tpda_tme";
 
-		status = "disabled";
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 
@@ -1085,6 +1089,7 @@
 		qcom,cmb-msrs-num = <12>;
 
 		device-name = "tpdm_tmess_seq";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1317,6 +1322,7 @@
 		qcom,dsb-msrs-num = <32>;
 
 		device-name = "tpdm_dlct_dsb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1338,6 +1344,7 @@
 		qcom,cmb-msrs-num = <1>;
 
 		device-name = "tpdm_ipcc_cmb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1359,6 +1366,7 @@
 		qcom,dsb-msrs-num = <32>;
 
 		device-name = "tpdm_dlct2_dsb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1381,6 +1389,7 @@
 		qcom,cmb-msrs-num = <1>;
 
 		device-name = "tpdm_dlct2_cmb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1580,15 +1589,14 @@
 	};
 
 	qdss_tpdm_dcc: tpdm@10003000 {
-		compatible = "arm,primecell";
-		arm,primecell-periphid = <0x000bb968>;
+		compatible = "qcom,coresight-tpdm", "arm,primecell";
 		reg = <0x0 0x10003000 0x0 0x1000>;
 		reg-names = "tpda-base";
 		qcom,cmb-element-bits = <32>;
 
 		device-name = "tpdm_dcc";
+		status = "disabled";
 
-		qcom,hw-enable-check;
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		out-ports {
@@ -1608,6 +1616,7 @@
 		qcom,cmb-element-bits = <32>;
 
 		device-name = "tpdm_spdm_cmb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -1943,7 +1952,7 @@
 		real-name = "tmc_etr1";
 		qdss,buffer-size = <0x2000000>;
 		qcom,secure-component;
-		memory-region = <&qdss_apps_mem>;
+	//	memory-region = <&qdss_apps_mem>;
 		coresight-csr = <&csr>;
 		csr-atid-offset = <0x108>;
 		csr-irqctrl-offset = <0x70>;
@@ -2109,6 +2118,7 @@
 		qcom,cmb-element-bits = <64>;
 
 		device-name = "tpdm_swao_prio_0";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2129,6 +2139,7 @@
 		qcom,cmb-element-bits = <64>;
 
 		device-name = "tpdm_swao_prio_1";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2150,6 +2161,7 @@
 		qcom,cmb-element-bits = <64>;
 
 		device-name = "tpdm_swao_prio_2";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2170,6 +2182,7 @@
 		qcom,cmb-element-bits = <64>;
 
 		device-name = "tpdm_swao_prio_3";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2190,6 +2203,7 @@
 		qcom,dsb-element-bits = <32>;
 
 		device-name = "tpdm_swao";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2391,7 +2405,7 @@
 		};
 	};
 
-	funnel_modem_q6_dup: funnel@1080d000 {
+	funnel_modem_q6_dup: funnel@1080c000 {
 		compatible = "arm,primecell";
 		arm,primecell-periphid = <0x000bb908>;
 		reg = <0x0 0x1080d000 0x0 0x1000>,
@@ -2626,6 +2640,7 @@
 		qcom,dsb-msrs-num = <16>;
 
 		device-name = "tpdm_modem_0";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2645,6 +2660,7 @@
 		device-name = "tpdm_modem_1";
 		qcom,cmb-element-bits = <64>;
 
+		status = "disabled";
 		out-ports {
 			port {
 				tpdm_modem1_out_tpda_modem: endpoint {
@@ -2718,6 +2734,7 @@
 
 		trace-name = "tpda-lpass-lpi";
 
+		status = "disabled";
 		out-ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -2825,6 +2842,7 @@
 		qcom,dsb-msrs-num = <16>;
 
 		device-name = "tpdm_lpass_cx";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -2875,6 +2893,7 @@
 		qcom,dsb-msrs-num = <16>;
 
 		device-name = "tpdm_wpss";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3007,7 +3026,7 @@
 	etm1 {
 		compatible = "arm,primecell";
 		arm,primecell-periphid = <0x000bb95d>;
-		reg = <0x0 0x12140000 0x0 0x1000>;
+		reg = <0x0 0x12140000 0x1000>;
 		cpu = <&CPU1>;
 
 		qcom,skip-power-up;
@@ -3142,7 +3161,7 @@
 		compatible = "arm,primecell";
 		arm,primecell-periphid = <0x000bb908>;
 
-		reg = <0x0 0x12800000 0x0 0x1000>;
+		reg = <0x12800000 0x1000>;
 		reg-names = "funnel-base";
 
 		device-name = "funnel-etm";
@@ -3336,6 +3355,7 @@
 		qcom,cmb-msrs-num = <12>;
 
 		device-name = "tpdm_llm_silver";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3358,6 +3378,7 @@
 		qcom,cmb-msrs-num = <12>;
 
 		device-name = "tpdm_llm_gold";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3380,6 +3401,7 @@
 		qcom,cmb-msrs-num = <1>;
 
 		device-name = "tpdm_int_cmb0";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3402,6 +3424,7 @@
 		qcom,dsb-msrs-num = <32>;
 
 		device-name = "tpdm_int_dsb";
+		status = "disabled";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";

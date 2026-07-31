@@ -15,31 +15,54 @@
 	clock-frequency = <5000000>;
 };
 
-&LITTLE_CPU_OFF {
-	status = "disabled";
+&CPU0 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
 };
 
-&LITTLE_CPU_RAIL_OFF {
-	status = "disabled";
+&CPU1 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
 };
 
-&BIG_CPU_OFF {
-	status = "disabled";
+&CPU2 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
 };
 
-&BIG_CPU_RAIL_OFF {
-	status = "disabled";
+&CPU3 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
 };
 
-&CLUSTER_OFF {
-	status = "disabled";
+&CPU4 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
 };
 
-&CX_RET {
+&CPU5 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
+};
+
+&CPU6 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
+};
+
+&CPU7 {
+	enable-method = "spin-table"; /* TODO: Update to psci */
+	cpu-release-addr = <0x0 0x90000000>;
+};
+
+&psci {
 	status = "disabled";
 };
 
 &soc {
+	usb_nop_phy: usb_nop_phy {
+		compatible = "usb-nop-xceiv";
+	};
 
 	usb_emuphy: phy@a784000 {
 		compatible = "qcom,usb-emu-phy";

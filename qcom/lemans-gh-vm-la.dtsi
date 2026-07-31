@@ -12,12 +12,10 @@
 / {
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
-	qcom,msm-name = "SA_GUNYAH_VM";
 	interrupt-parent = <&intc>;
 
 	aliases {
 		hsuart0 = &qupv3_se17_4uart;
-		hsuart1 = &qupv3_se3_4uart;
 	};
 
 	qcom,mem-buf {
@@ -27,7 +25,7 @@
 	};
 
 	chosen {
-		bootargs = "nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n driver_async_probe=arm-scmi pcie_pme=nomsi androidboot.dtbo_idx=1";
+		bootargs = "nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n driver_async_probe=arm-scmi";
 	};
 
 	reserved_memory: reserved-memory {
@@ -46,7 +44,7 @@
 
 		qseecom_mem: qseecom_region {
 			compatible = "shared-dma-pool";
-			alloc-ranges = <0x0 0x00000000 0x0 0xe9000000>;
+			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 			reusable;
 			alignment = <0x0 0x400000>;
 			size = <0x0 0x1400000>;
@@ -54,7 +52,7 @@
 
 		qseecom_ta_mem: qseecom_ta_region {
 			compatible = "shared-dma-pool";
-			alloc-ranges = <0x0 0x00000000 0x0 0xe9000000>;
+			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 			reusable;
 			alignment = <0x0 0x400000>;
 			size = <0x0 0x1000000>;
@@ -238,10 +236,6 @@
 		qcom,dev-name = "vconsole";
 	};
 
-	virtio_scmi {
-		irq_no_suspend;
-	};
-
 	virtio_blk_super {
 		qcom,dev-name = "super";
 	};
@@ -338,10 +332,6 @@
 		qcom,dev-name = "bootloader_a";
 	};
 
-	virtio_blk_la_gvminfo {
-		qcom,dev-name = "gvminfo";
-	};
-
 	vm_config: qcom,vm-config {
 		compatible = "qcom,vm-1.0";
 		vm-type = "aarch64-guest";
@@ -352,7 +342,7 @@
 		vendor = "QTI";
 		image-name = "qcom,autogvm";
 		qcom,pasid = <0x0 0x2c>;
-		qcom,qtee-config-info = "p=3,16,57,77,78,7A,7C,8F,97,159,199,47E,7F1,10C;ta=keymaster64,widevine,pr_3_0,she_gvm,auto_test_a,auto_test_b,auto_test_c,auto_test_d,auto_test_e,auto_test_f,auto_test_g,auto_test_h,auto_test_i,auto_test_j,auto_test_k,auto_test_l,auto_test_m,auto_test_n,auto_test_o,auto_test_p,auto_test_320,auto_test_321,auto_test_322,auto_test_323,auto_test_324,apttestapp,apttestapp64,aptcryptotestapp,aptcryptotestapp64,smplserv,tzecotestapp,tzecotestappcbo1,smci_auto_test_1,smci_auto_test_2,smci_auto_test_3,smci_auto_test_4,smci_auto_test_5,smci_auto_test_6,smci_auto_test_7,smci_auto_test_8,smci_auto_test_9,smci_auto_test_10,smci_auto_test_11,smci_auto_test_12,smci_auto_test_13,smci_auto_test_14,smci_auto_test_15,smci_auto_test_16,smci_auto_test_init_crash,smci_auto_test_restartable,smci_auto_test_shutdown_crash,fsp_test_1,fsp_test_2,fsp_test_3,bintestapp64,tzecotestapp1,crypto_testapp,sst_testapp,autosst_testapp,auto_test_unpermitted,FD02C9DA-306C-48C7-A49C-BBD827AE86EF,5AF8C3E6-D9DF-446E-4FF2-D4D58E8CA49B,19CE19B9-FD73-4262-8553-E5CAC40C895A,C02CAC07-2639-4EF0-BC12-C4AF1FB3E276,15C6B6E4-D083-48E4-8744-4D90A8FF1EF2,CAD10542-34E4-452D-6156-E979AA6E61BC,23914957-C174-4EA6-54D1-DA820F77B4B0,5AF8C3E6-D9DF-446E-4FF2-C3C47D7B938A,CAD10542-34E4-452D-6156-E979AA6E6132,5AF8C3E6-D9DF-446E-4FF2-B2B36C6A8279,smplap32,smplap64,wvqcomkeyprov;";
+		qcom,qtee-config-info = "p=3,16,57,77,78,7A,7C,8F,97,159,199,47E,7F1,10C;ta=keymaster64,widevine,pr_3_0,she_gvm,auto_test_a,auto_test_b,auto_test_c,auto_test_d,auto_test_e,auto_test_f,auto_test_g,auto_test_h,auto_test_i,auto_test_j,auto_test_k,auto_test_l,auto_test_m,auto_test_n,auto_test_o,auto_test_p,auto_test_320,auto_test_321,auto_test_322,auto_test_323,auto_test_324,apttestapp,apttestapp64,aptcryptotestapp,aptcryptotestapp64,smplserv,tzecotestapp,tzecotestappcbo1,smci_auto_test_1,smci_auto_test_2,smci_auto_test_3,smci_auto_test_4,smci_auto_test_5,smci_auto_test_6,smci_auto_test_7,smci_auto_test_8,smci_auto_test_9,smci_auto_test_10,smci_auto_test_11,smci_auto_test_12,smci_auto_test_13,smci_auto_test_14,smci_auto_test_15,smci_auto_test_16,smci_auto_test_init_crash,smci_auto_test_restartable,smci_auto_test_shutdown_crash,fsp_test_1,fsp_test_2,fsp_test_3,bintestapp64,tzecotestapp1,crypto_testapp,sst_testapp,autosst_testapp,auto_test_unpermitted,FD02C9DA-306C-48C7-A49C-BBD827AE86EE,5AF8C3E6-D9DF-446E-4FF2-D4D58E8CA49B,19CE19B9-FD73-4262-8553-E5CAC40C895A,C02CAC07-2639-4EF0-BC12-C4AF1FB3E276,15C6B6E4-D083-48E4-8744-4D90A8FF1EF2,CAD10542-34E4-452D-6156-E979AA6E61BC,23914957-C174-4EA6-54D1-DA820F77B4B0,5AF8C3E6-D9DF-446E-4FF2-C3C47D7B938A,CAD10542-34E4-452D-6156-E979AA6E6132,5AF8C3E6-D9DF-446E-4FF2-B2B36C6A8279,smplap32,smplap64;";
 		qcom,secdomain-ids = <52 9 10>;
 		qcom,primary-vm-index = <0>;
 		vm-attrs = "guest-ram-dump", "vpm-virq", "allow-unprotected";
@@ -364,11 +354,6 @@
 				0x0 0x88C000 0x0 0x88C000 0x0 0x1000 0x0
 				0x0 0x88D000 0x0 0x88D000 0x0 0x1000 0x0
 				0x0 0x88E000 0x0 0x88E000 0x0 0x1000 0x0
-				/* QUPv3 SE4 region */
-				0x0 0x98c000 0x0 0x98c000 0x0 0x1000 0x0
-				0x0 0x98D000 0x0 0x98D000 0x0 0x1000 0x0
-				0x0 0x98E000 0x0 0x98E000 0x0 0x1000 0x0
-				0x0 0x98F000 0x0 0x98F000 0x0 0x1000 0x0
 				/* QRNG region */
 				0x0 0x10dc000 0x0 0x10dc000 0x0 0x1000 0x0
 				/* MPROC NS1 IPCC region */
@@ -380,16 +365,14 @@
 				0x0 0x1fdd000 0x0 0x1fdd000 0x0 0x1000 0x3
 				0x0 0x1fdb000 0x0 0x1fdb000 0x0 0x1000 0x0
 				0x0 0x1fdf000 0x0 0x1fdf000 0x0 0x1000 0x0
-				/* IMEM region */
-				0x0 0x146D8000 0x0 0x146D8000 0x0 0x1000 0x0
-				/* MPM timer read only*/
-				0x0 0xc221000 0x0 0xc221000 0x0 0x1000 0x1
 				/* Board serial number region */
 				0x0 0x786000 0x0 0x786000 0x0 0x1000 0x1
 				/* PTP region */
 				0x0 0x23047000 0x0 0x23047000 0x0 0x1000 0x0
 				/* Qtimer region */
 				0x0 0x17c23000 0x0 0x17c23000 0x0 0x1000 0x0
+				/* MPM timer read only*/
+				0x0 0xc221000 0x0 0xc221000 0x0 0x1000 0x1
 				/* PCIe0 region */
 				0x4 0x0 0x4 0x0 0x0 0x10000000 0x0
 				0x0 0x40000000 0x0 0x40000000 0x0 0x100000 0x0
@@ -408,8 +391,6 @@
 		gic-irq-ranges = <
 			/* QUPv3 SE17 GIC IRQ */
 			617 617
-			/* QUPv3 SE4 GIC IRQ */
-			562 562
 			/* MPROC NS1 IPCC GIC IRQ */
 			591 591
 			/* Compute L0 IPCC GIC IRQ */
@@ -425,11 +406,6 @@
 			346 346
 			406 406
 			407 407
-			/* PCIe0 INTx */
-			466 466
-			467 467
-			470 470
-			471 471
 			/* EMAC1 CH4 GIC IRQ */
 			808 808
 			860 860
@@ -489,7 +465,7 @@
 
 			virtio-mmio@0 {
 				vdevice-type = "virtio-mmio";
-				patch = "/virtio_blk_la_gvminfo";
+				generate = "/virtio-mmio";
 				peer-default;
 				vqs-num = <0x1>;
 				push-compatible = "virtio,mmio";
@@ -1035,7 +1011,7 @@
 
 			virtio-mmio@34 {
 				vdevice-type = "virtio-mmio";
-				patch = "/virtio_scmi";
+				generate = "/virtio-mmio";
 				peer-default;
 				vqs-num = <0x2>;
 				push-compatible = "virtio,mmio";
@@ -1257,8 +1233,8 @@
 			vsmmu@15000000 {
 				vdevice-type = "vsmmu-v2";
 				smmu-handle = <0x15000000>;
-				num-cbs = <0x4>;
-				num-smrs = <0x4>;
+				num-cbs = <0x3>;
+				num-smrs = <0x3>;
 				patch = "/soc/apps-smmu@15000000";
 			};
 
@@ -1313,13 +1289,9 @@
 			compatible = "qcom,smcinvoke";
 		};
 
-		qcom_mem_object {
-			compatible = "qcom,mem-object";
-		};
-
 		android {
 			compatible = "android,firmware";
-			boot_devices = "3002f000.virtio_blk_la_bootloader_b,3002e000.virtio_blk_la_bootloader_a,30003000.virtio_blk_la_devinfo,30004000.virtio_blk_la_init_boot_a,30005000.virtio_blk_la_init_boot_b,30006000.virtio_blk_la_vendor_boot_a,30007000.virtio_blk_la_vendor_boot_b,30008000.virtio_blk_dsp_a,30009000.virtio_blk_dsp_b,3000a000.virtio_blk_la_dtbo_a,3000b000.virtio_blk_la_dtbo_b,3000c000.virtio_blk_la_boot_a,3000d000.virtio_blk_la_boot_b,3000e000.virtio_blk_bluetooth_a,3000f000.virtio_blk_bluetooth_b,30010000.virtio_blk_modem_a,30011000.virtio_blk_modem_b,30012000.virtio_blk_vbmeta_a,30013000.virtio_blk_vbmeta_b,30014000.virtio_blk_misc,30015000.virtio_blk_persist,30016000.virtio_blk_metadata,30017000.virtio_blk_userdata,30018000.virtio_blk_super";
+			boot_devices = "7002f000.virtio_blk_la_bootloader_b,7002e000.virtio_blk_la_bootloader_a,70003000.virtio_blk_la_devinfo,70004000.virtio_blk_la_init_boot_a,70005000.virtio_blk_la_init_boot_b,70006000.virtio_blk_la_vendor_boot_a,70007000.virtio_blk_la_vendor_boot_b,70008000.virtio_blk_dsp_a,70009000.virtio_blk_dsp_b,7000a000.virtio_blk_la_dtbo_a,7000b000.virtio_blk_la_dtbo_b,7000c000.virtio_blk_la_boot_a,7000d000.virtio_blk_la_boot_b,7000e000.virtio_blk_bluetooth_a,7000f000.virtio_blk_bluetooth_b,70010000.virtio_blk_modem_a,70011000.virtio_blk_modem_b,70012000.virtio_blk_vbmeta_a,70013000.virtio_blk_vbmeta_b,70014000.virtio_blk_misc,70015000.virtio_blk_persist,70016000.virtio_blk_metadata,70017000.virtio_blk_userdata,70018000.virtio_blk_super";
 
 			vbmeta {
 				compatible = "android,vbmeta";
@@ -1484,40 +1456,6 @@
 			qcom,token = <0x40000>;
 			memory-region = <&system_secure_mem>;
 		};
-	};
-
-	qcom,msm-imem@146D8000 {
-		compatible = "qcom,msm-imem";
-		reg = <0x146D8000 0x1000>;
-		ranges = <0x0 0x146D8000 0x1000>;
-		#address-cells = <1>;
-		#size-cells = <1>;
-		status = "ok";
-		boot_stats@6b0 {
-			compatible = "qcom,msm-imem-boot_stats";
-			reg = <0x6b0 0x20>;
-		};
-
-		mem_dump_table@10 {
-			compatible = "qcom,msm-imem-mem_dump_table";
-			reg = <0x10 0x8>;
-		};
-
-		dload_type@1c {
-			compatible = "qcom,msm-imem-dload-type";
-			reg = <0x1c 0x4>;
-		};
-
-		diag_dload@c8 {
-			compatible = "qcom,msm-imem-diag-dload";
-			reg = <0xc8 0xc8>;
-		};
-	};
-
-	qcom,mpm2-sleep-counter@c221000 {
-			compatible = "qcom,mpm2-sleep-counter";
-			reg = <0xc221000 0x1000>;
-			clock-frequency = <32768>;
 	};
 
 	tlmm: pinctrl@f000000 {
@@ -1745,18 +1683,13 @@
 		};
 	};
 
-
-	emac_iommu_region: emac-iommu-region {
-		iommu-addresses = <&emac1_hw 0x0 0x80000000>, <&emac1_hw 0xC0000000 0x40000000>;
-	};
-
 	emac1_hw: qcom,ethernet@2300C000 {
-		compatible = "qcom,stmmac-ethqos-emac1-gy";
+		compatible = "qcom,stmmac-ethqos-emac1";
 		emac-core-version = <0x30010000>;
+		qcom,arm-smmu;
 		reg = <0x2300C000 0x1000>;
 		reg-names = "stmmaceth";
 
-		dma-coherent;
 		interrupts-extended = <&intc 0 776 1>, <&intc 0 828 1>;
 		interrupt-names = "rx_ch0_intr", "tx_ch0_intr";
 
@@ -1771,11 +1704,12 @@
 		snps,mtl-rx-config = <&mtl_rx_setup>;
 		snps,mtl-tx-config = <&mtl_tx_setup>;
 		queue = <0>;
-
-		iommus = <&apps_smmu 0x148 0x1>;
-		qcom,iommu-geometry = <0x80000000 0x40000000>;
-		memory-region = <&emac_iommu_region>;
-		qcom,iommu-dma = "fastmap";
+		emac1_emb_smmu: emac1_emb_smmu {
+			compatible = "qcom,emac-thin-smmu-embedded";
+			iommus = <&apps_smmu 0x148 0x1>;
+			qcom,iommu-dma = "fastmap";
+			qcom,iommu-dma-addr-pool = <0x80000000 0x40000000>;
+		};
 	};
 };
 
@@ -1895,9 +1829,13 @@
 &usb2 {
 	compatible = "qcom,dwc3-msm-fw-managed";
 
+	interrupts-extended = <&intc GIC_SPI 444 IRQ_TYPE_LEVEL_HIGH>;
+	interrupt-names = "pwr_event_irq";
+
 	power-domains = <&scmi_power 4>, <&scmi_power 5>;
 	power-domain-names = "usb_transfer", "usb_core";
 
+	/delete-property/ qcom,use-pdc-interrupts;
 	/delete-property/ USB3_GDSC-supply;
 	/delete-property/ clocks;
 	/delete-property/ clock-names;
@@ -1944,38 +1882,6 @@
 	interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>;
 
 	power-domains = <&scmi_power 0>, <&scmi_perf 0>;
-	power-domain-names = "power", "perf";
-	status = "ok";
-};
-
-&qupv3_0 {
-	/delete-property/ clocks;
-	/delete-property/ clock-names;
-	compatible = "qcom,sa8255p-geni-se-qup";
-	reg = <0x9c0000 0x1000>;
-	iommus = <&apps_smmu 0x418 0x0>;
-	qcom,iommu-dma = "default";
-	status = "ok";
-};
-
-	/* BT UART 2nd Hastings Instance */
-&qupv3_se3_4uart {
-	/delete-property/ clocks;
-	/delete-property/ clock-names;
-	/delete-property/ interconnects;
-	/delete-property/ interconnect-names;
-	/delete-property/ pinctrl-names;
-	/delete-property/ pinctrl-0;
-	/delete-property/ pinctrl-1;
-	/delete-property/ pinctrl-2;
-	/delete-property/ pinctrl-3;
-	/delete-property/ interrupts-extended;
-	/delete-property/ qcom,wakeup-byte;
-	compatible = "qcom,sa8255p-geni-uart";
-	reg = <0x98c000 0x4000>;
-	interrupts = <GIC_SPI 530 IRQ_TYPE_LEVEL_HIGH>;
-
-	power-domains = <&scmi_power 10>, <&scmi_perf 1>;
 	power-domain-names = "power", "perf";
 	status = "ok";
 };

@@ -50,16 +50,6 @@ pmar2230: pmar2230@0 {
 			};
 		};
 
-		pmar2230_btn1: btn@2500 {
-			compatible = "qcom,pmar2230-btn";
-			reg = <0x2500>;
-			interrupts = <0x0 0x25 0x0 IRQ_TYPE_EDGE_BOTH>;
-			interrupt-names = "btn1";
-			linux,code = <KEY_CAMERA>;
-			debounce = <15625>;
-			bias-pull-up;
-		};
-
 		pmar2230_rtc: rtc@6400 {
 			compatible = "qcom,pm5100-rtc";
 			reg = <0x6400>, <0x6500>;
@@ -91,21 +81,6 @@ pmar2230: pmar2230@0 {
 			reg = <0x7400>;
 		};
 
-		pmar2230_sdam_22: sdam@8500 {
-			compatible = "qcom,spmi-sdam";
-			reg = <0x8500>;
-		};
-
-		pmar2230_sdam_23: sdam@8600 {
-			compatible = "qcom,spmi-sdam";
-			reg = <0x8600>;
-		};
-
-		pmar2230_sdam_24: sdam@8700 {
-			compatible = "qcom,spmi-sdam";
-			reg = <0x8700>;
-		};
-
 		pmar2230-pwm {
 			compatible = "qcom,pmk8850-pwm", "qcom,pmk8550-pwm";
 			#address-cells = <1>;
@@ -118,24 +93,6 @@ pmar2230: pmar2230@0 {
 			reg = <0x2700>;
 			interrupts = <0x0 0x27 0x0 IRQ_TYPE_EDGE_BOTH>;
 			interrupt-names = "usb_vbus";
-		};
-
-		sdam@900 {
-			compatible = "qcom,spmi-sdam";
-			reg = <0x900>;
-			#address-cells = <1>;
-			#size-cells = <1>;
-		};
-
-		pmar2230_vdac: vdac@9600 {
-			compatible = "qcom,spmi-vdac";
-			reg = <0x9600>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-			io-channels = <&pmar2230_vadc PMAR2230_ADC5_GEN4_ATEST1>,
-				      <&pmar2230_vadc PMAR2230_ADC5_GEN4_ATEST2>;
-			io-channel-names = "ATEST1",
-					   "ATEST2";
 		};
 
 		pmar2230_vadc: vadc@7900 {
@@ -183,18 +140,6 @@ pmar2230: pmar2230@0 {
 				qcom,adc-tm-type = <1>;
 			};
 
-			pmar2230_atest1 {
-				reg = <PMAR2230_ADC5_GEN4_ATEST1>;
-				label = "pmar2230_atest1";
-				qcom,pre-scaling = <1 1>;
-			};
-
-			pmar2230_atest2 {
-				reg = <PMAR2230_ADC5_GEN4_ATEST2>;
-				label = "pmar2230_atest2";
-				qcom,pre-scaling = <1 1>;
-			};
-
 			pmar2230_soc_therm {
 				reg = <PMAR2230_ADC5_GEN4_AMUX_THM1_100K_PU>;
 				label = "pmar2230_soc_therm";
@@ -221,33 +166,5 @@ pmar2230: pmar2230@0 {
 				qcom,pre-scaling = <1 1>;
 				qcom,adc-tm-type = <1>;
 			};
-		};
-
-		pmar2230_bcl: bcl@4700 {
-			compatible = "qcom,pmh0101-bcl-v5";
-			reg = <0x4700 0x100>;
-			interrupts = <0x0 0x47 0x0 IRQ_TYPE_NONE>,
-					<0x0 0x47 0x1 IRQ_TYPE_NONE>,
-					<0x0 0x47 0x2 IRQ_TYPE_NONE>;
-			interrupt-names = "bcl-lvl0",
-					"bcl-lvl1",
-					"bcl-lvl2";
-			qcom,pmic7-threshold;
-			qcom,vph-dynamic-threshold;
-			#thermal-sensor-cells = <1>;
-		};
-
-		pmar2230_qpt: qcom,power-telemetry-device {
-			compatible = "qcom,power-telemetry";
-			status = "disabled";
-			interrupts = <0x0 0x87 0x1 IRQ_TYPE_EDGE_RISING>,
-				<0x0 0x86 0x1 IRQ_TYPE_EDGE_RISING>;
-			nvmem = <&pmar2230_sdam_22>,
-					<&pmar2230_sdam_23>,
-					<&pmar2230_sdam_24>;
-			nvmem-names = "qpt-config-sdam",
-					"qpt-frac-sdam",
-					"qpt-data-sdam";
-			#powerzone-cells = <1>;
 		};
 };

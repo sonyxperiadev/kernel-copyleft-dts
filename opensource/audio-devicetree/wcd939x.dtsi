@@ -1,0 +1,197 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ *  SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
+&swr1 {
+	wcd939x_rx_slave: wcd939x-rx-slave {
+		compatible = "qcom,wcd939x-slave";
+		reg = <0x0E 0x01170224>;
+	};
+
+	wcd9378_rx_slave: wcd9378-rx-slave {
+		status = "disabled";
+		compatible = "qcom,wcd9378-slave";
+		reg = <0x10 0x01170224>;
+	};
+
+	rx_swr_haptics: swr_haptics@f0170220 {
+		status = "disabled";
+		reg = <0x03 0xf0170220>;
+		compatible = "qcom,pmih010x-swr-haptics";
+		qcom,rx_swr_ch_map = <0 0x01 0x01 0 PCM_OUT1>;
+	};
+
+};
+
+&swr2 {
+
+	wcd939x_tx_slave: wcd939x-tx-slave {
+		compatible = "qcom,wcd939x-slave";
+		reg = <0x0E 0x01170223>;
+	};
+	wcd9378_tx_slave: wcd9378-tx-slave {
+		status = "disabled";
+		compatible = "qcom,wcd9378-slave";
+		reg = <0x10 0x01170223>;
+	};
+
+};
+
+&lpass_cdc {
+
+	wcd939x_codec: wcd939x-codec {
+		compatible = "qcom,wcd939x-codec";
+		status = "disabled";
+		qcom,split-codec = <1>;
+		qcom,rx_swr_ch_map = <0 HPH_L 0x1 0 HPH_L>,
+			<0 HPH_R 0x2 0 HPH_R>, <1 CLSH 0x1 0 CLSH>,
+			<2 COMP_L 0x1 0 COMP_L>, <2 COMP_R 0x2 0 COMP_R>,
+			<3 LO 0x1 0 LO>, <4 DSD_L 0x1 0 DSD_L>,
+			<4 DSD_R 0x2 0 DSD_R>, <5 HIFI_PCM_L 0x1 0 HIFI_PCM_L>,
+			<5 HIFI_PCM_R 0x2 0 HIFI_PCM_R>;
+
+		qcom,tx_swr_ch_map = <0 ADC1 0x1 0 SWRM_TX1_CH1>,
+			<0 ADC2 0x2 0 SWRM_TX1_CH2>,
+			<1 ADC3 0x1 0 SWRM_TX1_CH3>,
+			<1 ADC4 0x2 0 SWRM_TX1_CH4>,
+			<2 DMIC0 0x1 0 SWRM_TX2_CH1>,
+			<2 DMIC1 0x2 0 SWRM_TX2_CH2>,
+			<2 MBHC 0x4 0 SWRM_TX2_CH3>,
+			<2 DMIC2 0x4 0 SWRM_TX2_CH3>,
+			<2 DMIC3 0x8 0 SWRM_TX2_CH4>,
+			<3 DMIC4 0x1 0 SWRM_TX3_CH1>,
+			<3 DMIC5 0x2 0 SWRM_TX3_CH2>,
+			<3 DMIC6 0x4 0 SWRM_TX3_CH3>,
+			<3 DMIC7 0x8 0 SWRM_TX3_CH4>;
+
+		qcom,swr-tx-port-params =
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL0 LANE2>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL2 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>;
+		qcom,wcd-rst-gpio-node = <&wcd939x_rst_gpio>;
+		qcom,rx-slave = <&wcd939x_rx_slave>;
+		qcom,tx-slave = <&wcd939x_tx_slave>;
+
+		cdc-vdd-rx-supply = <&L15B>;
+		qcom,cdc-vdd-rx-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-rx-current = <30000>;
+		qcom,cdc-vdd-rx-lpm-supported = <1>;
+
+		cdc-vdd-tx-supply = <&L15B>;
+		qcom,cdc-vdd-tx-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-tx-current = <30000>;
+		qcom,cdc-vdd-tx-lpm-supported = <1>;
+
+		cdc-vdd-buck-supply = <&L15B>;
+		qcom,cdc-vdd-buck-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-buck-current = <650000>;
+		qcom,cdc-vdd-buck-lpm-supported = <1>;
+
+		cdc-vdd-mic-bias-supply = <&BOB1>;
+		qcom,cdc-vdd-mic-bias-voltage = <3296000 3296000>;
+		qcom,cdc-vdd-mic-bias-current = <30000>;
+
+		cdc-vdd-px-supply = <&L1G>;
+		qcom,cdc-vdd-px-voltage = <1200000 1200000>;
+		qcom,cdc-vdd-px-current = <15000>;
+		qcom,cdc-vdd-px-lpm-supported = <1>;
+
+		qcom,cdc-vdd-px-rem-supported = <1>;
+
+		qcom,cdc-micbias1-mv = <1800>;
+		qcom,cdc-micbias2-mv = <1800>;
+		qcom,cdc-micbias3-mv = <1800>;
+		qcom,cdc-micbias4-mv = <1800>;
+
+		qcom,cdc-static-supplies = "cdc-vdd-rx",
+					   "cdc-vdd-tx",
+					   "cdc-vdd-mic-bias";
+		qcom,cdc-on-demand-supplies = "cdc-vdd-buck",
+					      "cdc-vdd-px";
+
+		wcd_mb1_reg: qcom,wcd-mb1-reg {
+			regulator-name = "wcd-mb1-reg";
+		};
+
+		wcd_mb2_reg: qcom,wcd-mb2-reg {
+			regulator-name = "wcd-mb2-reg";
+		};
+
+		wcd_mb3_reg: qcom,wcd-mb3-reg {
+			regulator-name = "wcd-mb3-reg";
+		};
+
+		wcd_mb4_reg: qcom,wcd-mb4-reg {
+			regulator-name = "wcd-mb4-reg";
+		};
+	};
+
+	wcd9378_codec: wcd9378-codec {
+		status = "disabled";
+		compatible = "qcom,wcd9378-codec";
+		qcom,split-codec = <1>;
+		qcom,wcd-mode = <1>;
+		qcom,rx_swr_ch_map = <0 HPH_L 0x1 0 HPH_L>,
+			<0 HPH_R 0x2 0 HPH_R>, <1 CLSH 0x1 0 CLSH>,
+			<2 COMP_L 0x1 0 COMP_L>, <2 COMP_R 0x2 0 COMP_R>,
+			<3 LO 0x1 0 LO>, <4 DSD_L 0x1 0 DSD_L>,
+			<4 DSD_R 0x2 0 DSD_R>;
+		qcom,tx_swr_ch_map = <0 ADC1 0x1 0 SWRM_TX1_CH1>,
+			<1 ADC2 0x1 0 SWRM_TX1_CH2>,
+			<2 ADC3 0x1 0 SWRM_TX1_CH3>,
+			<3 DMIC0 0x4 0 SWRM_TX2_CH1>,
+			<3 DMIC1 0x8 0 SWRM_TX2_CH2>,
+			<3 MBHC 0x4 0 SWRM_TX2_CH3>,
+			<4 DMIC2 0x1 0 SWRM_TX2_CH3>,
+			<4 DMIC3 0x2 0 SWRM_TX2_CH4>,
+			<4 DMIC4 0x3 0 SWRM_TX3_CH1>,
+			<4 DMIC5 0x4 0 SWRM_TX3_CH2>;
+		qcom,swr-tx-port-params =
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE1>,
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL0 LANE1>, <OFFSET1_VAL2 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>,
+			<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL1 LANE0>;
+		qcom,wcd-rst-gpio-node = <&wcd939x_rst_gpio>;
+		qcom,rx-slave = <&wcd9378_rx_slave>;
+		qcom,tx-slave = <&wcd9378_tx_slave>;
+
+		cdc-vdd-rxtx-supply = <&L15B>;
+		qcom,cdc-vdd-rxtx-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-rxtx-current = <30000>;
+		qcom,cdc-vdd-rxtx-lpm-supported = <1>;
+
+		cdc-vdd-io-supply = <&L1F>;
+		qcom,cdc-vdd-io-voltage = <1200000 1200000>;
+		qcom,cdc-vdd-io-current = <20000>;
+		qcom,cdc-vdd-io-lpm-supported = <1>;
+
+		cdc-vdd-buck-supply = <&L15B>;
+		qcom,cdc-vdd-buck-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-buck-current = <650000>;
+		qcom,cdc-vdd-buck-lpm-supported = <1>;
+
+		cdc-vdd-mic-bias-supply = <&BOB1>;
+		qcom,cdc-vdd-mic-bias-voltage = <3296000 3296000>;
+		qcom,cdc-vdd-mic-bias-current = <40055>;
+
+		qcom,cdc-micbias1-mv = <1800>;
+		qcom,cdc-micbias2-mv = <1800>;
+		qcom,cdc-micbias3-mv = <1800>;
+
+		qcom,cdc-static-supplies = "cdc-vdd-rxtx",
+					   "cdc-vdd-io";
+		qcom,cdc-on-demand-supplies = "cdc-vdd-buck";
+	};
+
+
+};

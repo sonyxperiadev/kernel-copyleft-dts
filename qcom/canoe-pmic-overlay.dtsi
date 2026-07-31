@@ -2,6 +2,11 @@
 /*
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/iio/qcom,spmi-adc5-gen4-pmh0101.h>
@@ -32,6 +37,15 @@
 };
 
 &pmh0101_gpios {
+	pinctrl-names = "default";
+	pinctrl-0 = <&board_therm_default &qtm_therm_default>;
+
+	board_therm_default: board-therm-default-state {
+		pins = "gpio1";
+		function = "normal";
+		bias-high-impedance;
+	};
+
 	qtm_therm_default: qtm-therm-default-state {
 		pins = "gpio2";
 		function = "normal";
@@ -149,6 +163,11 @@
 	io-channel-names = "thermal";
 };
 
+&hwinfo {
+	io-channels = <&pmk8850_vadc PMIH010X_ADC5_GEN4_AMUX5_GPIO18_100K_PU(1, PMIH010X_SID)>;
+	io-channel-names = "get_stageid_adc_kb";
+};
+
 &soc {
 	reboot_reason {
 		compatible = "qcom,reboot-reason";
@@ -202,6 +221,9 @@
 
 &pmk8850_vadc {
 	/* PMK8850 ADC Channels */
+	pinctrl-names = "default";
+	pinctrl-0 = <&get_stageid_adc_kb_default>;
+
 	pmk8850_offset_ref {
 		reg = <PMK8850_ADC5_GEN4_OFFSET_REF(0, PMK8850_SID)>;
 		label = "pmk8850_offset_ref";
@@ -293,12 +315,28 @@
 		qcom,ratiometric;
 		qcom,hw-settle-time = <200>;
 		qcom,adc-tm-type = <1>;
-		status = "disabled";
+		status = "okay";
 	};
 
 	pmh0101_pa_therm2 {
 		reg = <PMH0101_ADC5_GEN4_AMUX_THM6_GPIO3_100K_PU(0, PMH0101_SID)>;
 		label = "pmh0101_pa_therm_2";
+		qcom,ratiometric;
+		qcom,hw-settle-time = <200>;
+		qcom,adc-tm-type = <1>;
+	};
+
+	pmh0101_board_therm {
+		reg = <PMH0101_ADC5_GEN4_AMUX1_GPIO1_100K_PU(0, PMH0101_SID)>;
+		label = "pmh0101_board_therm";
+		qcom,ratiometric;
+		qcom,hw-settle-time = <200>;
+		qcom,adc-tm-type = <1>;
+	};
+
+	pmh0101_charge_therm{
+		reg = <PMH0101_ADC5_GEN4_AMUX_THM5_100K_PU(0, PMH0101_SID)>;
+		label = "pmh0101_charge_therm";
 		qcom,ratiometric;
 		qcom,hw-settle-time = <200>;
 		qcom,adc-tm-type = <1>;
@@ -407,6 +445,14 @@
 		qcom,adc-tm-type = <1>;
 	};
 
+	get_stageid_adc_kb {
+		reg = <PMIH010X_ADC5_GEN4_AMUX5_GPIO18_100K_PU(1, PMIH010X_SID)>;
+		label = "get_stageid_adc_kb";
+		qcom,hw-settle-time = <200>;
+		qcom,pre-scaling = <1 1>;
+		qcom,adc5-gen4;
+	};
+
 	pmih010x_batt_therm2 {
 		reg = <PMIH010X_ADC5_GEN4_AMUX3_BAT2_THERM_100K_PU(1, PMIH010X_SID)>;
 		label = "pmih010x_batt_therm_2";
@@ -422,11 +468,47 @@
 		qcom,hw-settle-time = <200>;
 		qcom,adc-tm-type = <1>;
 	};
+
+	pmih010x_oled_therm {
+		reg = <PMIH010X_ADC5_GEN4_AMUX2_BAT2_ID_100K_PU(1, PMIH010X_SID)>;
+		label = "pmih010x_oled_therm";
+		qcom,ratiometric;
+		qcom,hw-settle-time = <200>;
+		qcom,adc-tm-type = <1>;
+	};
 };
 
 &pmih010x_haptics {
 	nvmem-names = "hap_cfg_sdam";
 	nvmem = <&pmk8850_sdam_46>;
+};
+
+&pmih010x_gpios {    
+	/* GPIO_7: SNAPSHOT_N */
+	pmih010x_gpio_7: pmih010x_gpio_7 {
+		pins = "gpio7";
+		function = "normal";
+		input-enable;
+		bias-pull-up; /* Digital In */
+		power-source = <1>;
+	};
+
+	/* GPIO_8: FOCUS_N */
+	pmih010x_gpio_8: pmih010x_gpio_8 {
+		pins = "gpio8";
+		function = "normal";
+		input-enable;
+		bias-pull-up; /* Digital In */
+		power-source = <1>;
+	};   
+        
+	/* GPIO_18: GET_STAGEID */
+	get_stageid_adc_kb {
+		get_stageid_adc_kb_default: get_stageid_adc_kb_default {
+			pins = "gpio18";
+			bias-high-impedance;
+		};
+	};
 };
 
 &pmih010x_eusb2_repeater {

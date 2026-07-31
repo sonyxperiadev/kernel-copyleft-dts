@@ -206,6 +206,22 @@
 			};
 		};
 
+		qcom,secure-buffer {
+			compatible = "qcom,secure-buffer";
+		};
+
+		qcom,mem-buf {
+			compatible = "qcom,mem-buf";
+			qcom,mem-buf-capabilities = "consumer";
+			qcom,vmid = <52>;
+			qcom,vm-uses-hyp-assign;
+		};
+
+		qcom,mem-buf-msgq {
+			compatible = "qcom,mem-buf-msgq";
+			qcom,msgq-names = "trusted_vm";
+		};
+
 		show_resume_irqs@17100000 {
 			compatible = "qcom,show-resume-irqs";
 			reg = <0x2f000000 0x112000>;

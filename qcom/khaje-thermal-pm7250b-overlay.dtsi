@@ -25,22 +25,22 @@
 	socd {
 		cooling-maps {
 			soc_cpu4 {
-				trip = <&socd_trip>;
+				trip = <&soc_trip>;
 				cooling-device = <&cpu4_pause 1 1>;
 			};
 
 			soc_cpu5 {
-				trip = <&socd_trip>;
+				trip = <&soc_trip>;
 				cooling-device = <&cpu5_pause 1 1>;
 			};
 
 			soc_cpu6 {
-				trip = <&socd_trip>;
+				trip = <&soc_trip>;
 				cooling-device = <&cpu6_pause 1 1>;
 			};
 
 			soc_cpu7 {
-				trip = <&socd_trip>;
+				trip = <&soc_trip>;
 				cooling-device = <&cpu7_pause 1 1>;
 			};
 		};

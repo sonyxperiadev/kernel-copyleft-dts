@@ -4,7 +4,6 @@
  */
 
 #include "pmi632.dtsi"
-#include <dt-bindings/iio/qti_power_supply_iio.h>
 
 &soc {
 	mtp_batterydata: qcom,battery-data {
@@ -137,12 +136,4 @@
 			};
 		};
 	};
-};
-
-&flash_led {
-	qcom,use-smb-battery-interface;
-	io-channels =  <&pmi632_qg PSY_IIO_RESISTANCE>,
-		       <&pmi632_qg PSY_IIO_VOLTAGE_OCV>;
-	io-channel-names = "rbatt",
-			   "voltage_ocv";
 };

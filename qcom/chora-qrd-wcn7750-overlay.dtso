@@ -14,9 +14,3 @@
 	qcom,msm-id = <724 0x10000>, <744 0x10000>;
 	qcom,board-id = <0x2000b 0x0>;
 };
-
-&S6B_E0 {
-	regulator-min-microvolt = <2156000>;
-	regulator-max-microvolt = <2700000>;
-	qcom,init-voltage = <2156000>;
-};

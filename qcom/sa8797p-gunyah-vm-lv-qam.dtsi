@@ -4,19 +4,3 @@
  */
 
 #include "sa8797p-gunyah-vm-lv.dtsi"
-
-&vm_config {
-	/* Pass through regions */
-	iomemory-ranges = <
-		/* GPU region */
-		0x0 0x3D41000 0x0 0x3D41000 0x0 0x1000 0x0
-		0x0 0x9841000 0x0 0x9841000 0x0 0x1000 0x0
-	>;
-
-	/* Pass through IRQs */
-	gic-irq-ranges = <
-		/* GPU GIC IRQ */
-		677 677
-		894 894
-	>;
-};

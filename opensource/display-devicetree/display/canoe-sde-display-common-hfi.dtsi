@@ -1,0 +1,40 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+&soc {
+
+	sde_dsi2: qcom,dsi-display-primary0 {
+		compatible = "qcom,dsi-display";
+		label = "primary";
+		qcom,op-label = "hfi";
+		status = "disabled";
+
+		qcom,dsi-ctrl = <&mdss_dsi2 &mdss_dsi3>;
+		qcom,dsi-phy = <&mdss_dsi_phy2 &mdss_dsi_phy3>;
+
+		qcom,platform-te-gpio = <&tlmm 86 0>;
+		qcom,panel-te-source = <0>;
+
+		qcom,mdp = <&mdss_mdp1>;
+		qcom,dsi-default-panel = <&dsi_nt37801_amoled_cmd>;
+		qcom,demura-panel-id = <0x0122e700 0x00000471>;
+	};
+
+	sde_dsi3: qcom,dsi-display-secondary0 {
+		compatible = "qcom,dsi-display";
+		label = "secondary";
+		qcom,op-label = "hfi";
+		status = "disabled";
+
+		qcom,dsi-ctrl = <&mdss_dsi2 &mdss_dsi3>;
+		qcom,dsi-phy = <&mdss_dsi_phy2 &mdss_dsi_phy3>;
+
+		qcom,platform-te-gpio = <&tlmm 87 0>;
+		qcom,panel-te-source = <1>;
+
+		qcom,mdp = <&mdss_mdp1>;
+		qcom,demura-panel-id = <0x0 0x0>;
+	};
+};

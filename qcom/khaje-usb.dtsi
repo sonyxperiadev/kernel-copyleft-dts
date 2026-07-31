@@ -83,9 +83,8 @@
 			snps,usb3-u1u2-disable;
 			snps,usb3_lpm_capable;
 			usb-core-id = <0>;
-			num-hc-interrupters = /bits/ 16 <3>;
 			maximum-speed = "super-speed";
-			dr_mode = "otg";
+			dr_mode = "peripheral";
 			usb-role-switch;
 		};
 	};

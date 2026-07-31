@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
 %YAML 1.2
 ---
 $id: http://devicetree.org/schemas/rtc/qcom-pm8xxx-rtc.yaml#
@@ -36,11 +36,6 @@ properties:
     $ref: /schemas/types.yaml#/definitions/flag
     description:
       Indicates that the setting of RTC time is allowed by the host CPU.
-
-  qcom,no-alarm:
-    $ref: /schemas/types.yaml#/definitions/flag
-    description:
-      Indicates that RTC alarm is not owned by HLOS (Linux).
 
 required:
   - compatible

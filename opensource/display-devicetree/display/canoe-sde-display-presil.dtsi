@@ -1,0 +1,73 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "canoe-sde-display.dtsi"
+#include "canoe-sde-display-emulated.dtsi"
+
+&pcie0 {
+	qcom,boot-option = <0x0>;
+	qcom,target-link-speed = <0x2>;
+	qcom,link-check-max-count = <200>;
+	qcom,no-l0s-supported;
+	qcom,no-l1-supported;
+	qcom,no-l1ss-supported;
+	qcom,no-aux-clk-sync;
+
+	iommu-map = <0x0 &apps_smmu 0x1400 0x1>,
+				<0x100 &apps_smmu 0x1401  0x1>,
+				<0x200 &apps_smmu 0x1401  0x1>,
+				<0x300 &apps_smmu 0x1401  0x1>,
+				<0x400 &apps_smmu 0x1401  0x1>,
+				<0x500 &apps_smmu 0x1401  0x1>,
+				<0x600 &apps_smmu 0x1401  0x1>,
+				<0x700 &apps_smmu 0x1401  0x1>,
+				<0x800 &apps_smmu 0x1401  0x1>,
+				<0x900 &apps_smmu 0x1401  0x1>,
+				<0xa00 &apps_smmu 0x1401 0x1>;
+};
+
+&reserved_memory {
+	disp_presil_mem: disp_presil_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0x3fffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x2000000>;
+	};
+};
+
+&pcie0_rp {
+	#address-cells = <5>;
+	#size-cells = <0>;
+
+	disp_presil_pci0: disp_presil_pci0 {
+		reg = <0 0 0 0 0>;
+		qcom,iommu-group = <&disp_presil_iommu_group>;
+		memory-region = <&disp_presil_mem>;
+
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		disp_presil_iommu_group: disp_presil_iommu_group {
+			qcom,iommu-msi-size = <0x1000>;
+			qcom,iommu-dma-addr-pool = <0xa0000000 0x10000000>;
+			qcom,iommu-dma = "fastmap";
+			qcom,iommu-pagetable = "coherent";
+			qcom,iommu-faults = "stall-disable", "HUPCF", "no-CFRE",
+						"non-fatal";
+		};
+	};
+};
+
+&mdss_mdp {
+	qcom,sde-sspp-type = "vig", "vig",
+	"dma", "dma", "dma", "dma";
+	qcom,sde-sspp-off = <0x2c000 0x35000
+			0x98000 0xa1000 0xaa000 0xb3000>;
+	qcom,sde-sspp-src-size = <0x84>;
+	qcom,sde-sspp-xin-id = <0 4 1 5 9 13>;
+	qcom,sde-sspp-excl-rect = <1 1 1 1 1 1>;
+	qcom,sde-sspp-smart-dma-priority = <5 6 1 2 3 4>;
+};

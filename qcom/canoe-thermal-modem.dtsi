@@ -192,19 +192,6 @@
 		polling-delay = <0>;
 		thermal-sensors = <&qmi_sensor
 				(QMI_MODEM_INST_ID+QMI_MMW0)>;
-		trips {
-			thermal-engine-config0 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-
-			thermal-hal-config0 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-		};
 	};
 
 	mmw1 {

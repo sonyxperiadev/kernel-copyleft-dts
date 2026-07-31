@@ -48,7 +48,6 @@ properties:
           - qcom,rpmcc-holi
           - qcom,rpmcc-khaje
           - qcom,rpmcc-monaco
-          - qcom,rpmcc-shikra
       - const: qcom,rpmcc
 
   '#clock-cells':

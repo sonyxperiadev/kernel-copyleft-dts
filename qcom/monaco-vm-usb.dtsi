@@ -44,19 +44,12 @@
 		qcom,host-poweroff-in-pm-suspend;
 		qcom,disable-host-ssphy-powerdown;
 		status = "disabled";
-		/*
-		 * Establish dependency on smmu driver so that depopulate path of
-		 * deferred probe doesn't run into existing bug in smmu driver.
-		 */
-		dummy-supply = <&apps_smmu>;
-
 		dwc3_0: dwc3@a600000 {
 			compatible = "snps,dwc3";
 			reg = <0x0 0xa600000 0x0 0xe000>;
 			iommus = <&apps_smmu 0x080 0x0>;
 			qcom,iommu-dma = "atomic";
 			memory-region = <&dwc3_mem_region>;
-			dma-coherent;
 			interrupts = <GIC_SPI 292 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy0>, <&usb_qmp_phy0>;
 			snps,disable-clk-gating;
@@ -72,11 +65,11 @@
 			dr_mode = "otg";
 			usb-role-switch;
 		};
+	};
 
-		dwc3_mem_region: dwc3_mem_region {
-			iommu-addresses = <&dwc3_0 0x0 0x0 0x0 0x90000000>,
-						<&dwc3_0 0x0 0xf0000000 0xffffffff 0x10000000>;
-		};
+	dwc3_mem_region: dwc3_mem_region {
+		iommu-addresses = <&dwc3_0 0x0 0x0 0x0 0x90000000>,
+					<&dwc3_0 0x0 0xf0000000 0xffffffff 0x10000000>;
 	};
 
 	/* Primary USB port related High Speed PHY */
@@ -270,19 +263,12 @@
 		qcom,default-mode-host;
 
 		status = "disabled";
-		/*
-		 * Establish dependency on smmu driver so that depopulate path of
-		 * deferred probe doesn't run into existing bug in smmu driver.
-		 */
-		dummy-supply = <&apps_smmu>;
-
 		dwc3_1: dwc3@a400000 {
 			compatible = "snps,dwc3";
 			reg = <0x0 0xa400000 0x0 0xe000>;
 			iommus = <&apps_smmu 0x020 0x0>;
 			qcom,iommu-dma = "atomic";
 			memory-region = <&dwc3_mem_region_1>;
-			dma-coherent;
 			interrupts = <GIC_SPI 442 IRQ_TYPE_LEVEL_HIGH>;
 			usb-phy = <&usb2_phy2>, <&usb_nop_phy>;
 			snps,disable-clk-gating;
@@ -294,11 +280,11 @@
 			dr_mode = "otg";
 			usb-role-switch;
 		};
+	};
 
-		dwc3_mem_region_1: dwc3_mem_region_1 {
-			iommu-addresses = <&dwc3_1 0x0 0x0 0x0 0x90000000>,
-						<&dwc3_1 0x0 0xf0000000 0xffffffff 0x10000000>;
-		};
+	dwc3_mem_region_1: dwc3_mem_region_1 {
+		iommu-addresses = <&dwc3_1 0x0 0x0 0x0 0x90000000>,
+					<&dwc3_1 0x0 0xf0000000 0xffffffff 0x10000000>;
 	};
 
 	/* USB2 High Speed PHY */

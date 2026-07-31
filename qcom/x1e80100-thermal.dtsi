@@ -451,12 +451,12 @@
 		cooling-maps {
 			cpu010_cdev {
 				trip = <&cpu1_emerg0>;
-				cooling-device = <&cpu1_pause 0 1>;
+				cooling-device = <&cpu1_pause 1 1>;
 			};
 
 			cpu010_cdev1 {
 				trip = <&cpu1_emerg0_1>;
-				cooling-device = <&cpu1_hotplug 0 1>;
+				cooling-device = <&cpu1_hotplug 1 1>;
 			};
 		};
 	};
@@ -498,12 +498,12 @@
 		cooling-maps {
 			cpu011_cdev {
 				trip = <&cpu1_emerg1>;
-				cooling-device = <&cpu1_pause 0 1>;
+				cooling-device = <&cpu1_pause 1 1>;
 			};
 
 			cpu011_cdev1 {
 				trip = <&cpu1_emerg1_1>;
-				cooling-device = <&cpu1_hotplug 0 1>;
+				cooling-device = <&cpu1_hotplug 1 1>;
 			};
 		};
 	};
@@ -545,12 +545,12 @@
 		cooling-maps {
 			cpu020_cdev {
 				trip = <&cpu2_emerg0>;
-				cooling-device = <&cpu2_pause 0 1>;
+				cooling-device = <&cpu2_pause 1 1>;
 			};
 
 			cpu020_cdev1 {
 				trip = <&cpu2_emerg0_1>;
-				cooling-device = <&cpu2_hotplug 0 1>;
+				cooling-device = <&cpu2_hotplug 1 1>;
 			};
 		};
 	};
@@ -592,12 +592,12 @@
 		cooling-maps {
 			cpu021_cdev {
 				trip = <&cpu2_emerg1>;
-				cooling-device = <&cpu2_pause 0 1>;
+				cooling-device = <&cpu2_pause 1 1>;
 			};
 
 			cpu021_cdev1 {
 				trip = <&cpu2_emerg1_1>;
-				cooling-device = <&cpu2_hotplug 0 1>;
+				cooling-device = <&cpu2_hotplug 1 1>;
 			};
 		};
 	};
@@ -639,12 +639,12 @@
 		cooling-maps {
 			cpu030_cdev {
 				trip = <&cpu3_emerg0>;
-				cooling-device = <&cpu3_pause 0 1>;
+				cooling-device = <&cpu3_pause 1 1>;
 			};
 
 			cpu030_cdev1 {
 				trip = <&cpu3_emerg0_1>;
-				cooling-device = <&cpu3_hotplug 0 1>;
+				cooling-device = <&cpu3_hotplug 1 1>;
 			};
 		};
 	};
@@ -686,12 +686,12 @@
 		cooling-maps {
 			cpu031_cdev {
 				trip = <&cpu3_emerg1>;
-				cooling-device = <&cpu3_pause 0 1>;
+				cooling-device = <&cpu3_pause 1 1>;
 			};
 
 			cpu031_cdev1 {
 				trip = <&cpu3_emerg1_1>;
-				cooling-device = <&cpu3_hotplug 0 1>;
+				cooling-device = <&cpu3_hotplug 1 1>;
 			};
 		};
 	};
@@ -824,12 +824,12 @@
 		cooling-maps {
 			cpu100_cdev {
 				trip = <&cpu4_emerg0>;
-				cooling-device = <&cpu4_pause 0 1>;
+				cooling-device = <&cpu4_pause 1 1>;
 			};
 
 			cpu100_cdev1 {
 				trip = <&cpu4_emerg0_1>;
-				cooling-device = <&cpu4_hotplug 0 1>;
+				cooling-device = <&cpu4_hotplug 1 1>;
 			};
 		};
 	};
@@ -871,12 +871,12 @@
 		cooling-maps {
 			cpu101_cdev {
 				trip = <&cpu4_emerg1>;
-				cooling-device = <&cpu4_pause 0 1>;
+				cooling-device = <&cpu4_pause 1 1>;
 			};
 
 			cpu101_cdev1 {
 				trip = <&cpu4_emerg1_1>;
-				cooling-device = <&cpu4_hotplug 0 1>;
+				cooling-device = <&cpu4_hotplug 1 1>;
 			};
 		};
 	};
@@ -918,12 +918,12 @@
 		cooling-maps {
 			cpu110_cdev {
 				trip = <&cpu5_emerg0>;
-				cooling-device = <&cpu5_pause 0 1>;
+				cooling-device = <&cpu5_pause 1 1>;
 			};
 
 			cpu110_cdev1 {
 				trip = <&cpu5_emerg0_1>;
-				cooling-device = <&cpu5_hotplug 0 1>;
+				cooling-device = <&cpu5_hotplug 1 1>;
 			};
 		};
 	};
@@ -965,12 +965,12 @@
 		cooling-maps {
 			cpu111_cdev {
 				trip = <&cpu5_emerg1>;
-				cooling-device = <&cpu5_pause 0 1>;
+				cooling-device = <&cpu5_pause 1 1>;
 			};
 
 			cpu111_cdev1 {
 				trip = <&cpu5_emerg1_1>;
-				cooling-device = <&cpu5_hotplug 0 1>;
+				cooling-device = <&cpu5_hotplug 1 1>;
 			};
 		};
 	};
@@ -1012,12 +1012,12 @@
 		cooling-maps {
 			cpu120_cdev {
 				trip = <&cpu6_emerg0>;
-				cooling-device = <&cpu6_pause 0 1>;
+				cooling-device = <&cpu6_pause 1 1>;
 			};
 
 			cpu120_cdev1 {
 				trip = <&cpu6_emerg0_1>;
-				cooling-device = <&cpu6_hotplug 0 1>;
+				cooling-device = <&cpu6_hotplug 1 1>;
 			};
 		};
 	};
@@ -1059,12 +1059,12 @@
 		cooling-maps {
 			cpu121_cdev {
 				trip = <&cpu6_emerg1>;
-				cooling-device = <&cpu6_pause 0 1>;
+				cooling-device = <&cpu6_pause 1 1>;
 			};
 
 			cpu121_cdev1 {
 				trip = <&cpu6_emerg1_1>;
-				cooling-device = <&cpu6_hotplug 0 1>;
+				cooling-device = <&cpu6_hotplug 1 1>;
 			};
 		};
 	};
@@ -1106,12 +1106,12 @@
 		cooling-maps {
 			cpu130_cdev {
 				trip = <&cpu7_emerg0>;
-				cooling-device = <&cpu7_pause 0 1>;
+				cooling-device = <&cpu7_pause 1 1>;
 			};
 
 			cpu130_cdev1 {
 				trip = <&cpu7_emerg0_1>;
-				cooling-device = <&cpu7_hotplug 0 1>;
+				cooling-device = <&cpu7_hotplug 1 1>;
 			};
 		};
 	};
@@ -1153,12 +1153,12 @@
 		cooling-maps {
 			cpu131_cdev {
 				trip = <&cpu7_emerg1>;
-				cooling-device = <&cpu7_pause 0 1>;
+				cooling-device = <&cpu7_pause 1 1>;
 			};
 
 			cpu131_cdev1 {
 				trip = <&cpu7_emerg1_1>;
-				cooling-device = <&cpu7_hotplug 0 1>;
+				cooling-device = <&cpu7_hotplug 1 1>;
 			};
 		};
 	};
@@ -1239,12 +1239,12 @@
 		cooling-maps {
 			cpu200_cdev {
 				trip = <&cpu8_emerg0>;
-				cooling-device = <&cpu8_pause 0 1>;
+				cooling-device = <&cpu8_pause 1 1>;
 			};
 
 			cpu200_cdev1 {
 				trip = <&cpu8_emerg0_1>;
-				cooling-device = <&cpu8_hotplug 0 1>;
+				cooling-device = <&cpu8_hotplug 1 1>;
 			};
 		};
 	};
@@ -1286,12 +1286,12 @@
 		cooling-maps {
 			cpu201_cdev {
 				trip = <&cpu8_emerg1>;
-				cooling-device = <&cpu8_pause 0 1>;
+				cooling-device = <&cpu8_pause 1 1>;
 			};
 
 			cpu201_cdev1 {
 				trip = <&cpu8_emerg1_1>;
-				cooling-device = <&cpu8_hotplug 0 1>;
+				cooling-device = <&cpu8_hotplug 1 1>;
 			};
 		};
 	};
@@ -1333,12 +1333,12 @@
 		cooling-maps {
 			cpu210_cdev {
 				trip = <&cpu9_emerg0>;
-				cooling-device = <&cpu9_pause 0 1>;
+				cooling-device = <&cpu9_pause 1 1>;
 			};
 
 			cpu210_cdev1 {
 				trip = <&cpu9_emerg0_1>;
-				cooling-device = <&cpu9_hotplug 0 1>;
+				cooling-device = <&cpu9_hotplug 1 1>;
 			};
 		};
 	};
@@ -1380,12 +1380,12 @@
 		cooling-maps {
 			cpu211_cdev {
 				trip = <&cpu9_emerg1>;
-				cooling-device = <&cpu9_pause 0 1>;
+				cooling-device = <&cpu9_pause 1 1>;
 			};
 
 			cpu211_cdev1 {
 				trip = <&cpu9_emerg1_1>;
-				cooling-device = <&cpu9_hotplug 0 1>;
+				cooling-device = <&cpu9_hotplug 1 1>;
 			};
 		};
 	};
@@ -1427,12 +1427,12 @@
 		cooling-maps {
 			cpu220_cdev {
 				trip = <&cpu10_emerg0>;
-				cooling-device = <&cpu10_pause 0 1>;
+				cooling-device = <&cpu10_pause 1 1>;
 			};
 
 			cpu220_cdev1 {
 				trip = <&cpu10_emerg0_1>;
-				cooling-device = <&cpu10_hotplug 0 1>;
+				cooling-device = <&cpu10_hotplug 1 1>;
 			};
 		};
 	};
@@ -1474,12 +1474,12 @@
 		cooling-maps {
 			cpu221_cdev {
 				trip = <&cpu10_emerg1>;
-				cooling-device = <&cpu10_pause 0 1>;
+				cooling-device = <&cpu10_pause 1 1>;
 			};
 
 			cpu221_cdev1 {
 				trip = <&cpu10_emerg1_1>;
-				cooling-device = <&cpu10_hotplug 0 1>;
+				cooling-device = <&cpu10_hotplug 1 1>;
 			};
 		};
 	};
@@ -1521,12 +1521,12 @@
 		cooling-maps {
 			cpu230_cdev {
 				trip = <&cpu11_emerg0>;
-				cooling-device = <&cpu11_pause 0 1>;
+				cooling-device = <&cpu11_pause 1 1>;
 			};
 
 			cpu230_cdev1 {
 				trip = <&cpu11_emerg0_1>;
-				cooling-device = <&cpu11_hotplug 0 1>;
+				cooling-device = <&cpu11_hotplug 1 1>;
 			};
 		};
 	};
@@ -1568,12 +1568,12 @@
 		cooling-maps {
 			cpu231_cdev {
 				trip = <&cpu11_emerg1>;
-				cooling-device = <&cpu11_pause 0 1>;
+				cooling-device = <&cpu11_pause 1 1>;
 			};
 
 			cpu231_cdev1 {
 				trip = <&cpu11_emerg1_1>;
-				cooling-device = <&cpu11_hotplug 0 1>;
+				cooling-device = <&cpu11_hotplug 1 1>;
 			};
 		};
 	};

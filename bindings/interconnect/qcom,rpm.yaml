@@ -61,19 +61,6 @@ properties:
       - qcom,malabar-mmnrt_virt
       - qcom,malabar-mmrt_virt
       - qcom,malabar-system_noc
-      - qcom,shikra-clk_virt
-      - qcom,shikra-config_noc
-      - qcom,shikra-mc_virt
-      - qcom,shikra-mem_noc_core
-      - qcom,shikra-mmrt_virt
-      - qcom,shikra-mmnrt_virt
-      - qcom,shikra-sys_noc
-      - qcom,scuba-bimc
-      - qcom,scuba-sys_noc
-      - qcom,scuba-config_noc
-      - qcom,scuba-clk_virt
-      - qcom,scuba-mmnrt_virt
-      - qcom,scuba-mmrt_virt
 
   '#interconnect-cells':
     description: |

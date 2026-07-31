@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/firmware/qcom,qseecom.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: QSEECOM (QTI Secure Execution Environment Communicator).
+
+description:
+  The Qseecom driver facilitiates the communication and data transfer between
+  Trust Zone and Linux OS.
+
+maintainers:
+  - Vikas Kumar Sharma <vksharma@qti.qualcomm.com>
+
+properties:
+  compatible :
+    const: "qcom,qseecom"
+  reg:
+    description: should contain memory region address reserved for loading secure apps.
+  qcom,support-multiple-ce-hw-instance:
+    description: indicates if multicore CE support is supported.
+  qcom,hlos-num-ce-hw-instances:
+    description: indicates number of CE HW instances hlos can use.
+  qcom,hlos-ce-hw-instance :
+    description: indicates what CE HW is used by HLOS crypto driver
+  qcom,qsee-ce-hw-instance :
+    description: indicates what CE HW is used by secure domain (TZ) crypto driver
+  qcom,disk-encrypt-pipe-pair :
+    description: indicates what CE HW pipe pair is used for disk encryption
+  qcom,file-encrypt-pipe-pair :
+    description: indicates what CE HW pipe pair is used for file encryption
+  qcom,msm_bus,name:
+    const: "qseecom-noc"
+  qcom,msm_bus,num_cases:
+    description: Depends on the use cases for bus scaling
+  qcom,msm_bus,num_paths:
+    description: The paths for source and destination ports
+  qcom,msm_bus,vectors:
+    description: Vectors for bus topology.
+  qcom,ce-opp-freq:
+    description: indicates the CE operating frequency in Hz, changes from target to target.
+
+Optional properties:
+  - qcom,support-bus-scaling:
+    description: indicates if driver support scaling the bus for crypto operation.
+  - qcom,support-fde:
+    description: indicates if driver support key managing for full disk encryption feature.
+  - qcom,support-pfe:
+    description: indicates if driver support key managing for per file encryption feature.
+  - qcom,no-clock-support:
+    description: indicates clocks are not handled by qseecom (could be handled by RPM)
+  - qcom,appsbl-qseecom-support:
+    description: indicates if there is qseecom support in appsbootloader
+  - vdd-hba-supply:
+    description: handle for fixed power regulator
+  - qcom,qsee-reentrancy-support:
+    description: indicates the qsee reentrancy phase supported by the target
+  - qcom,commonlib64-loaded-by-uefi:
+    description: indicates commonlib64 is loaded by uefi already
+  - qcom,fde-key-size:
+    description: indicates which FDE key size is used in device.
+
+required:
+  - compatible
+
+additionalProperties: false
+
+examples:
+  - |
+    qcom_qseecom: qseecom@d1800000 {
+        compatible = "qcom,qseecom";
+        reg = <0xd1800000 0x3900000>;
+        reg-names = "secapp-region";
+        memory-region = <&qseecom_mem>;
+        qcom,hlos-num-ce-hw-instances = <1>;
+        qcom,hlos-ce-hw-instance = <0>;
+        qcom,qsee-ce-hw-instance = <0>;
+        qcom,disk-encrypt-pipe-pair = <2>;
+        qcom,no-clock-support;
+        qcom,commonlib-loaded-by-hostvm;
+        qcom,qsee-reentrancy-support = <2>;
+    };

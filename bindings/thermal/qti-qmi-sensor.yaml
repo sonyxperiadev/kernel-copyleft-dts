@@ -45,8 +45,9 @@ patternProperties:
         description: |
           Remote sensor names. Below strings are the only acceptable
           sensor names.
+        minItems: 1
         items:
-          - enum:
+          enum:
             - pa
             - pa_1
             - pa_2
@@ -127,13 +128,6 @@ patternProperties:
             - sys_therm4
             - sys_therm5
             - sys_therm6
-            - rf_cal
-            - modem_cfg
-            - lte_cc
-            - mcg_fr1_cc
-            - mcg_fr2_cc
-            - scg_fr1_cc
-            - scg_fr2_cc
             - beamer_n_therm
             - beamer_e_therm
             - beamer_w_therm

@@ -71,12 +71,6 @@ properties:
   spi-max-frequency:
     maxItems: 1
 
-  qcom,vote-index:
-    description: Index values used for bandwidth voting across interconnect paths.
-    $ref: /schemas/types.yaml#/definitions/uint32-array
-    minItems: 3
-    maxItems: 3
-
 required:
   - compatible
   - reg
@@ -86,8 +80,6 @@ required:
   - pinctrl-names
   - spi-max-frequency
 
-additionalProperties: false
-
 examples:
   - |
     #include <dt-bindings/clock/qcom,gcc-sun.h>
@@ -95,25 +87,25 @@ examples:
     #include <dt-bindings/interrupt-controller/arm-gic.h>
 
     qupv3_se0_spi: spi@a80000 {
-      compatible = "qcom,spi-geni";
-      reg = <0xa80000 0x4000>;
-      #address-cells = <1>;
-      #size-cells = <0>;
-      reg-names = "se_phys";
-      interrupts = <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
-      clock-names = "se-clk";
-      clocks = <&gcc GCC_QUPV3_WRAP1_S0_CLK>;
-      interconnect-names = "qup-core", "qup-config", "qup-memory";
-      interconnects = <&clk_virt MASTER_QUP_CORE_1 &clk_virt SLAVE_QUP_CORE_1>,
-                      <&gem_noc MASTER_APPSS_PROC &config_noc SLAVE_QUP_1>,
-                      <&aggre1_noc MASTER_QUP_1 &mc_virt  SLAVE_EBI1>;
-      pinctrl-names = "default", "sleep";
-      pinctrl-0 = <&qupv3_se0_spi_mosi_active>, <&qupv3_se0_spi_miso_active>,
-                  <&qupv3_se0_spi_clk_active>, <&qupv3_se0_spi_cs_active>;
-      pinctrl-1 = <&qupv3_se0_spi_sleep>;
-      dmas = <&gpi_dma1 0 0 1 64 0>,
-             <&gpi_dma1 1 0 1 64 0>;
-      dma-names = "tx", "rx";
-      spi-max-frequency = <50000000>;
+	compatible = "qcom,spi-geni";
+	reg = <0xa80000 0x4000>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	reg-names = "se_phys";
+	interrupts = <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
+	clock-names = "se-clk";
+	clocks = <&gcc GCC_QUPV3_WRAP1_S0_CLK>;
+	interconnect-names = "qup-core", "qup-config", "qup-memory";
+	interconnects = <&clk_virt MASTER_QUP_CORE_1 &clk_virt SLAVE_QUP_CORE_1>,
+                        <&gem_noc MASTER_APPSS_PROC &config_noc SLAVE_QUP_1>,
+                        <&aggre1_noc MASTER_QUP_1 &mc_virt  SLAVE_EBI1>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&qupv3_se0_spi_mosi_active>, <&qupv3_se0_spi_miso_active>,
+		        <&qupv3_se0_spi_clk_active>, <&qupv3_se0_spi_cs_active>;
+	pinctrl-1 = <&qupv3_se0_spi_sleep>;
+	dmas = <&gpi_dma1 0 0 1 64 0>,
+		<&gpi_dma1 1 0 1 64 0>;
+	dma-names = "tx", "rx";
+	spi-max-frequency = <50000000>;
     };
 ...

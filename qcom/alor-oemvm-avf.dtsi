@@ -8,7 +8,7 @@
 / {
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
-	qcom,msm-id = <685 0x10000>, <727 0x10000>, <764 0x10000>;
+	qcom,msm-id = <685 0x10000>, <727 0x10000>;
 
 	host {
 		#address-cells = <0x2>;
@@ -133,15 +133,6 @@
 				peer-default;
 			};
 
-			test-large-dmabuf-oemvm {
-				vdevice-type = "message-queue-pair";
-				generate = "/hypervisor/test-large-dmabuf-oemvm-pair";
-				message-size = <0xf0>;
-				queue-depth = <0x8>;
-				qcom,label = <0x10e>;
-				peer-default;
-			};
-
 			msgqsock-msgq-pair {
 				vdevice-type = "message-queue-pair";
 				generate = "/hypervisor/msgqsock-msgq-pair";
@@ -197,7 +188,6 @@
 				&virtio_mem_device
 				&qcom_test_dbl_oemvm
 				&qcom_test_msgq_oemvm
-				&qcom_test_large_dmabuf_oemvm
 				&qmsgq_gunyah
 				&qcom_qrtr
 				&qrtr_gunyah
@@ -241,11 +231,6 @@
 		compatible = "qcom,gh-msgq-test";
 		gunyah-label = <0x105>;
 		affinity = <0>;
-	};
-
-	qcom_test_large_dmabuf_oemvm: qcom,test-large-dmabuf-oemvm {
-		compatible = "qcom,gh-large-dmabuf-test";
-		gunyah-label = <0x10e>;
 	};
 
 	qmsgq_gunyah: msgq-gunyah {

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
 %YAML 1.2
 ---
 $id: "http://devicetree.org/schemas/mailbox/qcom,apcs-kpss-global.yaml#"
@@ -33,7 +33,6 @@ properties:
               - qcom,sm8150-apss-shared
               - qcom,sm8150-spcs-global
               - qcom,monaco-apcs-hmss-global
-              - qcom,shikra-apcs-hmss-global
       - items:
           - enum:
               - qcom,msm8916-apcs-kpss-global

@@ -2,6 +2,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
 
 #include <dt-bindings/thermal/thermal_qti.h>
 
@@ -24,7 +29,7 @@
 			};
 
 			socd_trip: socd-trip {
-				temperature = <90>;
+				temperature = <95>;
 				hysteresis = <0>;
 				type = "passive";
 			};
@@ -45,7 +50,7 @@
 
 		trips {
 			ibat_lvl0:ibat-lvl0 {
-				temperature = <13500>;
+				temperature = <9500>;
 				hysteresis = <200>;
 				type = "passive";
 			};
@@ -319,7 +324,7 @@
 	};
 
 	/* XOAGG_THERM */
-	sys-therm-1 {
+	xo_therm {
 		thermal-sensors = <&pmk8850_vadc
 				   PMK8850_ADC5_GEN4_AMUX2_GPIO7_100K_PU(0, PMK8850_SID)>;
 
@@ -339,7 +344,7 @@
 	};
 
 	/* SKIN_THERM */
-	sys-therm-2 {
+	sdm_therm {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX_THM1_100K_PU(0, PMH0101_SID)>;
 
@@ -383,7 +388,7 @@
 	};
 
 	/* CAM_FLASH_THERM */
-	sys-therm-3 {
+	FLASH_THERM {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX_THM2_100K_PU(0, PMH0101_SID)>;
 
@@ -403,7 +408,7 @@
 	};
 
 	/* WLAN_THERM */
-	sys-therm-4 {
+	sys_therm2 {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX_THM3_100K_PU(0, PMH0101_SID)>;
 
@@ -423,7 +428,7 @@
 	};
 
 	/* PA_THERM1 */
-	sys-therm-5 {
+	pa_therm1 {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX_THM4_100K_PU(0, PMH0101_SID)>;
 
@@ -443,7 +448,7 @@
 	};
 
 	/* QTM_THERM */
-	sys-therm-6 {
+	qtm_therm {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX2_GPIO2_100K_PU(0, PMH0101_SID)>;
 
@@ -463,7 +468,7 @@
 	};
 
 	/* PA_THERM2 */
-	sys-therm-7 {
+	pa_therm2 {
 		thermal-sensors = <&pmk8850_vadc
 				   PMH0101_ADC5_GEN4_AMUX_THM6_GPIO3_100K_PU(0, PMH0101_SID)>;
 
@@ -482,8 +487,34 @@
 		};
 	};
 
+	/* board_therm */
+	sys_therm3 {
+		thermal-sensors = <&pmk8850_vadc
+				   PMH0101_ADC5_GEN4_AMUX1_GPIO1_100K_PU(0, PMH0101_SID)>;
+	};
+
+	/* charge_therm */
+	sys_therm4 {
+		thermal-sensors = <&pmk8850_vadc
+				   PMH0101_ADC5_GEN4_AMUX_THM5_100K_PU(0, PMH0101_SID)>;
+
+		trips {
+			active-config0 {
+				temperature = <125000>;
+				hysteresis = <1000>;
+				type = "passive";
+			};
+
+			active-config1 {
+				temperature = <125000>;
+				hysteresis = <1000>;
+				type = "passive";
+			};
+		};
+	};
+
 	/* WLS_THERM */
-	sys-therm-8 {
+	sys_therm1 {
 		thermal-sensors = <&pmk8850_vadc
 				   PMIH010X_ADC5_GEN4_AMUX4_GPIO12_100K_PU(1, PMIH010X_SID)>;
 
@@ -503,49 +534,41 @@
 	};
 
 	/* BATT_THERM */
-	sys-therm-9 {
+	BATT_THERM {
 		thermal-sensors = <&pmk8850_vadc
 				   PMIH010X_ADC5_GEN4_AMUX_THM1_BAT_THERM_100K_PU(1, PMIH010X_SID)>;
-
-		trips {
-			active-config0 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-
-			active-config1 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-		};
 	};
 
 	/* USB_THERM */
-	sys-therm-11 {
+	USB_THERM {
 		thermal-sensors = <&pmk8850_vadc
 				   PMIH010X_ADC5_GEN4_AMUX_THM4_USB_THERM_100K_PU(1, PMIH010X_SID)>;
-
-		trips {
-			active-config0 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-
-			active-config1 {
-				temperature = <125000>;
-				hysteresis = <1000>;
-				type = "passive";
-			};
-		};
 	};
 
 	/* BATT2_THERM */
 	sys-therm-12 {
 		thermal-sensors = <&pmk8850_vadc
 				   PMIH010X_ADC5_GEN4_AMUX3_BAT2_THERM_100K_PU(1, PMIH010X_SID)>;
+
+		trips {
+			active-config0 {
+				temperature = <125000>;
+				hysteresis = <1000>;
+				type = "passive";
+			};
+
+			active-config1 {
+				temperature = <125000>;
+				hysteresis = <1000>;
+				type = "passive";
+			};
+		};
+	};
+
+	/* OLED_THERM */
+	DISP_THERM {
+		thermal-sensors = <&pmk8850_vadc
+				   PMIH010X_ADC5_GEN4_AMUX2_BAT2_ID_100K_PU(1, PMIH010X_SID)>;
 
 		trips {
 			active-config0 {

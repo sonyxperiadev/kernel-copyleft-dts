@@ -1,0 +1,268 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ *  SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "canoe-lpi.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
+#include "canoe-audio-lpass-reg.dtsi"
+
+&wsa_macro {
+	wsa_data_fs_ctl_reg = <0x6B6F000>;
+	qcom,wsa-bat-cfgs= <2>, <2>;
+	qcom,wsa-rloads= <2>, <2>;
+	qcom,wsa-system-gains= <0 9>, <0 9>;
+};
+
+&wsa2_macro {
+	wsa_data_fs_ctl_reg = <0x6B6F000>;
+	qcom,wsa-bat-cfgs= <2>, <2>;
+	qcom,wsa-rloads= <2>, <2>;
+	qcom,wsa-system-gains= <0 9>, <0 9>;
+};
+
+&wsa_swr_clk_active {
+	config {
+		drive-strength = <4>;
+	};
+};
+
+&wsa_swr_data_active {
+	config {
+		drive-strength = <4>;
+	};
+};
+
+&swr1 {
+	status = "disabled";
+
+};
+
+&swr0{
+	status = "okay";
+	wsa884x_0220: wsa884x@02170220 {
+		status = "okay";
+	};
+
+	wsa884x_0221: wsa884x@02170221{
+		status = "okay";
+	};
+};
+
+
+
+&swr3 {
+	swr_haptics: swr_haptics@f0170220 {
+		status = "okay";
+	};
+
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+
+};
+
+&wcd939x_rst_gpio {
+	status = "disabled";
+
+};
+
+&wcd939x_codec {
+	status = "disabled";
+
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+
+&swr2 {
+	qmp01: qmp@04170232 {
+		/*
+		 * reg = <Class_partID[7:0]
+		 * partID[15:8] manuID[7:0] manuID[15:8](version4bits_UniqueID4bits)
+		 */
+		reg = <0x0100 0x04170232>;
+		compatible = "qcom,qmp-sdca-dmic";
+		sound-name-prefix = "QMP_MIC01";
+		qcom,codec-name = "qmp-dmic.01";
+		qmp-vdd-supply = <&L10B>;
+		qcom,swr-tx-port-params =
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>;
+		reg-values = <0x401805B0 0x5
+				  0x401805B1 0x5
+				  0x401805B2 0x5
+				  0x401805B3 0x5
+				  0x401805B8 0x5>;
+	};
+
+	qmp02: qmp@04170236 {
+		reg = <0x0100 0x04170236>;
+		compatible = "qcom,qmp-sdca-dmic";
+		sound-name-prefix = "QMP_MIC02";
+		qcom,codec-name = "qmp-dmic.02";
+		qmp-vdd-supply = <&L10B>;
+		qcom,swr-tx-port-params =
+				<OFFSET1_VAL2 LANE0>, <OFFSET1_VAL1 LANE0>,
+				<OFFSET1_VAL2 LANE0>, <OFFSET1_VAL1 LANE0>,
+				<OFFSET1_VAL2 LANE0>, <OFFSET1_VAL1 LANE0>,
+				<OFFSET1_VAL2 LANE0>, <OFFSET1_VAL1 LANE0>;
+		reg-values = <0x401805B0 0x5
+				  0x401805B1 0x5
+				  0x401805B2 0x5
+				  0x401805B3 0x5
+				  0x401805B8 0x5>;
+	};
+
+	qmp03: qmp@04170230 {
+		reg = <0x0100 0x04170230>;
+		compatible = "qcom,qmp-sdca-dmic";
+		sound-name-prefix = "QMP_MIC03";
+		qcom,codec-name = "qmp-dmic.03";
+		qmp-vdd-supply = <&L10B>;
+		qcom,swr-tx-port-params =
+				<OFFSET1_VAL3 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL3 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL3 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL3 LANE0>, <OFFSET1_VAL2 LANE0>;
+		reg-values = <0x401805B0 0x5
+				  0x401805B1 0x5
+				  0x401805B2 0x5
+				  0x401805B3 0x5
+				  0x401805B8 0x5>;
+	};
+
+	qmp04: qmp@04170239 {
+		reg = <0x0100 0x04170239>;
+		compatible = "qcom,qmp-sdca-dmic";
+		sound-name-prefix = "QMP_MIC04";
+		qcom,codec-name = "qmp-dmic.04";
+		qmp-vdd-supply = <&L10B>;
+		qcom,swr-tx-port-params =
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>,
+				<OFFSET1_VAL1 LANE0>, <OFFSET1_VAL2 LANE0>;
+		reg-values = <0x401805B0 0x5
+				  0x401805B1 0x5
+				  0x401805B2 0x5
+				  0x401805B3 0x5
+				  0x401805B8 0x5>;
+	};
+};
+
+&canoe_snd {
+	qcom,model = "canoe-qrd-wsa884x-snd-card";
+	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,wcn-bt = <1>;
+	qcom,tdm-max-slots = <8>;
+	qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,audio-core-list = <0>, <1>;
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,qmp-mic = <1>;
+	qcom,wsa-max-devs = <2>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&swr_haptics>,	<&wsa884x_0220>,
+			<&wsa884x_0221>, <&qmp01>, <&qmp02>,
+			<&qmp03>, <&qmp04>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+		"swr-haptics", "wsa-codec1", "wsa-codec2",
+		"qmp-dmic.01", "qmp-dmic.02",
+		"qmp-dmic.03", "qmp-dmic.04";
+	qcom,dedicated-wsa2;
+	qcom,audio-routing =
+		"HAP_IN", "WSA2_HAPT OUT",
+		"WSA SRC0_INP", "SRC0",
+		"WSA_TX DEC0_INP", "TX DEC0 MUX",
+		"WSA_TX DEC1_INP", "TX DEC1 MUX",
+		"SpkrLeft IN", "WSA_SPK1 OUT",
+		"SpkrRight IN", "WSA_SPK2 OUT",
+		"TX SWR_INPUT", "QMP_MIC01 NORMAL_OUTPUT",
+		"TX SWR_INPUT", "QMP_MIC02 NORMAL_OUTPUT",
+		"TX SWR_INPUT", "QMP_MIC03 NORMAL_OUTPUT",
+		"TX SWR_INPUT", "QMP_MIC04 NORMAL_OUTPUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA SWR_INPUT", "QMP_MIC01 LP_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC02 LP_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC03 LP_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC04 LP_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC01 VA_NORMAL_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC02 VA_NORMAL_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC03 VA_NORMAL_OUTPUT",
+		"VA SWR_INPUT", "QMP_MIC04 VA_NORMAL_OUTPUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK";
+	qcom,wcd-disabled = <1>;
+	qcom,wcn-bt-ext = <1>;
+	qcom,msm-mbhc-hs-mic-max-threshold-mv = <1670>;
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+				<&lpass_cdc>, <&lpass_bt_swr>;
+		/*
+		 * ====================
+		 * UPD backend - WSA
+		 * ====================
+		 *
+		 * Mute/Unmute the interpolator
+		 * ------------------------------
+		 * Register:Â LPASS_WSA_CDC_RX0_RX_PATH_MIX_CTL - 0x6B00418
+		 *
+		 * Send control commands to the peripheral from the soundwire controller
+		 * -----------------------------------------------------------------------
+		 * Register: LPASS_WSA_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x6B14020
+		 *
+		 * Enable/Disable ear piece
+		 * --------------------------
+		 * Register:Â DIG_CTRL0_PA_FSM_EN - 0x3430
+		 *
+		 */
+		qcom,upd_backends_used = "wsa";
+		qcom,upd_lpass_reg_addr = <0x6B00418 0x6B14020>;
+		qcom,upd_ear_pa_reg_addr = <0x3430>;
+
+		/*
+		 * ====================
+		 * UPD backend - WCD
+		 * ====================
+		 *
+		 * Mute/Unmute the interpolator
+		 * ------------------------------
+		 * Register: LPASS_WCD_CDC_RX0_RX_PATH_MIX_CTL - 0x6AC0418
+		 *
+		 * Send control commands to the wcd from the soundwire controller
+		 * ----------------------------------------------------------------
+		 * Register: LPASS_WCD_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x7634020
+		 *
+		 * Enable/Disable ear piece
+		 * --------------------------
+		 * Register:Â DIG_CTRL0_PA_FSM_EN - 0x300A
+		 *
+		 */
+		/*
+		 * qcom,upd_backends_used = "wcd";
+		 * qcom,upd_lpass_reg_addr = <0x6AC0418 0x7634020>;
+		 * qcom,upd_ear_pa_reg_addr = <0x300A>;
+		 */
+};

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 /dts-v1/;
@@ -12,5 +12,4 @@
 	model = "Qualcomm Technologies, Inc. Monaco Single LA Virtual Machine";
 	compatible = "qcom,monaco", "qcom,quinvm";
 	qcom,board-id = <0 0x1000001>;
-	qcom,sdp = <0x2c6>;
 };

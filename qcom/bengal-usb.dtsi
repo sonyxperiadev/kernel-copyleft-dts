@@ -13,8 +13,8 @@
 		reg = <0x4e00000 0x100000>;
 		reg-names = "core_base";
 
-		#address-cells = <2>;
-		#size-cells = <2>;
+		#address-cells = <1>;
+		#size-cells = <1>;
 		ranges;
 
 		interrupts-extended = <&intc GIC_SPI 302 IRQ_TYPE_LEVEL_HIGH>,
@@ -64,13 +64,13 @@
 				<0 40000>;
 
 
-		dwc3_0: dwc3@4e00000 {
+		dwc3@4e00000 {
 			compatible = "snps,dwc3";
-			reg = <0x0 0x4e00000 0x0 0xcd00>;
+			reg = <0x4e00000 0xcd00>;
 
 			iommus = <&apps_smmu 0x120 0x0>;
 			qcom,iommu-dma = "atomic";
-			memory-region = <&dwc3_mem_region_0>;
+			qcom,iommu-dma-addr-pool = <0x50000000 0x60000000>;
 
 			interrupt-parent = <&intc>;
 			interrupts = <GIC_SPI 255 IRQ_TYPE_LEVEL_HIGH>;
@@ -83,17 +83,11 @@
 			snps,hird-threshold = /bits/ 8 <0x10>;
 			snps,usb3-u1u2-disable;
 			snps,usb3_lpm_capable;
-			num-hc-interrupters = /bits/ 16 <3>;
 			maximum-speed = "super-speed";
 			dr_mode = "otg";
 			usb-role-switch;
 		};
 
-	};
-
-	dwc3_mem_region_0: dwc3_mem_region0 {
-		iommu-addresses = <&dwc3_0 0x0 0x0 0x0 0x50000000>,
-					<&dwc3_0 0x0 0xb0000000 0xffffffff 0x50000000>;
 	};
 
 	/* Primary USB port related High Speed PHY */

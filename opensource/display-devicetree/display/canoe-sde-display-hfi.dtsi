@@ -1,0 +1,59 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
+
+#include "canoe-sde-hfi.dtsi"
+#include "canoe-sde-display-common-hfi.dtsi"
+
+&soc {
+	sde_wb2: qcom,wb-display@2 {
+		compatible = "qcom,wb-display";
+		cell-index = <0>;
+		label = "wb_display0";
+		qcom,op-label = "hfi";
+		status = "disabled";
+	};
+
+	sde_wb3: qcom,wb-display@3 {
+		compatible = "qcom,wb-display";
+		cell-index = <1>;
+		label = "wb_display1";
+		qcom,op-label = "hfi";
+		status = "disabled";
+	};
+};
+
+&sde_dsi2 {
+	vddio-supply = <&L12B>;
+	vci-supply = <&L13B>;
+	vdd-supply = <&L11B>;
+	tvdd-supply = <&L4B>;
+
+	pinctrl-names = "panel_active", "panel_active_with_esync", "panel_suspend";
+	pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+	pinctrl-1 = <&sde_dsi_active &sde_te_active>;
+	pinctrl-2 = <&sde_dsi_suspend &sde_te_suspend>;
+};
+
+&sde_dsi3 {
+	vddio-supply = <&L12B>;
+	vci-supply = <&L13B>;
+	vdd-supply = <&L11B>;
+	tvdd-supply = <&L4B>;
+
+	pinctrl-names = "panel_active", "panel_active_with_esync", "panel_suspend";
+	pinctrl-0 = <&sde_dsi1_active &sde_te1_active &sde_esync1_suspend>;
+	pinctrl-1 = <&sde_dsi1_active &sde_te1_active &sde_esync1_active>;
+	pinctrl-2 = <&sde_dsi1_suspend &sde_te1_suspend &sde_esync1_suspend>;
+};
+
+&mdss_mdp1 {
+	connectors = <&sde_dsi2 &sde_dsi3 &smmu_sde_unsec1 &smmu_sde_sec1
+			&sde_wb2 &sde_wb3>;
+};

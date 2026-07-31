@@ -10,7 +10,7 @@
 		ranges;
 
 		cycle-cntr@f521000 {
-			compatible = "qcom,cycle-cntr-hw";
+			compatible = "qcom,epss";
 			reg = <0xf521000 0x1000>, <0xf523000 0x1000>;
 			reg-names = "freq-domain0",
 				"freq-domain1";

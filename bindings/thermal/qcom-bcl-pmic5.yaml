@@ -78,12 +78,6 @@ properties:
       When this flag is defined, the BCL driver will account for
       no bit shift in the threshold registers.
 
-  qcom,disable-vbat-level0-in-suspend:
-    type: boolean
-    description: |
-      When this flag is defined, the BCL driver will disable vbat
-      level0 alarm during suspend entry and re-enable it during resume.
-
 required:
   - compatible
   - reg

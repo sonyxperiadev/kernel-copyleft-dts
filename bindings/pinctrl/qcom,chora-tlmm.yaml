@@ -150,9 +150,9 @@ $defs:
 examples:
   - |
     #include <dt-bindings/interrupt-controller/arm-gic.h>
-    pinctrl@f000000 {
+    pinctrl@f100000 {
         compatible = "qcom,chora-tlmm";
-        reg = <0xf000000 0x1000000>;
+        reg = <0xf100000 0xf00000>;
         gpio-controller;
         #gpio-cells = <2>;
         gpio-ranges = <&tlmm 0 0 152>;
@@ -160,19 +160,23 @@ examples:
         #interrupt-cells = <2>;
         interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
 
-        qupv3_se6_i2c_pins {
-            qupv3_se6_i2c_sda_active {
-                mux {
-                    pins = "gpio27";
-                    function = "qup0_se6_l0";
-                };
+        gpio-wo-state {
+            pins = "gpio1";
+            function = "gpio";
+        };
 
-                config {
-                    pins = "gpio27";
-                    drive-strength = <2>;
-                    bias-pull-up;
-                };
-           };
+        uart-w-state {
+            rx-pins {
+                pins = "gpio26";
+                function = "qup1_se7_l0";
+                bias-pull-up;
+            };
+
+            tx-pins {
+                pins = "gpio27";
+                function = "qup1_se7_l1";
+                bias-disable;
+            };
         };
     };
 ...

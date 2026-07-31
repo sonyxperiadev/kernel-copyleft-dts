@@ -1,0 +1,1 @@
+dtbo-y := synx/canoe-synx.dtbo

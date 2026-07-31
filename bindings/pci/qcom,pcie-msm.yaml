@@ -40,7 +40,6 @@ properties:
       - const: pcie_sm
       - const: tcsr
       - const: rumi
-      - const: phy_portb
 
   cell-index:
     $ref: /schemas/types.yaml#/definitions/uint32
@@ -337,10 +336,6 @@ properties:
                  the PCIe enumeration if the config spac read returns all Fs.
     type: boolean
 
-  qcom,device-vendor-id:
-    description: Support Device-Vendor Id.
-    $ref: /schemas/types.yaml#/definitions/uint32
-
   qcom,pcie-phy-ver:
     description: States the PCIe PHY HSR version.
     $ref: /schemas/types.yaml#/definitions/uint32
@@ -360,37 +355,6 @@ properties:
   qcom,phy-sequence:
     description: PCIe PHY initialization sequence.
     $ref: /schemas/types.yaml#/definitions/uint32-array
-
-  qcom,phy-sequence-portb:
-    description: PCIe PHY initialization sequence for port B in full-lane mode for
-                 bifurcation capable pcie ports.
-    $ref: /schemas/types.yaml#/definitions/uint32-array
-
-  qcom,bifurcation-capable:
-    description: Indicates that the PCIe controller supports bifurcation capability.
-    type: boolean
-
-  qcom,tcsr-pcie-link-config-offset:
-    description: TCSR offset for configuring full lane PCIe link mode.
-    $ref: /schemas/types.yaml#/definitions/uint32
-
-  qcom,tcsr-pcie-link-config-mask:
-    description: Mask value to set for full lane mode configuration in TCSR register.
-    $ref: /schemas/types.yaml#/definitions/uint32
-
-  qcom,tcsr-pcie-link-config-value:
-    description: Value to write to TCSR register for configuring PCIe lane mode.
-                 This value determines whether the PCIe controller operates in full-lane
-                 or bifurcated mode. If not specified, defaults to 0 (bifurcated mode).
-    $ref: /schemas/types.yaml#/definitions/uint32
-
-  qcom,phy-sw-reset-offset:
-    description: Offset from PCIe PHY base for software reset control.
-    $ref: /schemas/types.yaml#/definitions/uint32
-
-  qcom,phy-start-cntrl-offset:
-    description: Offset from PCIe PHY base for PHY start control.
-    $ref: /schemas/types.yaml#/definitions/uint32
 
   qcom,parf-debug-reg:
     description: Debug property to dump parf registers.
@@ -492,20 +456,9 @@ properties:
                  inbound write transactions upon detecting a No-Snoop change.
     type: boolean
 
-  qcom,read-halt-en:
-    description: Set this property to 1 to enable the RD_HALT_EN feature
-                 for certain controllers.When enabled, controller halts AXI read
-                 requests until all pending AXI write transactions are completed.
-    type: boolean
-
   qcom,no-aux-clk-sync:
     description: The AUX clock is not synchronous to the Core clock to
                  support l1ss.
-    type: boolean
-
-  qcom,no-client-based-bw-voting:
-    description: client based bw voting is not supported. PCIe driver votes for
-                 required bandwidth based on link-width and Gen-Speed.
     type: boolean
 
   qcom,wr-halt-size:

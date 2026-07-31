@@ -15,9 +15,3 @@
 	qcom,msm-id = <733 0x10000>, <757 0x10000>;
 	qcom,board-id = <0x1000b 0>;
 };
-
-&L5E {
-	regulator-min-microvolt = <2504000>;
-	regulator-max-microvolt = <3544000>;
-	qcom,init-voltage = <2504000>;
-};

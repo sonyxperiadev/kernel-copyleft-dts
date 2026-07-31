@@ -33,11 +33,15 @@
 				<GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-parent = <&intc>;
 
-		dma-coherent;
-		iommu-map = <0x0 &virtio_iommu0 0x20000 0x1>,
-				<0x100 &virtio_iommu0 0x20100 0x1>,
-				<0x200 &virtio_iommu0 0x20200 0x1>,
-				<0x300 &virtio_iommu0 0x20300 0x1>;
+		/*TODO: SMMU V3 is not yet enabled*/
+		/*
+		 *dma-coherent;
+		 *iommus = <&pcie_smmu 0x20000>;
+		 *iommu-map = <0x0 &pcie_smmu 0x20000 0x1>,
+		 *	    <0x100 &pcie_smmu 0x20001 0x1>,
+		 *	    <0x200 &pcie_smmu 0x20002 0x1>,
+		 *	    <0x300 &pcie_smmu 0x20003 0x1>;
+		 */
 
 		status = "disabled";
 	};
@@ -71,11 +75,15 @@
 				<GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-parent = <&intc>;
 
-		dma-coherent;
-		iommu-map = <0x0 &virtio_iommu0 0x30000 0x1>,
-				<0x100 &virtio_iommu0 0x30100 0x1>,
-				<0x200 &virtio_iommu0 0x30200 0x1>,
-				<0x300 &virtio_iommu0 0x30300 0x1>;
+		/*TODO: SMMU V3 is not yet enabled*/
+		/*
+		 *dma-coherent;
+		 *iommus = <&pcie_smmu 0x30000>;
+		 *iommu-map = <0x0 &pcie_smmu 0x30000 0x1>,
+		 *	    <0x100 &pcie_smmu 0x30001 0x1>,
+		 *	    <0x200 &pcie_smmu 0x30002 0x1>,
+		 *	    <0x300 &pcie_smmu 0x30003 0x1>;
+		 */
 
 		status = "disabled";
 	};

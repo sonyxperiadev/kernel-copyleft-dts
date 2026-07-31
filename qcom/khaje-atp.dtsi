@@ -230,6 +230,10 @@
 	status = "disabled";
 };
 
+&pm8008_9 {
+	status = "disabled";
+};
+
 &pm6125_pwm {
 	status = "okay";
 };
@@ -271,8 +275,4 @@
 	vdd-pdphy-supply = <&L15A>;
 	vbus-supply = <&smb5_vbus>;
 	vconn-supply = <&smb5_vconn>;
-};
-
-&usb0 {
-	extcon = <&pm7250b_pdphy>, <&pm7250b_charger>, <&eud>;
 };

@@ -1,0 +1,459 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear.
+ */
+/*
+* Copyright 2025 Sony Corporation
+* NOTE: This file has been modified by Sony Corporation
+* Modifications are licensed under the License.
+*/
+
+#include "canoe-lpi.dtsi"
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "canoe-audio-lpass-reg.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
+#include "canoe-audio-simple-amp.dtsi"
+
+&swr_tx_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&swr_tx_data0_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&swr_tx_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&swr_tx_data2_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&swr3 {
+	swr_haptics: swr_haptics@f0170220 {
+		status = "okay";
+	};
+};
+
+&wcd939x_tx_slave {
+	status = "okay";
+};
+
+&wcd939x_rx_slave {
+	status = "okay";
+};
+
+&wcd939x_codec {
+	status = "okay";
+	/* 0 for digital crosstalk disabled,
+	 * 1 for digital crosstalk with local sensed a-xtalk enabled, and
+	 * 2 for digital crosstalk with remote sensed a-xtalk enabled.
+	 */
+	qcom,usbcss-hs-xtalk-config = <0>;
+	qcom,usbcss-hs-rdson = <600>;
+	qcom,usbcss-hs-r2 = <7550>;
+	qcom,usbcss-hs-r3 = <1>;
+	qcom,usbcss-hs-r4 = <330>;
+	qcom,usbcss-hs-r5 = <5>;
+	qcom,usbcss-hs-r6 = <1>;
+	qcom,usbcss-hs-r7 = <5>;
+	qcom,usbcss-hs-lin-k-aud = <13>;
+	qcom,usbcss-hs-lin-k-gnd = <13>;
+
+};
+
+&canoe_snd {
+	qcom,model = "canoe-qrd-snd-card";
+	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,wcn-bt = <1>;
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,tdm-max-slots = <8>;
+	qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,audio-core-list = <0>, <1>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+                        <&cs35l45_l>, <&cs35l45_r>,
+			<&wcd939x_codec>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+                        "cs35l45_l", "cs35l45_r",
+			"wcd939x_codec";
+	qcom,wsa-max-devs = <0>;
+	qcom,wcn-bt-ext = <1>;
+	qcom,dedicated-wsa2;
+	qcom,audio-routing =
+		"AMIC1", "Analog Mic1",
+		"AMIC1", "MIC BIAS1",
+		"AMIC2", "Analog Mic2",
+		"AMIC2", "MIC BIAS2",
+		"AMIC3", "Analog Mic3",
+		"AMIC3", "MIC BIAS3",
+		"AMIC4", "Analog Mic4",
+		"AMIC4", "MIC BIAS3",
+		"AMIC5", "Analog Mic5",
+		"AMIC5", "MIC BIAS4",
+		"VA AMIC1", "Analog Mic1",
+		"VA AMIC1", "VA MIC BIAS1",
+		"VA AMIC2", "Analog Mic2",
+		"VA AMIC2", "MIC BIAS2",
+		"VA AMIC3", "Analog Mic3",
+		"VA AMIC3", "VA MIC BIAS3",
+		"VA AMIC4", "Analog Mic4",
+		"VA AMIC4", "VA MIC BIAS3",
+		"VA AMIC5", "Analog Mic5",
+		"VA AMIC5", "VA MIC BIAS4",
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC0", "MIC BIAS1",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC1", "MIC BIAS1",
+		"TX DMIC2", "Digital Mic3",
+		"TX DMIC2", "MIC BIAS4",
+		"TX DMIC3", "Digital Mic2",
+		"TX DMIC3", "MIC BIAS3",
+		"IN1_HPHL", "HPHL_OUT",
+		"IN2_HPHR", "HPHR_OUT",
+		"IN3_EAR", "AUX_OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"TX SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic3",
+		"VA DMIC3", "Digital Mic2",
+		"VA DMIC0", "VA MIC BIAS1",
+		"VA DMIC1", "VA MIC BIAS1",
+		"VA DMIC2", "VA MIC BIAS4",
+		"VA DMIC3", "VA MIC BIAS3";
+	swr-haptics-unsupported;
+	qcom,qmp-mic = <0>;
+	qcom,sep-mi2s-gpios = <&cdc_sep_mi2s_gpios>;
+	qcom,msm-mbhc-hs-mic-max-threshold-mv = <1670>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <1>;
+	qcom,msm-mbhc-gnd-swh = <1>;
+	qcom,wcd-disable-legacy-surge;
+	wcd939x-i2c-handle = <&wcd_usbss>;
+        qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
+        qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
+        qcom,cdc-dmic45-gpios = <&cdc_dmic45_gpios>;
+        qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+			<&lpass_cdc>, <&lpass_bt_swr>;
+		/*
+		 * ====================
+		 * UPD backend - WSA
+		 * ====================
+		 *
+		 * Mute/Unmute the interpolator
+		 * ------------------------------
+		 * Register: LPASS_WSA_CDC_RX0_RX_PATH_MIX_CTL - 0x6B00418
+		 *
+		 * Send control commands to the peripheral from the soundwire controller
+		 * -----------------------------------------------------------------------
+		 * Register: LPASS_WSA_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x6B14020
+		 *
+		 * Enable/Disable ear piece
+		 * --------------------------
+		 * Register: DIG_CTRL0_PA_FSM_EN - 0x3430
+		 *
+		 */
+                /*
+		qcom,upd_backends_used = "wsa";
+		qcom,upd_lpass_reg_addr = <0x6B00418 0x6B14020>;
+		qcom,upd_ear_pa_reg_addr = <0x3430>;
+		*/
+                /*
+		* ====================
+		* UPD backend - WCD
+		* ====================
+		*
+		* Mute/Unmute the interpolator
+		* ------------------------------
+		* Register: LPASS_WCD_CDC_RX0_RX_PATH_MIX_CTL - 0x6AC0418
+		*
+		* Send control commands to the wcd from the soundwire controller
+		* ----------------------------------------------------------------
+		* Register: LPASS_WCD_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x7634020
+		*
+		* Enable/Disable ear piece
+		* --------------------------
+		* Register: DIG_CTRL0_PA_FSM_EN - 0x300A
+		*
+		*/
+		qcom,upd_backends_used = "wcd";
+		qcom,upd_lpass_reg_addr = <0x6AC0418 0x7634020>;
+		qcom,upd_ear_pa_reg_addr = <0x300A>;
+};
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+	lpass-cdc-clk-rsc-mngr {
+	clock-names = "tx_core_clk", "rx_core_clk", "rx_tx_core_clk",
+		"va_core_clk";
+	clocks = <&clock_audio_tx_1 0>, <&clock_audio_rx_1 0>,
+		<&clock_audio_rx_tx 0>, <&clock_audio_va_1 0>;
+	};
+};
+
+
+&cdc_sep_mi2s_gpios {
+       status = "ok";
+       compatible = "qcom,msm-cdc-pinctrl";
+       pinctrl-names = "aud_active", "aud_sleep";
+       pinctrl-0 = <&lpi_i2s3_clk_active &lpi_i2s3_ws_active
+                       &lpi_i2s3_data0_active &lpi_i2s3_data1_active>;
+       pinctrl-1 = <&lpi_i2s3_clk_sleep &lpi_i2s3_ws_sleep
+                       &lpi_i2s3_data0_sleep &lpi_i2s3_data1_sleep>;
+       qcom,lpi-gpios;
+       qcom,tlmm-pins = <175 176 181>;
+       #gpio-cells = <0>;
+};
+
+&qupv3_se11_i2c {
+	status = "ok";
+	qcom,clk-freq-out = <1000000>;
+	cs35l45_l: cs35l45@30 {
+		status = "ok";
+		compatible = "cirrus,cs35l45";
+		reg = <0x30>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <68 IRQ_TYPE_LEVEL_LOW>;
+		reset-gpios = <&tlmm 76 0>;		/*GPIO_ACTIVE_HIGH = 0*/
+		cirrus,asp-sdout-hiz-ctrl = <0x3>;
+		cirrus,dsp-part-name = "L-cs35l45";
+
+		cirrus,ngate-ch1-thr =  <0x6>;
+		cirrus,ngate-ch1-hold = <0x5>;
+		cirrus,ngate-ch2-thr =  <0x6>;
+		cirrus,ngate-ch2-hold = <0x5>;
+
+		cirrus,gpio-ctrl2 {
+			gpio-ctrl = <0x2>;
+		};
+		cirrus,ldpm-config {
+			ldpm-gp1-boost-sel = <0x1>;
+			ldpm-gp1-amp-sel = <0x1>;
+			ldpm-gp1-delay = <0x4>;
+			ldpm-gp1-pcm-thld = <0x6>;
+			ldpm-gp2-imon-sel = <0x1>;
+			ldpm-gp2-vmon-sel = <0x1>;
+			ldpm-gp2-delay = <0x7>;
+			ldpm-gp2-pcm-thld = <0x0>;
+		};
+		cirrus,hvlv-config {
+			hvlv-thld-hys = <0x0>;
+			hvlv-thld = <0x3>;
+			hvlv-dly = <0x1>;
+		};
+		cirrus,classh-config {
+			ch-hdrm = <0x2>;
+			ch-ratio = <0x5>;
+			ch-rel-rate = <0x2>;
+			ch-ovb-thld1 = <0x5a>;
+			ch-ovb-thlddelta = <0xc8>;
+			ch-vdd-bst-max = <0xfa>;
+			ch-ovb-latch = <0x1>;
+			ch-ovb-ratio = <0x2>;
+			ch-thld1-offset = <0x46>;
+		};
+		cirrus,bst-bpe-inst-config {
+			bst-bpe-inst-thld = <0x1E 0x32 0x3c 0x46 0>;
+			bst-bpe-inst-ilim = <0 0x00 0x04 0x14 0x3C>;
+			bst-bpe-inst-ss-ilim = <0 0x00 0x04 0x08 0x1C>;
+			bst-bpe-inst-atk-rate = <0 0x3 0x6 0x6 0>;
+			bst-bpe-inst-hold-time = <0x2 0x2 0x2 0x2 0>;
+			bst-bpe-inst-rls-rate = <0x06 0x06 0x06 0x06 0>;
+		};
+		cirrus,bst-bpe-misc-config {
+			bst-bpe-inst-inf-hold-rls = <0x0>;
+			bst-bpe-il-lim-mode = <0x0>;
+			bst-bpe-out-opmode-sel = <0x0>;
+			bst-bpe-inst-l3-byp = <0x1>;
+			bst-bpe-inst-l2-byp = <0x1>;
+			bst-bpe-inst-l1-byp = <0x0>;
+			bst-bpe-filt-sel = <0x0>;
+		};
+		cirrus,bst-bpe-il-lim-config {
+			bst-bpe-il-lim-thld-del1 = <0x0>;
+			bst-bpe-il-lim-thld-del2 = <0x0>;
+			bst-bpe-il-lim1-thld = <0x3C>;
+			bst-bpe-il-lim-thld-hyst = <0x0>;
+			bst-bpe-il-lim1-dly = <0x2>;
+			bst-bpe-il-lim2-dly = <0x4>;
+			bst-bpe-il-lim-dly-hyst = <0x0>;
+			bst-bpe-il-lim1-atk-rate = <0x0>;
+			bst-bpe-il-lim2-atk-rate = <0x0>;
+			bst-bpe-il-lim1-rls-rate = <0x0>;
+			bst-bpe-il-lim2-rls-rate = <0x0>;
+		};
+		cirrus,bpe-inst-config {
+			bpe-inst-thld = <0x1E 0x28 0x32 0x5A>;
+			bpe-inst-attn = <0x06 0x04 0x0C 0x06>;
+			bpe-inst-atk-rate = <0x0 0x1 0x6 0x6>;
+			bpe-inst-hold-time = <0xb 0x4 0x2 0x2>;
+			bpe-inst-rls-rate = <0x08 0x07 0x05 0x05>;
+		};
+		cirrus,bpe-misc-config {
+			bpe-inst-bpe-byp = <0x0>;
+			bpe-inst-inf-hold-rls = <0x0>;
+			bpe-inst-l3-byp = <0x1>;
+			bpe-inst-l2-byp = <0x1>;
+			bpe-inst-l1-byp = <0x0>;
+			bpe-mode-sel = <0x0>;
+			bpe-filt-sel = <0x0>;
+		};
+	};
+	cs35l45_r: cs35l45@31 {
+		status = "ok";
+		compatible = "cirrus,cs35l45";
+		reg = <0x31>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <68 IRQ_TYPE_LEVEL_LOW>;
+		reset-gpios = <&tlmm 77 0>;		/*GPIO_ACTIVE_HIGH = 0*/
+		cirrus,asp-sdout-hiz-ctrl = <0x3>;
+		cirrus,dsp-part-name = "R-cs35l45";
+
+		cirrus,ngate-ch1-thr =  <0x6>;
+		cirrus,ngate-ch1-hold = <0x5>;
+		cirrus,ngate-ch2-thr =  <0x6>;
+		cirrus,ngate-ch2-hold = <0x5>;
+
+		cirrus,gpio-ctrl2 {
+			gpio-ctrl = <0x2>;
+		};
+		cirrus,ldpm-config {
+			ldpm-gp1-boost-sel = <0x1>;
+			ldpm-gp1-amp-sel = <0x1>;
+			ldpm-gp1-delay = <0x4>;
+			ldpm-gp1-pcm-thld = <0x6>;
+			ldpm-gp2-imon-sel = <0x1>;
+			ldpm-gp2-vmon-sel = <0x1>;
+			ldpm-gp2-delay = <0x7>;
+			ldpm-gp2-pcm-thld = <0x0>;
+		};
+		cirrus,hvlv-config {
+			hvlv-thld-hys = <0x0>;
+			hvlv-thld = <0x3>;
+			hvlv-dly = <0x1>;
+		};
+		cirrus,classh-config {
+			ch-hdrm = <0x2>;
+			ch-ratio = <0x5>;
+			ch-rel-rate = <0x2>;
+			ch-ovb-thld1 = <0x5a>;
+			ch-ovb-thlddelta = <0xc8>;
+			ch-vdd-bst-max = <0xfa>;
+			ch-ovb-latch = <0x1>;
+			ch-ovb-ratio = <0x2>;
+			ch-thld1-offset = <0x46>;
+		};
+		cirrus,bst-bpe-inst-config {
+			bst-bpe-inst-thld = <0x1E 0x32 0x3c 0x46 0>;
+			bst-bpe-inst-ilim = <0 0x00 0x04 0x14 0x3C>;
+			bst-bpe-inst-ss-ilim = <0 0x00 0x04 0x08 0x1C>;
+			bst-bpe-inst-atk-rate = <0 0x3 0x6 0x6 0>;
+			bst-bpe-inst-hold-time = <0x2 0x2 0x2 0x2 0>;
+			bst-bpe-inst-rls-rate = <0x06 0x06 0x06 0x06 0>;
+		};
+		cirrus,bst-bpe-misc-config {
+			bst-bpe-inst-inf-hold-rls = <0x0>;
+			bst-bpe-il-lim-mode = <0x0>;
+			bst-bpe-out-opmode-sel = <0x0>;
+			bst-bpe-inst-l3-byp = <0x1>;
+			bst-bpe-inst-l2-byp = <0x1>;
+			bst-bpe-inst-l1-byp = <0x0>;
+			bst-bpe-filt-sel = <0x0>;
+		};
+		cirrus,bst-bpe-il-lim-config {
+			bst-bpe-il-lim-thld-del1 = <0x0>;
+			bst-bpe-il-lim-thld-del2 = <0x0>;
+			bst-bpe-il-lim1-thld = <0x3C>;
+			bst-bpe-il-lim-thld-hyst = <0x0>;
+			bst-bpe-il-lim1-dly = <0x2>;
+			bst-bpe-il-lim2-dly = <0x4>;
+			bst-bpe-il-lim-dly-hyst = <0x0>;
+			bst-bpe-il-lim1-atk-rate = <0x0>;
+			bst-bpe-il-lim2-atk-rate = <0x0>;
+			bst-bpe-il-lim1-rls-rate = <0x0>;
+			bst-bpe-il-lim2-rls-rate = <0x0>;
+		};
+		cirrus,bpe-inst-config {
+			bpe-inst-thld = <0x1E 0x28 0x32 0x5A>;
+			bpe-inst-attn = <0x06 0x04 0x0C 0x06>;
+			bpe-inst-atk-rate = <0x0 0x1 0x6 0x6>;
+			bpe-inst-hold-time = <0xb 0x4 0x2 0x2>;
+			bpe-inst-rls-rate = <0x08 0x07 0x05 0x05>;
+		};
+		cirrus,bpe-misc-config {
+			bpe-inst-bpe-byp = <0x0>;
+			bpe-inst-inf-hold-rls = <0x0>;
+			bpe-inst-l3-byp = <0x1>;
+			bpe-inst-l2-byp = <0x1>;
+			bpe-inst-l1-byp = <0x0>;
+			bpe-mode-sel = <0x0>;
+			bpe-filt-sel = <0x0>;
+		};
+	};
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&wsa_swr_gpios {
+	status = "disabled";
+};
+
+&wsa2_swr_gpios {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
+
+&wsa_spkr_en13 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_1 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_2 {
+	status = "disabled";
+};
+
+&clock_audio_wsa_tx {
+	status = "disabled";
+};
+
+&clock_audio_wsa2_tx {
+	status = "disabled";
+};
+
+&swr_haptics {
+	status = "disabled";
+};

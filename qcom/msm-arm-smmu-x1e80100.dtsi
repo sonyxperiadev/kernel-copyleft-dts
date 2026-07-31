@@ -79,10 +79,6 @@
 		#global-interrupts = <1>;
 		dma-coherent;
 
-		clocks = <&gcc GCC_HLOS1_VOTE_MMU_TCU_CLK>;
-		clock-names = "hlos";
-		power-domains = <&gcc GCC_HLOS1_VOTE_MMU_TCU_GDS>;
-
 		interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>,
@@ -182,34 +178,9 @@
 			     <GIC_SPI 697 IRQ_TYPE_LEVEL_HIGH>;
 	};
 
-	pcie_smmu: iommu@15400000 {
-		compatible = "arm,smmu-v3";
-		reg = <0 0x15400000 0 0x80000>;
-		#iommu-cells = <1>;
-		interrupts = <GIC_SPI 138 IRQ_TYPE_EDGE_RISING>,
-				<GIC_SPI 134 IRQ_TYPE_EDGE_RISING>,
-				<GIC_SPI 136 IRQ_TYPE_EDGE_RISING>;
-		interrupt-names = "eventq",
-				"gerror",
-				"cmdq-sync";
-		dma-coherent;
-
-		interconnects = <&pcie_center_anoc MASTER_PCIE_NORTH &pcie_center_anoc SLAVE_ANOC_PCIE_GEM_NOC>;
-		qcom,active-only;
-	};
-
 	dma_dev {
 		compatible = "qcom,iommu-dma";
 		memory-region = <&system_cma>;
-	};
-
-	dpd_smmu: dpd_smmu {
-		compatible = "qcom,dpd-smmu";
-		#iommu-cells = <1>;
-	};
-
-	dpd_proxy {
-		compatible = "qcom,dpd-proxy";
 	};
 
 	iommu_test_device {

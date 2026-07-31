@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <dt-bindings/interrupt-controller/arm-gic.h>
@@ -289,7 +289,7 @@
 			compatible = "qcom,qsmmuv500-tbu", "qcom,qtb500";
 			reg = <0x0 0x7d3000 0x0 0x1000>;
 			qcom,stream-id-range = <0xc00 0x400>;
-			qcom,iova-width = <40>;
+			qcom,iova-width = <34>;
 			interconnects = <&nsp_noc MASTER_CDSP_PROC &mc_virt SLAVE_EBI1>;
 			qcom,num-qtb-ports = <2>;
 		};

@@ -10,7 +10,7 @@
 / {
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
-	qcom,msm-id = <685 0x10000>, <727 0x10000>, <764 0x10000>;
+	qcom,msm-id = <685 0x10000>, <727 0x10000>;
 
 	host {
 		#address-cells = <0x2>;
@@ -77,7 +77,7 @@
 		vendor = "QTI";
 		image-name = "qcom,trustedvm";
 		qcom,pasid = <0x0 0x1c>;
-		qcom,qtee-config-info = "p=3,9,C,39,77,78,7C,8F,96,97,C8,FE,10C,11B,159,199,47E,7F1,CDF;";
+		qcom,qtee-config-info = "p=3,9,39,77,78,7C,8F,97,C8,FE,11B,159,199,47E,7F1,CDF;";
 		qcom,secdomain-ids = <45>;
 		qcom,primary-vm-index = <0>;
 		vm-uri = "vmuid/trusted-ui";
@@ -159,15 +159,6 @@
 				message-size = <0xf0>;
 				queue-depth = <0x8>;
 				qcom,label = <0x104>;
-				peer-default;
-			};
-
-			test-large-dmabuf-tuivm {
-				vdevice-type = "message-queue-pair";
-				generate = "/hypervisor/test-large-dmabuf-tuivm-pair";
-				message-size = <0xf0>;
-				queue-depth = <0x8>;
-				qcom,label = <0x10d>;
 				peer-default;
 			};
 
@@ -315,7 +306,6 @@
 			&tlmm_vm_test
 			&qcom_test_dbl_tuivm
 			&qcom_test_msgq_tuivm
-			&qcom_test_large_dmabuf_tuivm
 			&qmsgq_gunyah
 			&qrtr_gunyah
 			&qcom_mem_buf
@@ -361,7 +351,10 @@
 
 	tlmm_vm_mem_access: tlmm-vm-mem-access {
 		compatible = "qcom,tlmm-vm-mem-access";
-		depends-on-supply = <&tlmm>;
+		tlmm-vm-gpio-list = <&tlmm 12 0 &tlmm 48 0 &tlmm 49 0 &tlmm 50 0 &tlmm 51 0
+					&tlmm 68 0 &tlmm 69 0 &tlmm 70 0 &tlmm 71 0 &tlmm 87 0
+					&tlmm 100 0 &tlmm 128 0 &tlmm 146 0 &tlmm 86 0 &tlmm 88 0
+					&tlmm 161 0 &tlmm 55 0>;
 	};
 
 	wdog: qcom,wdt@17600000 {
@@ -429,11 +422,6 @@
 		compatible = "qcom,gh-msgq-test";
 		gunyah-label = <0x104>;
 		affinity = <0>;
-	};
-
-	qcom_test_large_dmabuf_tuivm: qcom,test-large-dmabuf-tuivm {
-		compatible = "qcom,gh-large-dmabuf-test";
-		gunyah-label = <0x10d>;
 	};
 
 	qrtr_gunyah: qrtr-gunyah {

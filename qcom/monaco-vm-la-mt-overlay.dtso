@@ -11,5 +11,4 @@
 	compatible = "qcom,monaco", "qcom,quinvm";
 	qcom,msm-id = <606 0x10000>;
 	qcom,board-id = <0x0 0x2000001>;
-	qcom,sdp = <0x2c6>;
 };

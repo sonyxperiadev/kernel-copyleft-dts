@@ -4,42 +4,27 @@
  */
 
 / {
-	host {
-		buffer@800006000 {
-			reg = <0x08 0x00006000 0x00 0x9000>;
-			android,pvmfw,target = <&qrtr_buff>;
-		};
-	};
+	host {};
 };
 
 &firmware {
 	qcom_scm {
 		compatible = "qcom,scm-v1.1", "qcom,scm";
+		interrupts = <0x00 0x3ad 0x01>;
+		qcom,max-queues = <0x23>;
 	};
 
 };
 
 &reserved_memory {
-	qrtr_buff: buffer@800006000 {
-		compatible = "qcom,qrtr-gunyah-gen";
-		reg = <0x08 0x00006000 0x00 0x9000>;
-		no-map;
-		qcom,label = <0x108>;
-	};
 };
 
 &non_devices_common {
-		required-subnodes-rm = <&qrtr_shm
-					&minidump
+		required-subnodes-rm = <&minidump_rm
 					&qcom_gunyah_vm>;
 };
 
 &{/}  {
-	qrtr_shm: qrtr-shm {
-		compatible = "qcom,qrtr-gunyah-gen", "qcom,gunyah-shm-doorbell";
-		memory-region = <&qrtr_buff>;
-		qcom,label = <0x108>;
-	};
 
 	minidump: minidump {
 		compatible = "qcom,minidump_rm", "qcom,minidump-rm";
