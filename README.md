@@ -12,3 +12,4 @@
 | `69.x.A.x.xxx` | Xperia 1 VI         | asahi    | SM8650 |
 | `70.x.A.x.xxx` | Xperia 10 VI        | columbia | SM6450 |
 | `71.x.A.x.xxx` | Xperia 1 VII        | shimanto | SM8750 |
+| `72.x.A.x.xxx` | Xperia 10 VII       | elbe     | SM6475 |
