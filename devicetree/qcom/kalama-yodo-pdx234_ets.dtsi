@@ -1,0 +1,8 @@
+#include "kalama-yodo-pdx234_generic.dtsi"
+
+/*
+ * ETS common dtsi
+ */
+#include "kalama-yodo-common_ets.dtsi"
+&soc {
+};

@@ -1,0 +1,48 @@
+Qualcomm Technologies, Inc. HW FENCE
+
+HW Fence implements Linux APIs to initialize, deinitialize, register-for-signal, and
+overall manage the hw-fences, for hw-to-hw communcation between hw cores.
+
+Required properties
+- compatible: Must be "qcom,msm-hw-fence".
+- qcom,ipcc-reg: Registers ranges for ipcc registers.
+- qcom,hw-fence-table-entries: A u32 indicationg number of entries for the hw-fence table
+- qcom,hw-fence-queue-entries: A u32 indicating number of entries for the Queues
+- hw_fence@0: Doorbell configuration to communicate with secondary vm through hypervisor.
+- hw_fence@1: Carved-out emory-mapping region, to be used for mapping of global tables and queues
+	     used by the hw-fence driver and fence controller running in secondary vm.
+
+Optional properties:
+- qcom,dpu-ctl-start-n-reg: Register address range for dpu ctl-start registers.
+			  These are only used if the optional property to trigger the dpu-ctl-start
+			  feature is enabled. This for hardwares that don't support dpu ipcc.
+
+Example:
+	msm_hw_fence: qcom,hw-fence {
+		compatible = "qcom,msm-hw-fence";
+		status = "ok";
+
+		qcom,ipcc-reg = <0x400000 0x100000>;
+		qcom,hw-fence-table-entries = <8192>;
+		qcom,hw-fence-queue-entries = <800>;
+
+		/* time register */
+		qcom,qtime-reg = <0xC221000 0x1000>;
+
+		/* haven doorbell specific */
+		hw_fence@0 {
+			compatible = "qcom,msm-hw-fence-db";
+			qcom,master;
+			gunyah-label = <6>;
+			peer-name = <3>;
+		};
+
+		/* haven io-mem specific */
+		hw_fence@1 {
+			compatible = "qcom,msm-hw-fence-mem";
+			qcom,master;
+			gunyah-label = <5>;
+			peer-name = <3>;
+			shared-buffer = <&hwfence_shbuf>;
+		};
+	};

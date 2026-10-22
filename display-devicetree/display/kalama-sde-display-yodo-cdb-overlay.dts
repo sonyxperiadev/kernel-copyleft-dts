@@ -1,0 +1,13 @@
+/dts-v1/;
+/plugin/;
+
+#include "kalama-sde-display-qrd.dtsi"
+#include "somc-yodo-display.dtsi"
+#include "somc-yodo-display-cdb.dtsi"
+
+/ {
+	model = "Sony Corporation. Yodo-CDB(Kalama QRD)";
+	compatible = "somc,yodo-cdb", "qcom,kalama", "qcom,qrd";
+	qcom,msm-id = <519 0x10000>, <536 0x10000>, <519 0x20000>, <536 0x20000>;
+	qcom,board-id = <0x1000B 0>;
+};

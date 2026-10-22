@@ -1,0 +1,4 @@
+/* arch/arm64/boot/dts/qcom/kalama-yodo-common_ets.dtsi */
+
+&soc {
+};

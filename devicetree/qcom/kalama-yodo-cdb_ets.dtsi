@@ -1,0 +1,10 @@
+/* arch/arm64/boot/dts/qcom/kalama-yodo-cdb_ets.dtsi */
+#include "kalama-yodo-cdb.dtsi"
+
+/*
+ * ETS common dtsi
+ */
+#include "kalama-yodo-common_ets.dtsi"
+
+&soc {
+};

@@ -1,0 +1,12 @@
+#include "kalama-yodo-pdx234_common.dtsi"
+
+&soc {
+};
+
+&regulator_ocp_notifier {
+	/delete-property/ periph-bc3-supply;
+	/delete-property/ periph-bc4-supply;
+	/delete-property/ periph-bc5-supply;
+	/delete-property/ periph-bc6-supply;
+	/delete-property/ periph-bc7-supply;
+};
